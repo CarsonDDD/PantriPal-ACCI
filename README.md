@@ -8,31 +8,3 @@ From aspiring chefs to proficient cooks, anyone wanting to improve is encouraged
 Pantri Pad is a unique look at cookbooks, by maintaining a virtual pantry this app becomes an invaluable tool. From something easy to difficult every dish requires ingredients, Pantri Pad’s virtual pantry feature allows users to create and edit their own pantry, keeping track of the ingredients they currently have. In this way, Pantri Pad’s ingredient list will notify the user when ingredients are low, adding them to a grocery list. Pantri Pad will also allow users to create new dishes, by adding their own recipes or remixing existing ones, encouraging users to experiment in the kitchen.
 
 This app will be defined as being successful provided it allows the user to share their own recipes, maintains a working catalogue of the user’s ingredients and recipes, and the app is easy to use, encouraging users to explore new recipes and techniques. 
-
-
-## Features
-
-1.
-2.
-3.
-4.
-5.
-
-
-
-## Iteration 1 User stories
-
-### Recipe Discovery (**Medium**)
-- As a user, I want to be able to find recipes which match my skill level
-- As a user, I want to be able to like/favorite other users recipes, exposing them to more people.
-- As a user, I want to be able to save recipes for later use.
-- As a cook, I want to be able to share my recipes with others.
-
-### Recipe Entry (**High**)
-- As a cook, I want to be able to add my existing recipes into the app easily.
-- As a learning cook, I want to be able to modify existing recipes.
-- As a cook, I want to be to have some of my recipes be private.
-
-### Digital Pantry (**High**)
-- As a user, I want to be able to keep track of what ingredients I have.
-- As a cook, I want to know what missing ingredients are required for a recipe.
