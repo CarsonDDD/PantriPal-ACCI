@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Pantri Pal</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="student_records_system">Student Records System</string>
+    <string name="title_activity_students">SRSYS: Students</string>
+    <string name="title_activity_courses">SRSYS: Courses</string>
+    <string name="title_activity_student_courses">SRSYS: Student Course History</string>
+    <string name="title_activity_course_students">SRSYS: Course Registrations</string>
+    <string name="students">Students</string>
+    <string name="courses">Courses</string>
+    <string name="registrations">Registrations</string>
+    <string name="create">Create</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="address">Address</string>
+    <string name="name">Name</string>
+    <string name="student_id">Student ID</string>
+    <string name="course_id">Course ID</string>
+    <string name="gpa">GPA</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
+</resources>
