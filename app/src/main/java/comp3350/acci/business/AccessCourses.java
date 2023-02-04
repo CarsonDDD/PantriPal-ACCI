@@ -1,13 +1,18 @@
 package comp3350.acci.business;
 
+import android.app.Activity;
+import android.content.Context;
+
 import java.util.Collections;
 import java.util.List;
 
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.Course;
+import comp3350.acci.objects.User;
+import comp3350.acci.persistence.AppDatabase;
 import comp3350.acci.persistence.CoursePersistence;
 
-public class AccessCourses
+public class AccessCourses extends Activity
 {
 	private CoursePersistence coursePersistence;
 	private List<Course> courses;
@@ -20,6 +25,7 @@ public class AccessCourses
 		courses = null;
 		course = null;
 		currentCourse = 0;
+		testDatabase();
 	}
 
     public List<Course> getCourses()
@@ -82,4 +88,17 @@ public class AccessCourses
 	{
 		coursePersistence.deleteCourse(currentCourse);
 	}
+
+	private void testDatabase() {
+		AppDatabase db = AppDatabase.getDbInstance();
+
+		User user = new User("600cows", "Hello, my name is Ayden");
+
+		db.userDao().insertUser(user);
+
+		List<User> allUsers = db.userDao().getAllUsers();
+
+		System.out.println(allUsers);
+	}
+
 }
