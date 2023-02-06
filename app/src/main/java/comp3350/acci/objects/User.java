@@ -1,39 +1,61 @@
 package comp3350.acci.objects;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import java.util.Objects;
 
-@Entity
 public class User
 {
-	@PrimaryKey(autoGenerate = true)
-	public int uid;
 
-	@ColumnInfo(name="user_name")
-	public String userName;
+	private static int count = 0;
 
-	@ColumnInfo(name="bio")
-	public String bio;
+	private int userID;
+
+	private String userName;
+
+	private String bio;
 
 	public User(){
+		this.userID = count;
 		userName = null;
 		this.bio = null;
+		count++;
+	}
+
+	public User(int userID, String username, String bio){
+		this.userID = userID;
+		userName = username;
+		this.bio = bio;
+		count++;
 	}
 
 	public User(String username, String bio){
+		this.userID = count;
 		userName = username;
 		this.bio = bio;
+		count++;
 	}
 
-	public User(int id, String username, String bio){
-		uid = id;
-		userName = username;
-		this.bio = bio;
+	public String getBio() {
+		return bio;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public boolean equals(Object other) {
+		boolean equals = false;
+
+		if (other instanceof User)
+		{
+			final User otherUser = (User) other;
+			equals = Objects.equals(this.userID, otherUser.userID);
+		}
+
+		return equals;
 	}
 
 	public String toString(){
-		return "{uid: " + uid + "\nuserName: " + userName + "\nbio: "+bio+"}\n";
+		return "user: {userName: " + userName + " bio: "+bio+"}";
 	}
 
 }

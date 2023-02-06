@@ -1,6 +1,5 @@
 package comp3350.acci.presentation;
 
-import static comp3350.acci.persistence.AppDatabase.setDbInstance;
 
 import comp3350.acci.R;
 
@@ -17,7 +16,6 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setDbInstance(this);
     }
 
     @Override
