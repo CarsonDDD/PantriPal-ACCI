@@ -42,6 +42,14 @@ public class User
 		return userName;
 	}
 
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public boolean equals(Object other) {
 		boolean equals = false;
 
