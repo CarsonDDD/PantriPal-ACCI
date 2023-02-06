@@ -26,6 +26,10 @@ public class Pantry {
         return quantity;
     }
 
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
     public String toString(){
         return String.format("Pantry: {%s, %s, quantity: %f}", user.toString(), ingredient.toString(), quantity);
     }
