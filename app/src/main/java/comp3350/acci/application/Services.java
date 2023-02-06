@@ -2,22 +2,34 @@ package comp3350.acci.application;
 
 import java.util.List;
 
+import comp3350.acci.objects.Ingredient;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.persistence.CoursePersistence;
+import comp3350.acci.persistence.IngredientPersistence;
+import comp3350.acci.persistence.PantryPersistence;
 import comp3350.acci.persistence.RecipePersistence;
 import comp3350.acci.persistence.SCPersistence;
 import comp3350.acci.persistence.StudentPersistence;
 import comp3350.acci.persistence.stubs.CoursePersistenceStub;
+import comp3350.acci.persistence.stubs.IngredientPersistenceStub;
+import comp3350.acci.persistence.stubs.PantryPersistenceStub;
 import comp3350.acci.persistence.stubs.RecipePersistenceStub;
 import comp3350.acci.persistence.stubs.SCPersistenceStub;
 import comp3350.acci.persistence.stubs.StudentPersistenceStub;
 
 public class Services
 {
+    //stuff to remove
 	private static StudentPersistence studentPersistence = null;
 	private static CoursePersistence coursePersistence = null;
 	private static SCPersistence scPersistence = null;
+
+    //Our stuff
     private static RecipePersistence recipePersistence = null;
+    private static PantryPersistence pantryPersistence = null;
+    private static IngredientPersistence ingredientPersistence = null;
+
+    //Stuff to remove:
 	public static synchronized StudentPersistence getStudentPersistence()
     {
 		if (studentPersistence == null)
@@ -27,21 +39,12 @@ public class Services
 
         return studentPersistence;
 	}
-
-    public static synchronized CoursePersistence getCoursePersistence()
-    {
-        if (coursePersistence == null)
-        {
+    public static synchronized CoursePersistence getCoursePersistence() {
+        if (coursePersistence == null) {
             coursePersistence = new CoursePersistenceStub();
         }
 
         return coursePersistence;
-    }
-    public static synchronized RecipePersistence getRecipePersistence() {
-       if(recipePersistence == null) {
-           recipePersistence = new RecipePersistenceStub();
-       }
-       return recipePersistence;
     }
 	public static synchronized SCPersistence getScPersistence() {
         if (scPersistence == null) {
@@ -49,5 +52,27 @@ public class Services
         }
 
         return scPersistence;
+    }
+
+    //Our persistence
+    public static synchronized RecipePersistence getRecipePersistence() {
+        if(recipePersistence == null) {
+            recipePersistence = new RecipePersistenceStub();
+        }
+        return recipePersistence;
+    }
+
+    public static synchronized IngredientPersistence getIngredientPersistence() {
+        if(ingredientPersistence == null) {
+            ingredientPersistence = new IngredientPersistenceStub();
+        }
+        return ingredientPersistence;
+    }
+
+    public static synchronized PantryPersistence getPantryPersistence(){
+        if(pantryPersistence == null) {
+            pantryPersistence = new PantryPersistenceStub();
+        }
+        return pantryPersistence;
     }
 }
