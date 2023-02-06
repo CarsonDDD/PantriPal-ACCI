@@ -1,8 +1,5 @@
 package comp3350.acci.business;
 
-import android.app.Activity;
-import android.content.Context;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -10,7 +7,7 @@ import comp3350.acci.application.Services;
 import comp3350.acci.objects.Course;
 import comp3350.acci.persistence.CoursePersistence;
 
-public class AccessCourses extends Activity
+public class AccessCourses
 {
 	private CoursePersistence coursePersistence;
 	private List<Course> courses;
