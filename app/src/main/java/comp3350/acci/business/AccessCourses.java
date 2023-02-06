@@ -82,4 +82,5 @@ public class AccessCourses
 	{
 		coursePersistence.deleteCourse(currentCourse);
 	}
+
 }
