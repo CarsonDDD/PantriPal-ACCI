@@ -4,18 +4,26 @@ import java.util.List;
 
 import comp3350.acci.objects.Ingredient;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.persistence.ContainPersistence;
 import comp3350.acci.persistence.CoursePersistence;
 import comp3350.acci.persistence.IngredientPersistence;
+import comp3350.acci.persistence.LikedPersistence;
 import comp3350.acci.persistence.PantryPersistence;
 import comp3350.acci.persistence.RecipePersistence;
 import comp3350.acci.persistence.SCPersistence;
+import comp3350.acci.persistence.SavedPersistence;
 import comp3350.acci.persistence.StudentPersistence;
+import comp3350.acci.persistence.UserPersistence;
+import comp3350.acci.persistence.stubs.ContainPersistenceStub;
 import comp3350.acci.persistence.stubs.CoursePersistenceStub;
 import comp3350.acci.persistence.stubs.IngredientPersistenceStub;
+import comp3350.acci.persistence.stubs.LikedPersistenceStub;
 import comp3350.acci.persistence.stubs.PantryPersistenceStub;
 import comp3350.acci.persistence.stubs.RecipePersistenceStub;
 import comp3350.acci.persistence.stubs.SCPersistenceStub;
+import comp3350.acci.persistence.stubs.SavedPersistenceStub;
 import comp3350.acci.persistence.stubs.StudentPersistenceStub;
+import comp3350.acci.persistence.stubs.UserPersistenceStub;
 
 public class Services
 {
@@ -28,6 +36,13 @@ public class Services
     private static RecipePersistence recipePersistence = null;
     private static PantryPersistence pantryPersistence = null;
     private static IngredientPersistence ingredientPersistence = null;
+    private static UserPersistence userPersistence = null;
+
+    private static SavedPersistence savedPersistence = null;
+
+    private static LikedPersistence likedPersistence = null;
+
+    private static ContainPersistence containPersistence = null;
 
     //Stuff to remove:
 	public static synchronized StudentPersistence getStudentPersistence()
@@ -74,5 +89,32 @@ public class Services
             pantryPersistence = new PantryPersistenceStub();
         }
         return pantryPersistence;
+    }
+
+    public static synchronized UserPersistence getUserPersistence() {
+        if(userPersistence == null) {
+            userPersistence = new UserPersistenceStub();
+        }
+        return userPersistence;
+    }
+
+    public static synchronized SavedPersistence getSavedPersistence() {
+        if(savedPersistence == null) {
+            savedPersistence = new SavedPersistenceStub();
+        }
+        return savedPersistence;
+    }
+    public static synchronized LikedPersistence getLikedPersistence() {
+        if(likedPersistence == null) {
+            likedPersistence = new LikedPersistenceStub();
+        }
+        return likedPersistence;
+    }
+
+    public static synchronized ContainPersistence getContainPersistence() {
+        if(containPersistence == null) {
+            containPersistence = new ContainPersistenceStub();
+        }
+        return containPersistence;
     }
 }
