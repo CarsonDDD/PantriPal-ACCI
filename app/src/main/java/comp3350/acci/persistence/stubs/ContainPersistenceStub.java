@@ -48,13 +48,13 @@ public class ContainPersistenceStub implements ContainPersistence {
     }
 
     @Override
-    public Contain insertPantry(Contain contain) {
+    public Contain insertContain(Contain contain) {
         containList.add(contain);
         return contain;
     }
 
     @Override
-    public Contain updatePantry(Contain contain) {
+    public Contain updateContain(Contain contain) {
         int index;
 
         index = containList.indexOf(contain);
@@ -78,7 +78,7 @@ public class ContainPersistenceStub implements ContainPersistence {
     }
 
     @Override
-    public void deletePantry(Contain contain) {
+    public void deleteContain(Contain contain) {
         int index;
 
         index = containList.indexOf(contain);

@@ -7,6 +7,8 @@ import comp3350.acci.objects.Recipe;
 public interface RecipePersistence {
     List<Recipe> getRecipes();
 
+    Recipe getRecipeByID(int id);
+
     Recipe insertRecipe(Recipe recipe);
 
     Recipe updateRecipe(Recipe recipe);
