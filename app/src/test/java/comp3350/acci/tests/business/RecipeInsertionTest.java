@@ -43,5 +43,7 @@ public class RecipeInsertionTest extends TestCase {
         manager.changePrivacy(rep1);
 
         assertTrue(rep1.getIsPrivate());
+
+        System.out.println("changePrivacy test successfully");
     }
 }
