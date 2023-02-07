@@ -33,5 +33,15 @@ public class RecipeInsertionTest extends TestCase {
     public void testRecipePrivacy() {
         System.out.println("\nStarting Recipe Privacy Test:");
 
+        User user = new User("Caelan", "I'm the coolest");
+        RecipeManager manager = new RecipeManager();
+
+        Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
+
+        assertFalse(rep1.getIsPrivate());
+
+        manager.changePrivacy(rep1);
+
+        assertTrue(rep1.getIsPrivate());
     }
 }
