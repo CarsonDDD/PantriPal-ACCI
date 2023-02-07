@@ -74,6 +74,22 @@ public class Recipe
 		return isPrivate;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
+	}
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public void setIsPrivate(boolean aPrivate) {
+		isPrivate = aPrivate;
+	}
+
 	public boolean equals(Object other) {
 		boolean equals = false;
 

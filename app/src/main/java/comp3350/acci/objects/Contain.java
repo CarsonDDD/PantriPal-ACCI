@@ -26,6 +26,10 @@ public class Contain {
         return quantity;
     }
 
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
     public String toString(){
         return String.format("Contain: {%s, %s, quantity: %f}", recipe.toString(), ingredient.toString(), quantity);
     }
