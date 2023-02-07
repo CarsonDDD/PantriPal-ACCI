@@ -31,6 +31,16 @@ public class RecipePersistenceStub implements RecipePersistence {
     }
 
     @Override
+    public Recipe getRecipeByID(int id) {
+        for (int i = 0; i<recipes.size(); i++){
+            if (recipes.get(i).getRecipeID() == id) {
+                return recipes.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
     public Recipe insertRecipe(Recipe recipe) {
         recipes.add(recipe);
         return recipe;

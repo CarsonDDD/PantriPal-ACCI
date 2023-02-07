@@ -26,18 +26,18 @@ public class IngredientPersistenceStub implements IngredientPersistence {
     }
 
     @Override
-    public List<Ingredient> getUsers() {
+    public List<Ingredient> getIngredients() {
         return Collections.unmodifiableList(ingredients);
     }
 
     @Override
-    public Ingredient insertUser(Ingredient ingredient) {
+    public Ingredient insertIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
         return ingredient;
     }
 
     @Override
-    public Ingredient updateUser(Ingredient ingredient) {
+    public Ingredient updateIngredient(Ingredient ingredient) {
         int index;
 
         index = ingredients.indexOf(ingredient);
@@ -49,7 +49,7 @@ public class IngredientPersistenceStub implements IngredientPersistence {
     }
 
     @Override
-    public void deleteUser(Ingredient ingredient) {
+    public void deleteIngredient(Ingredient ingredient) {
         int index;
 
         index = ingredients.indexOf(ingredient);
