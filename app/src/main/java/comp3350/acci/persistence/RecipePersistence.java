@@ -9,6 +9,8 @@ public interface RecipePersistence {
 
     Recipe getRecipeByID(int id);
 
+    Recipe getRecipe(Recipe recipe);
+
     Recipe insertRecipe(Recipe recipe);
 
     Recipe updateRecipe(Recipe recipe);
