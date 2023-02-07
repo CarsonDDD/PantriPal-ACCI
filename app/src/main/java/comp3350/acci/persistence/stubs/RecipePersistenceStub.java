@@ -29,7 +29,15 @@ public class RecipePersistenceStub implements RecipePersistence {
     public List<Recipe> getRecipes() {
         return Collections.unmodifiableList(recipes);
     }
-
+    @Override
+    public Recipe getRecipe(Recipe recipe) {
+        for (int i = 0; i<recipes.size(); i++){
+            if (recipes.equals(recipe)) {
+                return recipes.get(i);
+            }
+        }
+        return null;
+    }
     @Override
     public Recipe getRecipeByID(int id) {
         for (int i = 0; i<recipes.size(); i++){
