@@ -8,11 +8,11 @@ import comp3350.acci.objects.Recipe;
 public interface ContainPersistence {
     List<Contain> getContains();
 
-    Contain insertPantry(Contain contain);
+    Contain insertContain(Contain contain);
 
-    Contain updatePantry(Contain contain);
+    Contain updateContain(Contain contain);
 
     List<Contain> getContainsByRecipe(Recipe recipe);
 
-    void deletePantry(Contain contain);
+    void deleteContain(Contain contain);
 }

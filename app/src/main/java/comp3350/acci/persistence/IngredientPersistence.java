@@ -5,11 +5,11 @@ import java.util.List;
 import comp3350.acci.objects.Ingredient;
 
 public interface IngredientPersistence {
-    List<Ingredient> getUsers();
+    List<Ingredient> getIngredients();
 
-    Ingredient insertUser(Ingredient ingredient);
+    Ingredient insertIngredient(Ingredient ingredient);
 
-    Ingredient updateUser(Ingredient ingredient);
+    Ingredient updateIngredient(Ingredient ingredient);
 
-    void deleteUser(Ingredient ingredient);
+    void deleteIngredient(Ingredient ingredient);
 }
