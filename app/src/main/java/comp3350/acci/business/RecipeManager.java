@@ -1,4 +1,6 @@
 package comp3350.acci.business;
+import java.util.List;
+
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
@@ -27,6 +29,11 @@ public class RecipeManager {
         return newRecipe;
     }
 
+    //given an id, returns the associated recipe
+    public Recipe getRecipeByID(int recipeID) {
+        //return recipePersistence.getRecipesByID(recipeID);
+        return null;
+    }
     //Swaps the privacy of a recipe from false to true and true to false
     public void changePrivacy(Recipe recipe) {
         if(recipe.getIsPrivate())
@@ -46,7 +53,7 @@ public class RecipeManager {
     }
 
     //given a recipe name, returns the ingredient list of said recipe
-    public String[] getIngredients(String name) {
+    public String[] getIngredients(Recipe recipe) {
         return null;
     }
 
