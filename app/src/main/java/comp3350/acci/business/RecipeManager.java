@@ -29,10 +29,9 @@ public class RecipeManager {
         return newRecipe;
     }
 
-    //given an id, returns the associated recipe
+    //given an id, returns the associated recipe, returns null if recipe with id could not be found
     public Recipe getRecipeByID(int recipeID) {
-        //return recipePersistence.getRecipesByID(recipeID);
-        return null;
+        return recipePersistence.getRecipeByID(recipeID);
     }
     //Swaps the privacy of a recipe from false to true and true to false
     public void changePrivacy(Recipe recipe) {
@@ -52,14 +51,20 @@ public class RecipeManager {
 
     }
 
-    //given a recipe name, returns the ingredient list of said recipe
+    //given a recipe, returns the ingredient list of said recipe
     public String[] getIngredients(Recipe recipe) {
         return null;
     }
 
     //sets the instructions of a given recipe
-    public void setInstructions(String name, String Instructions) {
-
+    public void setInstructions(Recipe recipe, String newInstructions) {
+        recipe.setInstructions((newInstructions));
+        recipePersistence.updateRecipe(recipe);
     }
 
+    //returns the instructions of a recipe from the Persistence layer
+    public String getInstructionsByID(int recipeID) {
+        Recipe recipe = getRecipeByID(recipeID);
+        return recipe.getInstructions();
+    }
 }
