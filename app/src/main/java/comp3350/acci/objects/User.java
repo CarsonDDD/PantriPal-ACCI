@@ -2,6 +2,12 @@ package comp3350.acci.objects;
 
 import java.util.Objects;
 
+/*
+    Name:           User
+    Description:    This class represents User DSO.
+    Author/Version: Ivory Lyons: 02/07/23
+
+ */
 public class User
 {
 
