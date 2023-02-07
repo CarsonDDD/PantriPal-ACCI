@@ -1,12 +1,15 @@
 package comp3350.acci.business;
 import comp3350.acci.application.Services;
+import comp3350.acci.objects.Recipe;
+import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
 
 /*
     Name:           RecipeManager
     Description:    This is the logic layer interface for recipe DSO
                     Similar to access courses
-    Author/Version: Caelan Myskiw: 02/06/23
+                    Allows the presentation layer to interface
+    Author/Version: Caelan Myskiw: 02/07/23
 
  */
 public class RecipeManager {
@@ -18,10 +21,20 @@ public class RecipeManager {
     }
 
     //creates a DSO: recipe with a given name, ingredients, and instructions. returns the recipe ID
-    public int createRecipe(String name, String instructions, boolean isPrivate, String Difficulty) {
-        return -1;
+    public Recipe createRecipe(User author, String name, String instructions, boolean isPrivate, String difficulty) {
+        Recipe newRecipe = new Recipe(author, name, instructions, isPrivate, difficulty);
+        newRecipe = recipePersistence.insertRecipe(newRecipe);
+        return newRecipe;
     }
 
+    //Swaps the privacy of a recipe from false to true and true to false
+    public void changePrivacy(Recipe recipe) {
+        if(recipe.getIsPrivate())
+            recipe.setIsPrivate(false);
+        else
+            recipe.setIsPrivate(true);
+        recipePersistence.updateRecipe(recipe);
+    }
     //Sets the ingredients for a recipe to the string array given
     //to add an ingredient use addIngredient instead
     public void setIngredients(String name, String[] ingredients) {
