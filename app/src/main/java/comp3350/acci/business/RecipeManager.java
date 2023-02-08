@@ -62,6 +62,10 @@ public class RecipeManager {
         recipePersistence.updateRecipe(recipe);
     }
 
+    //return instructions of a recipe from persistence layer
+    public String getInstructions(Recipe recipe) {
+        return recipePersistence.getRecipe(recipe).getInstructions();
+    }
     //returns the instructions of a recipe from the Persistence layer
     public String getInstructionsByID(int recipeID) {
         Recipe recipe = getRecipeByID(recipeID);
