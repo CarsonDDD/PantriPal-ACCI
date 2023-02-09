@@ -44,6 +44,26 @@ public class RecipeInsertionTest extends TestCase {
 
         assertTrue(rep1.getIsPrivate());
 
-        System.out.println("changePrivacy test successfully");
+        System.out.println("changePrivacy tested successfully");
+    }
+    @Test
+    public void testRecipeInstructions() {
+        System.out.println("\nStarting Recipe Instruction Tests:");
+
+        User user = new User("Caelan", "I'm the coolest");
+        RecipeManager manager = new RecipeManager();
+
+        Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
+
+        assertEquals(rep1.getInstructions(), manager.getInstructions(rep1));
+
+        String newInstructions = "Put the jam and peanut butter on some bread";
+
+        manager.setInstructions(rep1, newInstructions);
+
+        assertEquals(newInstructions, manager.getInstructions(rep1));
+        assertEquals(newInstructions, manager.getInstructionsByID(rep1.getRecipeID()));
+
+        System.out.println("Recipe Instructions tested Successfully");
     }
 }
