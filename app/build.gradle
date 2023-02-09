@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "comp3350.acci"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -25,14 +25,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding true
+    }
     namespace 'comp3350.acci'
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.room:room-common:2.4.2'
     implementation 'androidx.test:core:1.5.0'
     implementation 'androidx.test.ext:junit:1.1.5'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.navigation:navigation-runtime:2.5.3'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     def room_version = "2.5.0"
