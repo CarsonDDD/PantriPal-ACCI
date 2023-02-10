@@ -1,11 +1,11 @@
-package comp3350.acci.persistence.stubs;
+package comp3350.acci.objects.persistence.stubs;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import comp3350.acci.objects.Student;
-import comp3350.acci.persistence.StudentPersistence;
+import comp3350.acci.objects.persistence.StudentPersistence;
 
 public class StudentPersistenceStub implements StudentPersistence {
     private List<Student> students;

@@ -1,4 +1,4 @@
-package comp3350.acci.persistence;
+package comp3350.acci.objects.persistence;
 
 import java.util.List;
 

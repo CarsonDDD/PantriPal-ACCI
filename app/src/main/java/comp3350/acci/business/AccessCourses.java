@@ -5,7 +5,7 @@ import java.util.List;
 
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.Course;
-import comp3350.acci.persistence.CoursePersistence;
+import comp3350.acci.objects.persistence.CoursePersistence;
 
 public class AccessCourses
 {

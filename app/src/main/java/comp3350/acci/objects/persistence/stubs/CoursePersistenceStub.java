@@ -1,11 +1,11 @@
-package comp3350.acci.persistence.stubs;
+package comp3350.acci.objects.persistence.stubs;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import comp3350.acci.objects.Course;
-import comp3350.acci.persistence.CoursePersistence;
+import comp3350.acci.objects.persistence.CoursePersistence;
 
 public class CoursePersistenceStub implements CoursePersistence {
     private List<Course> courses;

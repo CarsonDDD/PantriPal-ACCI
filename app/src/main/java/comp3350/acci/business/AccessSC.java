@@ -4,7 +4,7 @@ import java.util.List;
 
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.SC;
-import comp3350.acci.persistence.SCPersistence;
+import comp3350.acci.objects.persistence.SCPersistence;
 
 public class AccessSC
 {

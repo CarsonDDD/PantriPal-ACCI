@@ -5,7 +5,7 @@ import java.util.List;
 
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.Student;
-import comp3350.acci.persistence.StudentPersistence;
+import comp3350.acci.objects.persistence.StudentPersistence;
 
 public class AccessStudents
 {

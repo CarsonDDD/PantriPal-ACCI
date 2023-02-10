@@ -1,10 +1,9 @@
 package comp3350.acci.business;
-import java.util.List;
 
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
-import comp3350.acci.persistence.RecipePersistence;
+import comp3350.acci.objects.persistence.RecipePersistence;
 
 /*
     Name:           RecipeManager
