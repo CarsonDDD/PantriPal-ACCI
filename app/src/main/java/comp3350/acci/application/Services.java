@@ -23,12 +23,7 @@ import comp3350.acci.objects.persistence.stubs.UserPersistenceStub;
 
 public class Services
 {
-    //stuff to remove
-	private static StudentPersistence studentPersistence = null;
-	private static CoursePersistence coursePersistence = null;
-	private static SCPersistence scPersistence = null;
 
-    //Our stuff
     private static RecipePersistence recipePersistence = null;
     private static PantryPersistence pantryPersistence = null;
     private static IngredientPersistence ingredientPersistence = null;
@@ -39,31 +34,6 @@ public class Services
     private static LikedPersistence likedPersistence = null;
 
     private static ContainPersistence containPersistence = null;
-
-    //Stuff to remove:
-	public static synchronized StudentPersistence getStudentPersistence()
-    {
-		if (studentPersistence == null)
-		{
-		    studentPersistence = new StudentPersistenceStub();
-        }
-
-        return studentPersistence;
-	}
-    public static synchronized CoursePersistence getCoursePersistence() {
-        if (coursePersistence == null) {
-            coursePersistence = new CoursePersistenceStub();
-        }
-
-        return coursePersistence;
-    }
-	public static synchronized SCPersistence getScPersistence() {
-        if (scPersistence == null) {
-            scPersistence = new SCPersistenceStub();
-        }
-
-        return scPersistence;
-    }
 
     //Our persistence
     public static synchronized RecipePersistence getRecipePersistence() {
