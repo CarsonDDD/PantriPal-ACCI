@@ -31,7 +31,7 @@ public class RecipeInsertionTest extends TestCase {
     }
     @Test
     public void testRecipePrivacy() {
-        System.out.println("\nStarting Recipe Privacy Test:");
+        System.out.println("\nStarting Recipe privacy Test:");
 
         User user = new User("Caelan", "I'm the coolest");
         RecipeManager manager = new RecipeManager();
@@ -48,7 +48,7 @@ public class RecipeInsertionTest extends TestCase {
     }
     @Test
     public void testRecipeInstructions() {
-        System.out.println("\nStarting Recipe Instruction Tests:");
+        System.out.println("\nStarting recipe instruction Tests:");
 
         User user = new User("Caelan", "I'm the coolest");
         RecipeManager manager = new RecipeManager();
