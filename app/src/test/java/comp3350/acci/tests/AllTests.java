@@ -3,7 +3,7 @@ package comp3350.acci.tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import comp3350.acci.tests.business.RecipeInsertionTest;
+import comp3350.acci.tests.business.RecipeManagerTest;
 import comp3350.acci.tests.objects.ContainTest;
 import comp3350.acci.tests.objects.IngredientTest;
 import comp3350.acci.tests.objects.LikedTest;
@@ -21,7 +21,7 @@ import comp3350.acci.tests.objects.UserTest;
         SavedTest.class,
         PantryTest.class,
         ContainTest.class,
-        RecipeInsertionTest.class
+        RecipeManagerTest.class
 })
 public class AllTests
 {

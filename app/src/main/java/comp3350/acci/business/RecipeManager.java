@@ -28,6 +28,16 @@ public class RecipeManager {
         return newRecipe;
     }
 
+    //creates a recipe for a user without an account (who just provides a name)
+    public Recipe createRecipe(String authorName, String recipeName, String instructions, boolean isPrivate, String difficulty) {
+        User author = new User(authorName, "PLACEHOLDER bio");
+        Recipe newRecipe = new Recipe(author, recipeName, "Placeholder Instructions", false, difficulty);
+        return recipePersistence.insertRecipe(newRecipe);
+    }
+
+    public Recipe getRecipeFromPersistence(Recipe recipe) {
+        return recipePersistence.getRecipe(recipe);
+    }
     //given an id, returns the associated recipe, returns null if recipe with id could not be found
     public Recipe getRecipeByID(int recipeID) {
         return recipePersistence.getRecipeByID(recipeID);
@@ -39,20 +49,6 @@ public class RecipeManager {
         else
             recipe.setIsPrivate(true);
         recipePersistence.updateRecipe(recipe);
-    }
-    //Sets the ingredients for a recipe to the string array given
-    //to add an ingredient use addIngredient instead
-    public void setIngredients(String name, String[] ingredients) {
-
-    }
-
-    public void addIngredient(String name, String ingredient) {
-
-    }
-
-    //given a recipe, returns the ingredient list of said recipe
-    public String[] getIngredients(Recipe recipe) {
-        return null;
     }
 
     //sets the instructions of a given recipe

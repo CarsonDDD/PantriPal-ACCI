@@ -9,12 +9,21 @@
         android:id="@+id/navigation_discovery"
         android:name="comp3350.acci.presentation.discovery.DiscoveryActivity"
         android:label="@string/home"
-        tools:layout="@layout/activity_discovery" />
+        tools:layout="@layout/activity_discovery" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_insert_recipe"
+        android:name="comp3350.acci.presentation.InsertRecipeActivity"
+        android:label="@string/add_recipe"
+        tools:layout="@layout/activity_insert_recipe" >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="comp3350.acci.presentation.discovery.DiscoveryActivity"
+        android:name="comp3350.acci.presentation.ProfileActivity"
         android:label="@string/profile"
-        tools:layout="@layout/activity_discovery" />
+        tools:layout="@layout/activity_profile" >
+    </fragment>
 
 </navigation>
