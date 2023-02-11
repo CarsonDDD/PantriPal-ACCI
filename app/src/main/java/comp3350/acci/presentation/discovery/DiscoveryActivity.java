@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.business.RecipeManager;
 import comp3350.acci.objects.Recipe;
 
 public class DiscoveryActivity extends Fragment {
@@ -42,11 +43,9 @@ public class DiscoveryActivity extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(),1));
 
-        List<Recipe> recipeList = new ArrayList<>();
-        recipeList.add(new Recipe());
-        recipeList.add(new Recipe());
-        recipeList.add(new Recipe());
-        recipeList.add(new Recipe());
+        RecipeManager rm = new RecipeManager();
+
+        List<Recipe> recipeList = rm.getRecipes();
 
         recipeAdapter = new RecipeAdapter(this.getContext(), recipeList);
         recyclerView.setAdapter(recipeAdapter);
