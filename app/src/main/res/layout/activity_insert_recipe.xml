@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Recipe Title"
+                    android:hint="Recipe Name"
                     android:inputType="textPersonName"
                     android:textSize="32dp" />
 
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Author"
+                    android:hint="Author's name"
                     android:inputType="textPersonName"
                     android:textSize="32dp" />
             </TableRow>
@@ -66,16 +66,16 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Steps:"
+                    android:text="Difficulty:"
                     android:textSize="32dp" />
 
                 <EditText
-                    android:id="@+id/insert_recipe_txtsteps"
+                    android:id="@+id/insert_recipe_txtdifficulty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="start|top"
-                    android:hint="Steps"
+                    android:hint="Recipe Difficulty"
                     android:inputType="textMultiLine"
                     android:textSize="32dp" />
 
@@ -87,7 +87,8 @@
             android:id="@+id/insert_recipe_btnadd"
             android:layout_width="match_parent"
             android:layout_height="88dp"
-            android:text="Add Recipe!" />
+            android:text="Add Recipe!"
+             />
 
     </LinearLayout>
 
