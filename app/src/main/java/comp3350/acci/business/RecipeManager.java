@@ -28,6 +28,9 @@ public class RecipeManager {
         return newRecipe;
     }
 
+    public Recipe getRecipeFromPersistence(Recipe recipe) {
+        return recipePersistence.getRecipe(recipe);
+    }
     //given an id, returns the associated recipe, returns null if recipe with id could not be found
     public Recipe getRecipeByID(int recipeID) {
         return recipePersistence.getRecipeByID(recipeID);

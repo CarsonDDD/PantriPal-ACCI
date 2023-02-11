@@ -32,7 +32,7 @@ public class RecipePersistenceStub implements RecipePersistence {
     @Override
     public Recipe getRecipe(Recipe recipe) {
         for (int i = 0; i<recipes.size(); i++){
-            if (recipes.equals(recipe)) {
+            if (recipes.get(i).equals(recipe)) {
                 return recipes.get(i);
             }
         }
