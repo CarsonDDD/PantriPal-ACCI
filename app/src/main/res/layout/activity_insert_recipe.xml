@@ -6,27 +6,89 @@
     tools:context=".presentation.InsertRecipeActivity">
 
 
-    <!-- Title -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Recipe Title"
-            android:textSize="32dp"/>
+            android:layout_height="230dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title:"
+                    android:textSize="32dp" />
+
+                <EditText
+                    android:id="@+id/insert_recipe_txtname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Recipe Title"
+                    android:inputType="textPersonName"
+                    android:textSize="32dp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Author: "
+                    android:textSize="32dp" />
+
+                <EditText
+                    android:id="@+id/insert_recipe_txtauthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Author"
+                    android:inputType="textPersonName"
+                    android:textSize="32dp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Steps:"
+                    android:textSize="32dp" />
+
+                <EditText
+                    android:id="@+id/insert_recipe_txtsteps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Steps"
+                    android:inputType="textMultiLine"
+                    android:textSize="32dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/insert_recipe_btnadd"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:text="Add Recipe!" />
+
     </LinearLayout>
-
-    <!-- Title -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </LinearLayout>
-
-
 
 </FrameLayout>
