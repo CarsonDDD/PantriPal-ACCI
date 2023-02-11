@@ -9,14 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import comp3350.acci.R;
 import comp3350.acci.business.RecipeManager;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link InsertRecipeActivity#newInstance} factory method to
- * create an instance of this fragment.
+    This class is the linked Java class to the activity_insert_recipe.xml layout file
+    Where the layout decides what is shown/parameters, this file decides logical operations that can be performed
+
+    Last Updated: Caelan Myskiw 02/11/2023
  */
 public class InsertRecipeActivity extends Fragment implements View.OnClickListener {
 
@@ -85,18 +88,31 @@ public class InsertRecipeActivity extends Fragment implements View.OnClickListen
         EditText recipeText = (EditText) getView().findViewById(R.id.insert_recipe_txtname);
         EditText authorText = (EditText) getView().findViewById(R.id.insert_recipe_txtauthor);
         EditText difficultyText = (EditText) getView().findViewById(R.id.insert_recipe_txtdifficulty);
+        EditText instructionText = (EditText) getView().findViewById(R.id.insert_recipe_txtInstructions);
 
+        Switch privacySwitch = (Switch) getView().findViewById(R.id.insert_recipe_swtchPrivacy);
+
+        TextView confirmationText = (TextView) getView().findViewById(R.id.insert_recipe_confirmation);
 
         //convert text fields to strings
         String recipeName = recipeText.getText().toString();
         String authorName = authorText.getText().toString();
         String difficulty = difficultyText.getText().toString();
+        String instructions = instructionText.getText().toString();
+        Boolean isPrivate = privacySwitch.isChecked();
         //create a manager
         RecipeManager manager = new RecipeManager();
 
 
-        manager.createRecipeFrame(null, recipeName,  difficulty);
+        manager.createRecipe(authorName, recipeName,instructions, isPrivate, difficulty);
 
-        addRecipeButton.setText("Recipe Added!");
+        //make the screen look like we did something (cuz we did)
+        confirmationText.setText("Recipe was added successfully!\nPlease add next recipe");
+        recipeText.getText().clear();
+        authorText.getText().clear();
+        difficultyText.getText().clear();
+        instructionText.getText().clear();
+        privacySwitch.setChecked(false);
+
     }
 }

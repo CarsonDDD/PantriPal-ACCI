@@ -13,7 +13,7 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="230dp">
+            android:layout_height="match_parent">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:ems="10"
                     android:hint="Recipe Name"
                     android:inputType="textPersonName"
-                    android:textSize="32dp" />
+                    android:textSize="20dp" />
 
             </TableRow>
 
@@ -55,7 +55,7 @@
                     android:ems="10"
                     android:hint="Author's name"
                     android:inputType="textPersonName"
-                    android:textSize="32dp" />
+                    android:textSize="20dp" />
             </TableRow>
 
             <TableRow
@@ -77,18 +77,75 @@
                     android:gravity="start|top"
                     android:hint="Recipe Difficulty"
                     android:inputType="textMultiLine"
-                    android:textSize="32dp" />
+                    android:textSize="20dp" />
 
             </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructions:"
+                    android:textSize="32dp" />
+
+                <EditText
+                    android:id="@+id/insert_recipe_txtInstructions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Recipe Instructions"
+                    android:inputType="textMultiLine"
+                    android:textSize="20dp"
+                    />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/insert_recipe_privacyQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Private?"
+                    android:textSize="32dp" />
+
+                <Switch
+                    android:id="@+id/insert_recipe_swtchPrivacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:textSize="20dp"
+                    android:text=""
+                    android:textOff="OFF"
+                    android:textOn="ON"
+                    />
+            </TableRow>
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/insert_recipe_btnadd"
+                    android:layout_width="match_parent"
+                    android:layout_height="88dp"
+                    android:text="Add Recipe!"
+                    />
+                <TextView
+                    android:id="@+id/insert_recipe_confirmation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Please add recipe"
+                    android:textSize="16dp"
+                    />
+
+            </TableRow>
         </TableLayout>
 
-        <Button
-            android:id="@+id/insert_recipe_btnadd"
-            android:layout_width="match_parent"
-            android:layout_height="88dp"
-            android:text="Add Recipe!"
-             />
 
     </LinearLayout>
 

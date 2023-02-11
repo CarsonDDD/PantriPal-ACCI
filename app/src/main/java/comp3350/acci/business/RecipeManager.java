@@ -28,7 +28,8 @@ public class RecipeManager {
         return newRecipe;
     }
 
-    public Recipe createRecipeFrame(String authorName, String recipeName, String difficulty) {
+    //creates a recipe for a user without an account (who just provides a name)
+    public Recipe createRecipe(String authorName, String recipeName, String instructions, boolean isPrivate, String difficulty) {
         User author = new User(authorName, "PLACEHOLDER bio");
         Recipe newRecipe = new Recipe(author, recipeName, "Placeholder Instructions", false, difficulty);
         return recipePersistence.insertRecipe(newRecipe);
