@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_insert_recipe:
                     replaceFragment(new InsertRecipeActivity());
                     break;
-                case R.id.menu_profile:
+                /*case R.id.menu_profile:
                     replaceFragment(new ProfileActivity());
-                    break;
+                    break;*/
             }
             return true;
         });
