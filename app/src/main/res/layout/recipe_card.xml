@@ -28,14 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-   <!-- <TextView
+    <TextView
         android:id="@+id/textView_instructions"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-<<<<<<< app/src/main/res/layout/recipe_card.xml
-        android:text="TextView" /> -->
+        android:text="TextView" />
 
     <ImageView
         android:id="@+id/imageView_food"
