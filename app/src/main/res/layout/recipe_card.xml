@@ -36,10 +36,6 @@
         android:paddingRight="4dp"
 <<<<<<< app/src/main/res/layout/recipe_card.xml
         android:text="TextView" /> -->
-=======
-        android:scrollbars="vertical"
-        android:text="TextView" />
->>>>>>> app/src/main/res/layout/recipe_card.xml
 
     <ImageView
         android:id="@+id/imageView_food"
