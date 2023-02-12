@@ -19,8 +19,8 @@ import comp3350.acci.objects.Recipe;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
 
-    final int INSTRUCTION_CUTOFF = 50;
-    final int CUTTOFF_SIZE = 90;
+    final int INSTRUCTION_CUTOFF = 200;
+    final int CUTTOFF_SIZE = 120;
 
     Context context;
     List<Recipe> list;
@@ -43,9 +43,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
         holder.textView_author.setText(list.get(position).getAuthor().getUserName());
 
         String instructions = list.get(position).getInstructions();
-        if(instructions.length() > INSTRUCTION_CUTOFF){
+        /*if(instructions.length() > INSTRUCTION_CUTOFF){
             holder.textView_instructions.setHeight(CUTTOFF_SIZE);
-        }
+        }*/
         holder.textView_instructions.setText(list.get(position).getInstructions());
         holder.textView_difficulty.setText(list.get(position).getDifficulty());
         //holder.imageView_food.setImageBitmap();
