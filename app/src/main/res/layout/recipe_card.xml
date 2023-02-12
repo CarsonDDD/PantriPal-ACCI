@@ -44,7 +44,7 @@
     <ImageView
         android:id="@+id/imageView_food"
         android:layout_width="374dp"
-        android:layout_height="27dp"
+        android:layout_height="132dp"
         android:layout_margin="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/defaultfoodimg" />

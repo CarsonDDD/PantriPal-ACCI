@@ -69,6 +69,6 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
         //textView_favorites = itemView.findViewById(R.id.textView_favorites);
         //textView_instructions = itemView.findViewById(R.id.textView_instructions);
         textView_difficulty = itemView.findViewById(R.id.textView_difficulty);
-        textView_instructions.setMovementMethod(new ScrollingMovementMethod());
+        //textView_instructions.setMovementMethod(new ScrollingMovementMethod());
     }
 }
