@@ -28,20 +28,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/textView_instructions"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:text="TextView" />
+        android:text="TextView" /> -->
 
     <ImageView
         android:id="@+id/imageView_food"
         android:layout_width="match_parent"
         android:layout_height="88dp"
         android:layout_margin="8dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/defaultfoodimg" />
     <!--Bottom Menu-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,24 +60,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:text="TextView"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:padding="8dp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_heart"
-                android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/textView_favorites"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="2 people"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:visibility="gone"
-                tools:visibility="invisible" />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
