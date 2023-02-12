@@ -17,16 +17,16 @@ public class UserTest
 		System.out.println("\nStarting testUser");
 
 		user = new User("600cows", "Hello, my name is Ayden");
-		assertNotNull(user);
-		assertEquals("600cows", user.getUserName());
-		assertEquals("Hello, my name is Ayden", user.getBio());
+		assertNotNull("User should be non-null",user);
+		assertEquals("user should have expected name","600cows", user.getUserName());
+		assertEquals("user should have expected bio","Hello, my name is Ayden", user.getBio());
 
 		System.out.println(user);
 
 		user = new User();
-		assertNotNull(user);
-		assertEquals(null, user.getUserName());
-		assertEquals(null, user.getBio());
+		assertNotNull("empty constructor should be non-null",user);
+		assertEquals("Empty constructor should produce null username",null, user.getUserName());
+		assertEquals("empty constructor should produce null bio",null, user.getBio());
 
 
 		System.out.println("Finished testUser");

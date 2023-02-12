@@ -23,12 +23,12 @@ public class RecipeTest
 
 		recipe = new Recipe(user, "PB&J", "Make PB&J", false, "easy");
 
-		assertNotNull(recipe);
-		assertEquals("PB&J", recipe.getName());
-		assertEquals(user, recipe.getAuthor());
-		assertEquals("Make PB&J", recipe.getInstructions());
-		assertFalse(recipe.getIsPrivate());
-		assertEquals("easy", recipe.getDifficulty());
+		assertNotNull("Recipe should be non-null",recipe);
+		assertEquals("Recipe should have correct name","PB&J", recipe.getName());
+		assertEquals("Recipe should have the correct author",user, recipe.getAuthor());
+		assertEquals("Recipe should have correct instructions","Make PB&J", recipe.getInstructions());
+		assertFalse("recipe should have expected privacy (false)",recipe.getIsPrivate());
+		assertEquals("Recipe difficulty should be correct","easy", recipe.getDifficulty());
 
 		System.out.println(recipe);
 

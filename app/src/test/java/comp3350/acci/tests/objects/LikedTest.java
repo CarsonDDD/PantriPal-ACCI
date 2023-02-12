@@ -27,9 +27,9 @@ public class LikedTest
 
 		liked = new Liked(user, recipe);
 
-		assertNotNull(liked);
-		assertEquals(user, liked.getUser());
-		assertEquals(recipe,liked.getRecipe());
+		assertNotNull("Liked should be NON-null",liked);
+		assertEquals("liked should have the correct user",user, liked.getUser());
+		assertEquals("liked should have the correct recipe",recipe,liked.getRecipe());
 
 		System.out.println(liked);
 

@@ -27,9 +27,9 @@ public class SavedTest
 
 		saved = new Saved(user, recipe);
 
-		assertNotNull(saved);
-		assertEquals(user, saved.getUser());
-		assertEquals(recipe,saved.getRecipe());
+		assertNotNull("Saved should be non-null",saved);
+		assertEquals("Saved should have correct user",user, saved.getUser());
+		assertEquals("Saved should have correct recipe",recipe,saved.getRecipe());
 
 		System.out.println(saved);
 
