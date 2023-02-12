@@ -27,10 +27,10 @@ public class PantryTest
 
 		pantry = new Pantry(user, ingredient, 1);
 
-		assertNotNull(pantry);
-		assertEquals(user, pantry.getUser());
-		assertEquals(ingredient,pantry.getIngredient());
-		assertEquals(1, pantry.getQuantity(), 0.001);
+		assertNotNull("Pantry should be non-null",pantry);
+		assertEquals("Pantry should contain correct user",user, pantry.getUser());
+		assertEquals("Pantry should contain the correct ingredient",ingredient,pantry.getIngredient());
+		assertEquals("Pantry should have expected quantity",1, pantry.getQuantity(), 0.001);
 
 		System.out.println(pantry);
 
