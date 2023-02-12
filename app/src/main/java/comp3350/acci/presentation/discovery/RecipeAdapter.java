@@ -36,9 +36,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull RecipeCardViewHolder holder, int position) {
         holder.textView_title.setText(list.get(position).getName());
-        holder.textView_favorites.setText("3");
+        //holder.textView_favorites.setText("3");
         holder.textView_author.setText(list.get(position).getAuthor().getUserName());
-        holder.textView_instructions.setText(list.get(position).getInstructions());
+        //holder.textView_instructions.setText(list.get(position).getInstructions());
         holder.textView_difficulty.setText(list.get(position).getDifficulty());
         //holder.imageView_food.setImageBitmap();
     }
@@ -53,10 +53,10 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
 
     CardView recipe_container;
     TextView textView_title;
-    TextView textView_instructions;
+    //TextView textView_instructions;
     TextView textView_difficulty;
     ImageView imageView_food;
-    TextView textView_favorites;
+    //TextView textView_favorites;
     TextView textView_author;
 
     public RecipeCardViewHolder(@NonNull View itemView) {
@@ -66,8 +66,8 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
         textView_title = itemView.findViewById(R.id.textView_title);
         imageView_food = itemView.findViewById(R.id.imageView_food);
         textView_author = itemView.findViewById(R.id.textView_author);
-        textView_favorites = itemView.findViewById(R.id.textView_favorites);
-        textView_instructions = itemView.findViewById(R.id.textView_instructions);
+        //textView_favorites = itemView.findViewById(R.id.textView_favorites);
+        //textView_instructions = itemView.findViewById(R.id.textView_instructions);
         textView_difficulty = itemView.findViewById(R.id.textView_difficulty);
         textView_instructions.setMovementMethod(new ScrollingMovementMethod());
     }
