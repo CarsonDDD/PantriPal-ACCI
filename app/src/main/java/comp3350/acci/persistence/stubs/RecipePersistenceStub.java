@@ -18,8 +18,18 @@ public class RecipePersistenceStub implements RecipePersistence {
         User user1 = new User(0, "600cows", "hi im ayden");
         User user2 = new User(1, "testuser", "bio");
 
-        Recipe pbj = new Recipe(user1, 0, "PB&J", "Make PB&J", false, "easy");
-        Recipe toast = new Recipe(user2, 1, "toast", "toast bread, spread butter", false, "easy");
+        String pbjString = "1. Spread the peanut butter on one piece of bread.\n" +
+                "2. Spread the jelly on the other side.\n" +
+                "3. Put the two pieces of bread together to form a sandwich.\n" +
+                "Toddler adaptation: cut off crusts before serving.";
+
+        String grilledCheeseString = "1. Butter the bread on one side and place the bread butter-side down on a hot skillet.\n" +
+                "2. Top with cheese, then place another slice of bread on top (butter-side up).\n" +
+                "3. Cook until the bottom slice is lightly browned, then flip.\n" +
+                "4. Continue cooking until the cheese is melted.";
+
+        Recipe pbj = new Recipe(user1, 0, "Peanut Butter and Jelly", pbjString, false, "easy");
+        Recipe toast = new Recipe(user2, 1, "Grilled Cheese", grilledCheeseString, false, "easy");
 
         recipes.add(pbj);
         recipes.add(toast);

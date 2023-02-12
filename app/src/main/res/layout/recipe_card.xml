@@ -31,15 +31,16 @@
     <TextView
         android:id="@+id/textView_instructions"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="165dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
+        android:scrollbars="vertical"
         android:text="TextView" />
 
     <ImageView
         android:id="@+id/imageView_food"
-        android:layout_width="match_parent"
-        android:layout_height="88dp"
+        android:layout_width="374dp"
+        android:layout_height="27dp"
         android:layout_margin="8dp"
         android:scaleType="centerCrop" />
     <!--Bottom Menu-->

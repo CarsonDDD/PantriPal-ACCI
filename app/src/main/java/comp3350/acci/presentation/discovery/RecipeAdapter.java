@@ -1,6 +1,7 @@
 package comp3350.acci.presentation.discovery;
 
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,5 +69,6 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
         textView_favorites = itemView.findViewById(R.id.textView_favorites);
         textView_instructions = itemView.findViewById(R.id.textView_instructions);
         textView_difficulty = itemView.findViewById(R.id.textView_difficulty);
+        textView_instructions.setMovementMethod(new ScrollingMovementMethod());
     }
 }
