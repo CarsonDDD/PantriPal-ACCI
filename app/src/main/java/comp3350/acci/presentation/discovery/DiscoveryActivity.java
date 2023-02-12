@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,9 @@ import java.util.List;
 
 import comp3350.acci.R;
 import comp3350.acci.business.RecipeManager;
+import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.presentation.MainActivity;
 
 public class DiscoveryActivity extends Fragment {
 
@@ -47,8 +50,16 @@ public class DiscoveryActivity extends Fragment {
 
         List<Recipe> recipeList = rm.getRecipes();
 
-        recipeAdapter = new RecipeAdapter(this.getContext(), recipeList);
+
+        recipeAdapter = new RecipeAdapter(this.getContext(), recipeList, recipeClickListener);
         recyclerView.setAdapter(recipeAdapter);
     }
+
+    private RecipeClickListener recipeClickListener = new RecipeClickListener() {
+        @Override
+        public void onRecipeClick(Recipe recipe) {
+            Toast.makeText(getContext(), "Hello World", Toast.LENGTH_SHORT).show();
+        }
+    };
 
 }

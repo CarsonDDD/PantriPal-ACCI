@@ -1,7 +1,12 @@
 package comp3350.acci.presentation.discovery;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
 import android.content.Context;
+import android.content.res.Resources;
 import android.text.method.ScrollingMovementMethod;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +20,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
-
-    final int INSTRUCTION_CUTOFF = 200;
-    final int CUTTOFF_SIZE = 120;
-
     Context context;
     List<Recipe> list;
+    RecipeClickListener listener;
 
-    public RecipeAdapter(Context context, List<Recipe> list) {
+    public RecipeAdapter(Context context, List<Recipe> list, RecipeClickListener listener) {
         this.context = context;
         this.list = list;
+        this.listener= listener;
     }
 
     @NonNull
@@ -41,14 +45,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
         holder.textView_title.setText(list.get(position).getName());
         //holder.textView_favorites.setText("3");
         holder.textView_author.setText(list.get(position).getAuthor().getUserName());
-
-        String instructions = list.get(position).getInstructions();
-        /*if(instructions.length() > INSTRUCTION_CUTOFF){
-            holder.textView_instructions.setHeight(CUTTOFF_SIZE);
-        }*/
         holder.textView_instructions.setText(list.get(position).getInstructions());
         holder.textView_difficulty.setText(list.get(position).getDifficulty());
         //holder.imageView_food.setImageBitmap();
+
+        // Do not treat position as fixed; only use immediately and call holder.getAdapterPosition() to look it up later
+        holder.imageView_food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // This may be getBindingAdapterPosition as holder.getAdapterPosition() is depreciated
+                listener.onRecipeClick(list.get(holder.getAbsoluteAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -78,5 +86,6 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
         textView_instructions = itemView.findViewById(R.id.textView_instructions);
         textView_difficulty = itemView.findViewById(R.id.textView_difficulty);
         textView_instructions.setMovementMethod(new ScrollingMovementMethod());
+
     }
 }

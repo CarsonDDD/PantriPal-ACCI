@@ -34,6 +34,7 @@
         android:layout_width="374dp"
         android:layout_height="132dp"
         android:layout_margin="8dp"
+        android:onClick="onRecipeClick"
         android:scaleType="fitCenter"
         android:src="@drawable/defaultfoodimg" />
 
@@ -41,10 +42,10 @@
         android:id="@+id/textView_instructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="TextView\ns\nd"
-        android:scrollbars = "vertical" />
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:scrollbars="vertical"
+        android:text="TextVieddddddddddddddddd" />
     <!--Bottom Menu-->
     <LinearLayout
         android:layout_width="match_parent"
