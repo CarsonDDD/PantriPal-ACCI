@@ -44,14 +44,14 @@ public class RecipeManagerTest extends TestCase {
 
         Recipe manRep = manager.getRecipeFromPersistence(rep1);
 
-        assertNotNull(rep1);
-        assertNotNull(manRep);
+        assertNotNull("Recipe should not be NULL",rep1);
+        assertNotNull("Recipe Manager should not be NULL", manRep);
 
-        assertEquals(authorName, manRep.getAuthor().getUserName());
+        assertEquals("author name values should match", authorName, manRep.getAuthor().getUserName());
 
-        assertEquals("PB&J", rep1.getName());
-        assertEquals("Put peanut butter and jam on toast.", rep1.getInstructions());
-        assertFalse(rep1.getIsPrivate());
+        assertEquals("Name should be the same", "PB&J", rep1.getName());
+        assertEquals("Instructions should be the same","Put peanut butter and jam on toast.", rep1.getInstructions());
+        assertFalse("Private bool should be false", rep1.getIsPrivate());
         System.out.println("Created Userless Recipe had all expected fields");
     }
     @Test
@@ -104,8 +104,8 @@ public class RecipeManagerTest extends TestCase {
         Recipe rep1 = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
 
-        assertNull(manager.getRecipeByID(100));
-        assertNull(manager.getRecipeFromPersistence(rep1));
+        assertNull("Result of nonexistent recipe id should be NULL", manager.getRecipeByID(100));
+        assertNull("Result of nonexistent recipe search should be NULL",manager.getRecipeFromPersistence(rep1));
 
         System.out.println("Null recipe search tested Successfully");
     }
