@@ -4,7 +4,31 @@ Our application follows the common three-layer architecture discussed in class. 
 
 ## Presentation Layer
 
+The presentation layer handles the application's GUI. It contains activities for different features, and fragments for use in multiple different activities.
+
+### InsertRecipeActivity
+
+InsertRecipeActivity implements the GUI and it's functionality for creating new recipes. It is linked to the recipe manager, which implements the functions required for creating and modifying recipes.
+
+### MainActivity
+
+MainActivity is the starting point of the application, created on launch. It includes a feed of user recipes implemented through the DiscoveryActivity and RecipeAdapter fragment, as well as a navigation bar at the bottom of the screen for switching between discovery, adding recipes and the user's profile.
+
+### ProfileActivity
+
+ProfileActivity will implement a place for users to view and modify their profile.
+
+### DiscoveryActivity
+
+DiscoveryActivity provides a feed of user created recipes that users can view, like and review. It implements the recipe_card fragment with functionality from RecipeAdapter.java.
+
 ## Business Layer
+
+The business layer handles the application's logic and functionality, and connects the persistence/DSO layer with the presentation layer.
+
+### RecipeManager
+
+The recipe manager provides all of the functionality required for users to create new recipe objects and add them to the database, as well as view, modify and search for existing recipes by recipe ID.
 
 ## Persistence Layer
 
