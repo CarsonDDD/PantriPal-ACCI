@@ -32,10 +32,10 @@ public class ContainTest
 
 		contain = new Contain(recipe, pb, 1);
 
-		assertNotNull(contain);
-		assertEquals(recipe, contain.getRecipe());
-		assertEquals(pb, contain.getIngredient());
-		assertEquals(1, contain.getQuantity(), 0.001);
+		assertNotNull("Contain should be non-null",contain);
+		assertEquals("Contain should have the correct recipe",recipe, contain.getRecipe());
+		assertEquals("Contain's ingredient should be PB",pb, contain.getIngredient());
+		assertEquals("Contain should have the correct quantity",1, contain.getQuantity(), 0.001);
 
 		System.out.println(contain);
 

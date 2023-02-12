@@ -18,8 +18,8 @@ public class IngredientTest
 
 		ingredient = new Ingredient("Peanut Butter");
 
-		assertNotNull(ingredient);
-		assertEquals("Peanut Butter", ingredient.getName());
+		assertNotNull("ingredient should be non null",ingredient);
+		assertEquals("ingredient name should be as expected","Peanut Butter", ingredient.getName());
 
 		System.out.println(ingredient);
 
