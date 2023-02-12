@@ -1,5 +1,7 @@
 package comp3350.acci.business;
 
+import java.util.List;
+
 import comp3350.acci.application.Services;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
@@ -31,8 +33,12 @@ public class RecipeManager {
     //creates a recipe for a user without an account (who just provides a name)
     public Recipe createRecipe(String authorName, String recipeName, String instructions, boolean isPrivate, String difficulty) {
         User author = new User(authorName, "PLACEHOLDER bio");
-        Recipe newRecipe = new Recipe(author, recipeName, "Placeholder Instructions", false, difficulty);
+        Recipe newRecipe = new Recipe(author, recipeName, instructions, false, difficulty);
         return recipePersistence.insertRecipe(newRecipe);
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipePersistence.getRecipes();
     }
 
     public Recipe getRecipeFromPersistence(Recipe recipe) {
