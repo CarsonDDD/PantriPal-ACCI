@@ -41,6 +41,25 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("Created Recipe had all expected fields");
     }
     @Test
+    public void testUserlessCreateRecipe() {
+        System.out.println("\nStarting userless recipe creation test");
+        RecipeManager manager = new RecipeManager();
+        String authorName = "Caelan";
+        Recipe rep1 = manager.createRecipe(authorName, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
+
+        Recipe manRep = manager.getRecipeFromPersistence(rep1);
+
+        assertNotNull("Recipe should not be NULL",rep1);
+        assertNotNull("Recipe Manager should not be NULL", manRep);
+
+        assertEquals("author name values should match", authorName, manRep.getAuthor().getUserName());
+
+        assertEquals("Name should be the same", "PB&J", rep1.getName());
+        assertEquals("Instructions should be the same","Put peanut butter and jam on toast.", rep1.getInstructions());
+        assertFalse("Private bool should be false", rep1.getIsPrivate());
+        System.out.println("Created Userless Recipe had all expected fields");
+    }
+    @Test
     public void testRecipePrivacy() {
         System.out.println("\nStarting Recipe privacy Test:");
 
@@ -79,5 +98,20 @@ public class RecipeManagerTest extends TestCase {
         assertEquals(newInstructions, manager.getInstructionsByID(rep1.getRecipeID()));
 
         System.out.println("Recipe Instructions tested Successfully");
+    }
+    @Test
+    public void testGetNullRecipe() {
+        System.out.println("\nStarting null recipe search Tests:");
+
+        RecipeManager manager = new RecipeManager();
+
+        User user = new User("Caelan", "I'm the coolest");
+        Recipe rep1 = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
+
+
+        assertNull("Result of nonexistent recipe id should be NULL", manager.getRecipeByID(100));
+        assertNull("Result of nonexistent recipe search should be NULL",manager.getRecipeFromPersistence(rep1));
+
+        System.out.println("Null recipe search tested Successfully");
     }
 }
