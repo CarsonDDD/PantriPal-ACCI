@@ -36,6 +36,11 @@ public class InsertRecipeActivity extends Fragment implements View.OnClickListen
         // Required empty public constructor
     }
 
+    private MainActivity mainActivity;
+    public InsertRecipeActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.

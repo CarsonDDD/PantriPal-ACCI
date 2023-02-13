@@ -1,5 +1,6 @@
 package comp3350.acci.presentation;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,15 +29,16 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new DiscoveryActivity());
+        replaceFragment(new DiscoveryActivity(this));
+
 
         binding.navigationBar.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.menu_discovery:
-                    replaceFragment(new DiscoveryActivity());
+                    replaceFragment(new DiscoveryActivity(this));
                     break;
                 case R.id.menu_insert_recipe:
-                    replaceFragment(new InsertRecipeActivity());
+                    replaceFragment(new InsertRecipeActivity(this));
                     break;
                 /*case R.id.menu_profile:
                     replaceFragment(new ProfileActivity());
@@ -45,26 +47,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        /*BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_discovery, R.id.navigation_insert_recipe, R.id.navigation_profile)
-                .build();
-        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.current_fragment);
-        NavController navController = navHostFragment.getNavController();
-
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);*/
     }
 
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.current_fragment, fragment);
         fragmentTransaction.commit();
     }
+
+
 }

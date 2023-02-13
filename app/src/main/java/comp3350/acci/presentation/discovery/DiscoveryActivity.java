@@ -20,11 +20,18 @@ import comp3350.acci.business.RecipeManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
+import comp3350.acci.presentation.RecipeViewActivity;
 
 public class DiscoveryActivity extends Fragment {
 
     private RecipeAdapter recipeAdapter;
     private RecyclerView recyclerView;
+
+    private MainActivity mainActivity;
+
+    public DiscoveryActivity(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,13 @@ public class DiscoveryActivity extends Fragment {
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            Toast.makeText(getContext(), "Hello World", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Hello World", Toast.LENGTH_SHORT).show();
+            // Open recipe view with recipe
+            // open view, not switch view.
+            // no nav bar
+
+            mainActivity.replaceFragment(new RecipeViewActivity(mainActivity, recipe));
+
         }
     };
 
