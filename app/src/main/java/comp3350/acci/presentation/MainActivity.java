@@ -2,11 +2,13 @@ package comp3350.acci.presentation;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -55,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(R.id.current_fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void hideNavigationBar(){
+        BottomNavigationView bar = binding.navigationBar;
+        bar.setVisibility(View.INVISIBLE);
+
+        FragmentContainerView fragment = binding.currentFragment;
+        //fragment.
+
+
     }
 
 
