@@ -31,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        replaceFragment(new DiscoveryActivity(this));
+        setContentView(binding.getRoot());// Set app display to this file
+
+        replaceFragment(new DiscoveryActivity(this));// Set starting fragment
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         binding.navigationBar.setOnItemSelectedListener(item -> {
