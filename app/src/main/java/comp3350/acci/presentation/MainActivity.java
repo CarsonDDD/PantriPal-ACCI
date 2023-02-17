@@ -62,13 +62,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    // To hide the nav bar in a constraint layout, we need to do 2 things
+    // 1. Make the navigation bar invisible: set the height to 0.
+    // 2. Make the fragment fullscreen/take its place: re-wire the constraint; tie the fragment to the bottom of the screen (instead of the top of the nav bar.)
     public void hideNavigationBar(){
         BottomNavigationView bar = binding.navigationBar;
         FragmentContainerView fragment = binding.currentFragment;
         ConstraintLayout layout = binding.container;
 
         bar.getLayoutParams().height = 0;
-        //fragment.
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(layout);
@@ -76,12 +78,13 @@ public class MainActivity extends AppCompatActivity {
         constraintSet.applyTo(layout);
     }
 
+    // Reset the height and constraints.
     public void showNavigationBar(){
         BottomNavigationView bar = binding.navigationBar;
         FragmentContainerView fragment = binding.currentFragment;
         ConstraintLayout layout = binding.container;
 
-        bar.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT; // Maybe?
+        bar.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(layout);
