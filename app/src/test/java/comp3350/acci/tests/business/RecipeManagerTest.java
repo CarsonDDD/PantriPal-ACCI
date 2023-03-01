@@ -6,7 +6,8 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 //project imports
-import comp3350.acci.business.RecipeManager;
+import comp3350.acci.business.implementation.RecipeCreator;
+import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 
@@ -19,7 +20,7 @@ public class RecipeManagerTest extends TestCase {
     @Test
     public void testCreateRecipe() {
         System.out.println("\nStarting recipe creation test");
-        RecipeManager manager = new RecipeManager();
+        RecipeManager manager = new RecipeCreator();
         User user = new User("Caelan", "I'm the coolest");
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -43,7 +44,7 @@ public class RecipeManagerTest extends TestCase {
     @Test
     public void testUserlessCreateRecipe() {
         System.out.println("\nStarting userless recipe creation test");
-        RecipeManager manager = new RecipeManager();
+        RecipeManager manager = new RecipeCreator();
         String authorName = "Caelan";
         Recipe rep1 = manager.createRecipe(authorName, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -64,7 +65,7 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("\nStarting Recipe privacy Test:");
 
         User user = new User("Caelan", "I'm the coolest");
-        RecipeManager manager = new RecipeManager();
+        RecipeManager manager = new RecipeCreator();
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -85,7 +86,7 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("\nStarting recipe instruction Tests:");
 
         User user = new User("Caelan", "I'm the coolest");
-        RecipeManager manager = new RecipeManager();
+        RecipeManager manager = new RecipeCreator();
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -107,7 +108,7 @@ public class RecipeManagerTest extends TestCase {
     public void testGetNullRecipe() {
         System.out.println("\nStarting null recipe search Tests:");
 
-        RecipeManager manager = new RecipeManager();
+        RecipeManager manager = new RecipeCreator();
 
         User user = new User("Caelan", "I'm the coolest");
         Recipe rep1 = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");

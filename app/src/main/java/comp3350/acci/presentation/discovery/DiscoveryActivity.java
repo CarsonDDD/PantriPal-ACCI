@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
-import comp3350.acci.business.RecipeManager;
+import comp3350.acci.application.Services;
+import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 
 public class DiscoveryActivity extends Fragment {
@@ -43,7 +43,7 @@ public class DiscoveryActivity extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(),1));
 
-        RecipeManager rm = new RecipeManager();
+        RecipeManager rm = Services.getRecipeManager();
 
         List<Recipe> recipeList = rm.getRecipes();
 
