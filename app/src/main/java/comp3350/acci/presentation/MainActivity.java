@@ -2,11 +2,14 @@ package comp3350.acci.presentation;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -20,6 +23,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Stack;
+
 import comp3350.acci.R;
 import comp3350.acci.databinding.ActivityMainBinding;
 import comp3350.acci.presentation.discovery.DiscoveryActivity;
@@ -28,16 +33,17 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    Stack<Fragment> fragmentHistory = new Stack<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());// Set app display to this file
 
-        replaceFragment(new DiscoveryActivity(this));// Set starting fragment
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        replaceFragment(new DiscoveryActivity(this));// Set starting fragment
 
         binding.navigationBar.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -53,7 +59,16 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void replaceFragment(Fragment fragment){
