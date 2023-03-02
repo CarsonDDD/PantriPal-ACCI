@@ -1,9 +1,7 @@
 package comp3350.acci.presentation;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -17,13 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import java.util.Stack;
 
 import comp3350.acci.R;
 import comp3350.acci.databinding.ActivityMainBinding;
@@ -33,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    Stack<Fragment> fragmentHistory = new Stack<>();
+    FragmentNavigator fragmentNavigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +32,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());// Set app display to this file
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        // Set starting fragment
+        fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
+        fragmentNavigator.setFragment(new DiscoveryActivity(this));
 
         replaceFragment(new DiscoveryActivity(this));// Set starting fragment
 
@@ -63,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        // Pop stack
+        // Make current top, current fragment
         switch (item.getItemId()) {
             case android.R.id.home:
                 Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
