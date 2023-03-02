@@ -1,5 +1,7 @@
 package comp3350.acci.application;
 
+import comp3350.acci.business.implementation.RecipeCreator;
+import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.persistence.ContainPersistence;
 
 import comp3350.acci.persistence.IngredientPersistence;
@@ -22,6 +24,7 @@ public class Services
 {
 
     private static RecipePersistence recipePersistence = null;
+    private static RecipeManager recipeManager = null;
     private static PantryPersistence pantryPersistence = null;
     private static IngredientPersistence ingredientPersistence = null;
     private static UserPersistence userPersistence = null;
@@ -39,7 +42,12 @@ public class Services
         }
         return recipePersistence;
     }
-
+    public static synchronized RecipeManager getRecipeManager() {
+        if(recipeManager == null) {
+            recipeManager = new RecipeCreator();
+        }
+        return recipeManager;
+    }
     public static synchronized IngredientPersistence getIngredientPersistence() {
         if(ingredientPersistence == null) {
             ingredientPersistence = new IngredientPersistenceStub();

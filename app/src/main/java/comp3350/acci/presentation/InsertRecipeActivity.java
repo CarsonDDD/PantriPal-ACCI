@@ -13,7 +13,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import comp3350.acci.R;
-import comp3350.acci.business.RecipeManager;
+import comp3350.acci.application.Services;
+import comp3350.acci.business.interfaces.RecipeManager;
 
 /**
     This class is the linked Java class to the activity_insert_recipe.xml layout file
@@ -105,8 +106,8 @@ public class InsertRecipeActivity extends Fragment implements View.OnClickListen
         String difficulty = difficultyText.getText().toString();
         String instructions = instructionText.getText().toString();
         Boolean isPrivate = privacySwitch.isChecked();
-        //create a manager
-        RecipeManager manager = new RecipeManager();
+        //get the manager from services
+        RecipeManager manager = Services.getRecipeManager();
 
 
         manager.createRecipe(authorName, recipeName,instructions, isPrivate, difficulty);
