@@ -26,6 +26,8 @@ public class RecipeManagerTest extends TestCase {
 
         Recipe manRep = manager.getRecipeFromPersistence(rep1);
 
+        Recipe rep2 = manager.createRecipe("", "", "", false, "");
+        assertNull(rep2);
         assertNotNull("Recipe manager should not have given back a null recipe",rep1);
         assertNotNull("Recipe manager should successfully give back a non-null recipe from the persistence",manRep);
 

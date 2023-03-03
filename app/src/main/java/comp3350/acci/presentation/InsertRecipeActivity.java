@@ -15,6 +15,7 @@ import android.widget.TextView;
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.objects.Recipe;
 
 /**
     This class is the linked Java class to the activity_insert_recipe.xml layout file
@@ -105,15 +106,17 @@ public class InsertRecipeActivity extends Fragment implements View.OnClickListen
         RecipeManager manager = Services.getRecipeManager();
 
 
-        manager.createRecipe(authorName, recipeName,instructions, isPrivate, difficulty);
-
-        //make the screen look like we did something (cuz we did)
-        confirmationText.setText("Recipe was added successfully!\nPlease add next recipe");
-        recipeText.getText().clear();
-        authorText.getText().clear();
-        difficultyText.getText().clear();
-        instructionText.getText().clear();
-        privacySwitch.setChecked(false);
-
+        Recipe addedRecipe = manager.createRecipe(authorName, recipeName,instructions, isPrivate, difficulty);
+        if(addedRecipe != null) {
+            //make the screen look like we did something (cuz we did)
+            confirmationText.setText("Recipe was added successfully!\nPlease add next recipe");
+            recipeText.getText().clear();
+            authorText.getText().clear();
+            difficultyText.getText().clear();
+            instructionText.getText().clear();
+            privacySwitch.setChecked(false);
+        }else {
+            confirmationText.setText("Some issue was found in recipe fields\nPlease fix them and try again");
+        }
     }
 }
