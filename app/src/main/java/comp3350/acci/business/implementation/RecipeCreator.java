@@ -32,6 +32,9 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
 
     //creates a recipe for a user without an account (who just provides a name)
     public Recipe createRecipe(String authorName, String recipeName, String instructions, boolean isPrivate, String difficulty) {
+        if(authorName.equals("")|| recipeName.equals("") || instructions.equals("") ||difficulty.equals("") ) {
+           return null;
+        }
         User author = new User(authorName, "PLACEHOLDER bio");
         Recipe newRecipe = new Recipe(author, recipeName, instructions, false, difficulty);
         return recipePersistence.insertRecipe(newRecipe);
