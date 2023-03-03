@@ -11,20 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import comp3350.acci.R;
 import comp3350.acci.databinding.ActivityMainBinding;
-import comp3350.acci.presentation.discovery.DiscoveryActivity;
+import comp3350.acci.presentation.fragments.discovery.DiscoveryActivity;
+import comp3350.acci.presentation.fragments.ACCIFragment;
+import comp3350.acci.presentation.fragments.InsertRecipeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
     private FragmentNavigator fragmentNavigator;
+
+    private boolean isShowingNavigationBar;
+    private boolean isShowingBackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +39,31 @@ public class MainActivity extends AppCompatActivity {
         fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
         fragmentNavigator.setFragment(new DiscoveryActivity(this));
 
+        // init layout variables to the starting fragment.
+        isShowingBackButton = fragmentNavigator.currentFragment().hasBackButton();
+        isShowingNavigationBar = fragmentNavigator.currentFragment().hasNavigationBar();
+
+
+        // Event Handler for bottom nav menu
         binding.navigationBar.setOnItemSelectedListener(item -> {
-            fragmentNavigator.clear();
-            showNavigationBar();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            fragmentNavigator.clear();// Clear navigation history. This is a design choice to not have a back button on a "main" menu
             switch (item.getItemId()){
                 case R.id.menu_discovery:
-                    fragmentNavigator.setFragment(new DiscoveryActivity(this));
+                    changeFragment(new DiscoveryActivity(this));
                     break;
                 case R.id.menu_insert_recipe:
-                    fragmentNavigator.setFragment(new InsertRecipeActivity(this));
+                    changeFragment(new InsertRecipeActivity(this));
                     break;
                 /*case R.id.menu_profile:
                     replaceFragment(new ProfileActivity());
                     break;*/
             }
+            //adjustCurrentFragment();
             return true;
         });
     }
 
+    // Gets called when the back button is pressed.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -65,22 +72,52 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
-                fragmentNavigator.undoFragment();
+                fragmentNavigator.undoFragment();// Possible to edit this function to not update the display, then set it using the local function here to isolate code
+                adjustCurrentFragment();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Public function to be used outside this class
-    public boolean setFragment(Fragment f){
-        return fragmentNavigator.setFragment(f);
+    // Public function to be used outside this class without needing to touch its caller
+    public boolean changeFragment(ACCIFragment f){
+        boolean hasChanged = fragmentNavigator.setFragment(f);
+        adjustCurrentFragment();
+        return hasChanged;
     }
 
+    // Update layout variables, only if they are different.
+    // This function needs to be called everytime a fragment is changed (so the main components update)
+    // Probably a better way around this, but thats for later.
+    public void adjustCurrentFragment(){
+        ACCIFragment currentFragment = fragmentNavigator.currentFragment();
+
+        // Only change if a change is required
+        // TODO: Change names, they are to similar
+        if(currentFragment.hasBackButton() != isShowingBackButton){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(currentFragment.hasBackButton());
+            isShowingBackButton = !isShowingBackButton;
+        }
+        if(currentFragment.hasNavigationBar() != isShowingNavigationBar) {
+            setNavigationBar(currentFragment.hasNavigationBar());
+            isShowingNavigationBar = !isShowingNavigationBar;
+        }
+        //setNavigationBar(currentFragment.hasNavigationBar());
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(currentFragment.hasBackButton());
+
+    }
+
+    public void setNavigationBar(boolean showBar){
+        if(showBar)
+            showNavigationBar();
+        else
+            hideNavigationBar();
+    }
 
     // To hide the nav bar in a constraint layout, we need to do 2 things
     // 1. Make the navigation bar invisible: set the height to 0.
     // 2. Make the fragment fullscreen/take its place: re-wire the constraint; tie the fragment to the bottom of the screen (instead of the top of the nav bar.)
-    public void hideNavigationBar(){
+    private void hideNavigationBar(){
         BottomNavigationView bar = binding.navigationBar;
         FragmentContainerView fragment = binding.currentFragment;
         ConstraintLayout layout = binding.container;
@@ -94,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Reset the height and constraints.
-    public void showNavigationBar(){
+    private void showNavigationBar(){
         BottomNavigationView bar = binding.navigationBar;
         FragmentContainerView fragment = binding.currentFragment;
         ConstraintLayout layout = binding.container;
@@ -105,8 +142,6 @@ public class MainActivity extends AppCompatActivity {
         constraintSet.clone(layout);
         constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,0);
         constraintSet.applyTo(layout);
-
-        //Toast.makeText(this, "SHOW NAV!!", Toast.LENGTH_SHORT).show();
     }
 
 

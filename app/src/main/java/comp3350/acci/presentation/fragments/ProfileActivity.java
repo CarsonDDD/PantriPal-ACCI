@@ -15,6 +15,8 @@ public class ProfileActivity extends ACCIFragment {
 
     public ProfileActivity(MainActivity mainActivity) {
         super(mainActivity);
+        this.hasNavigationBar = true;
+        this.hasBackButton = false;
     }
 
     @Override

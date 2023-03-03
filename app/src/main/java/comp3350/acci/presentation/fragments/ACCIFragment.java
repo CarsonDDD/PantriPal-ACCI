@@ -24,6 +24,10 @@ public abstract class ACCIFragment extends Fragment implements IACCIFragment {
         return hasNavigationBar;
     }
 
+    public boolean hasBackButton() {
+        return hasBackButton;
+    }
+
     // Returns the AppCompact holding the fragment
     public MainActivity getAppCompact(){
         return mainActivity;

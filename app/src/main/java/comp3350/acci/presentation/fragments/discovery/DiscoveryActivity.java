@@ -29,7 +29,8 @@ public class DiscoveryActivity extends ACCIFragment {
 
     public DiscoveryActivity(MainActivity mainActivity){
         super(mainActivity);
-
+        this.hasNavigationBar = true;
+        this.hasBackButton = false;
     }
 
     @Override
@@ -63,7 +64,7 @@ public class DiscoveryActivity extends ACCIFragment {
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            getAppCompact().setFragment(new RecipeViewActivity(getAppCompact(), recipe));
+            getAppCompact().changeFragment(new RecipeViewActivity(getAppCompact(), recipe));
         }
     };
 

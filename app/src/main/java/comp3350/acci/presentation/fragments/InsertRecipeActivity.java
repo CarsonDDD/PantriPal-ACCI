@@ -24,11 +24,12 @@ import comp3350.acci.presentation.fragments.ACCIFragment;
  */
 public class InsertRecipeActivity extends ACCIFragment implements View.OnClickListener {
 
-    private MainActivity mainActivity;
     public InsertRecipeActivity(MainActivity mainActivity) {
         super(mainActivity);
 
         this.hasNavigationBar = true;
+        this.hasBackButton = false;
+
     }
 
     @Override

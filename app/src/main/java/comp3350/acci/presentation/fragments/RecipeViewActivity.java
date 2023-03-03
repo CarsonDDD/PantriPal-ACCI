@@ -22,6 +22,7 @@ public class RecipeViewActivity extends ACCIFragment {
         this.recipe = recipe;
 
         hasNavigationBar = false;
+        hasBackButton = true;
     }
 
     @Nullable
