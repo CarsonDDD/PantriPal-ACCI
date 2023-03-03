@@ -18,18 +18,6 @@ public class FragmentNavigator {
         manager = supportFragmentManger;
     }
 
-    // Updates the FragmentManager with the current fragment
-    // returns if fragment changed
-    private boolean updateManager(){
-        if(fragmentHistory.size() > 0){
-            FragmentTransaction fragmentTransaction = manager.beginTransaction();
-            fragmentTransaction.replace(R.id.current_fragment, currentFragment());
-            fragmentTransaction.commit();
-            return true;
-        }
-        return false;
-    }
-
     public Fragment currentFragment(){
         return fragmentHistory.peek();
     }
@@ -53,6 +41,18 @@ public class FragmentNavigator {
 
     public void clear(){
         fragmentHistory.clear();
+    }
+
+    // Updates the FragmentManager with the current fragment
+    // returns if fragment changed
+    private boolean updateManager(){
+        if(fragmentHistory.size() > 0){
+            FragmentTransaction fragmentTransaction = manager.beginTransaction();
+            fragmentTransaction.replace(R.id.current_fragment, currentFragment());
+            fragmentTransaction.commit();
+            return true;
+        }
+        return false;
     }
 
 
