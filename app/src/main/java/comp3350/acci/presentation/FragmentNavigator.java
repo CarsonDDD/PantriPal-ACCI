@@ -19,8 +19,9 @@ public class FragmentNavigator {
     }
 
     // Updates the FragmentManager with the current fragment
+    // returns if fragment changed
     private boolean updateManager(){
-        if(fragmentHistory.size() > 1){
+        if(fragmentHistory.size() > 0){
             FragmentTransaction fragmentTransaction = manager.beginTransaction();
             fragmentTransaction.replace(R.id.current_fragment, currentFragment());
             fragmentTransaction.commit();
@@ -33,14 +34,20 @@ public class FragmentNavigator {
         return fragmentHistory.peek();
     }
 
+    // returns if fragment changed
     public boolean setFragment(Fragment f){
         fragmentHistory.push(f);
         return updateManager();
     }
 
+    // returns if fragment changed
     public boolean undoFragment(){
-        fragmentHistory.pop();
-        return updateManager();
+        if(fragmentHistory.size() > 0){
+            fragmentHistory.pop();
+            return updateManager();
+        }
+
+        return false;
     }
 
     public void clear(){

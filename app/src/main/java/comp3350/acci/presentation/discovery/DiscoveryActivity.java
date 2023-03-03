@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
-import comp3350.acci.business.RecipeManager;
+import comp3350.acci.business.implementation.RecipeCreator;
+import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
@@ -53,7 +54,7 @@ public class DiscoveryActivity extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(),1));
 
-        RecipeManager rm = new RecipeManager();
+        RecipeManager rm = new RecipeCreator();
 
         List<Recipe> recipeList = rm.getRecipes();
 
@@ -70,8 +71,7 @@ public class DiscoveryActivity extends Fragment {
             // open view, not switch view.
             // no nav bar
 
-            mainActivity.replaceFragment(new RecipeViewActivity(mainActivity, recipe));
-
+            mainActivity.setFragment(new RecipeViewActivity(mainActivity, recipe));
         }
     };
 

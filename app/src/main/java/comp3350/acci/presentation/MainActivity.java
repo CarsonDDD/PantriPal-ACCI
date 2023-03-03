@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    FragmentNavigator fragmentNavigator;
+    private FragmentNavigator fragmentNavigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +38,16 @@ public class MainActivity extends AppCompatActivity {
         fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
         fragmentNavigator.setFragment(new DiscoveryActivity(this));
 
-        replaceFragment(new DiscoveryActivity(this));// Set starting fragment
-
         binding.navigationBar.setOnItemSelectedListener(item -> {
+            fragmentNavigator.clear();
+            showNavigationBar();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             switch (item.getItemId()){
                 case R.id.menu_discovery:
-                    replaceFragment(new DiscoveryActivity(this));
+                    fragmentNavigator.setFragment(new DiscoveryActivity(this));
                     break;
                 case R.id.menu_insert_recipe:
-                    replaceFragment(new InsertRecipeActivity(this));
+                    fragmentNavigator.setFragment(new InsertRecipeActivity(this));
                     break;
                 /*case R.id.menu_profile:
                     replaceFragment(new ProfileActivity());
@@ -59,23 +60,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        // Pop stack
+        // Pop stack, switching between THESE menus should clear the history as the fragmentNavigator is used to handle submenus/subfragments
         // Make current top, current fragment
         switch (item.getItemId()) {
             case android.R.id.home:
                 Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
+                fragmentNavigator.undoFragment();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.replace(R.id.current_fragment, fragment);
-        fragmentTransaction.commit();
+    // Public function to be used outside this class
+    public boolean setFragment(Fragment f){
+        return fragmentNavigator.setFragment(f);
     }
+
 
     // To hide the nav bar in a constraint layout, we need to do 2 things
     // 1. Make the navigation bar invisible: set the height to 0.
@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         constraintSet.clone(layout);
         constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,0);
         constraintSet.applyTo(layout);
+
+        //Toast.makeText(this, "SHOW NAV!!", Toast.LENGTH_SHORT).show();
     }
 
 

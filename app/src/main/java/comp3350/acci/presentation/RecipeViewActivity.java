@@ -33,7 +33,7 @@ public class RecipeViewActivity extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        mainActivity.hideNavigationBar();
+        //mainActivity.hideNavigationBar();
 
         mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
