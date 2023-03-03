@@ -42,7 +42,7 @@ public class FragmentNavigator {
 
     // returns if fragment changed
     public boolean undoFragment(){
-        if(fragmentHistory.size() > 0){
+        if(fragmentHistory.size() > 1){
             fragmentHistory.pop();
             return updateManager();
         }
