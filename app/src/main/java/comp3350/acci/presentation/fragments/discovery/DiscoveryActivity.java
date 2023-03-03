@@ -1,4 +1,4 @@
-package comp3350.acci.presentation.discovery;
+package comp3350.acci.presentation.fragments.discovery;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

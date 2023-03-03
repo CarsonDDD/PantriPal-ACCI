@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.discovery.DiscoveryActivity">
+    tools:context=".presentation.fragments.discovery.DiscoveryActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_recipe"
