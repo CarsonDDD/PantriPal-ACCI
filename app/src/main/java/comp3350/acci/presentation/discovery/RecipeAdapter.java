@@ -1,12 +1,7 @@
 package comp3350.acci.presentation.discovery;
 
-import static androidx.test.InstrumentationRegistry.getContext;
-
 import android.content.Context;
-import android.content.res.Resources;
 import android.text.method.ScrollingMovementMethod;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

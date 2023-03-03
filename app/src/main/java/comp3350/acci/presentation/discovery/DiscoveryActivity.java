@@ -4,15 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
@@ -20,18 +17,19 @@ import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.presentation.fragments.ACCIFragment;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.RecipeViewActivity;
+import comp3350.acci.presentation.fragments.RecipeViewActivity;
 
-public class DiscoveryActivity extends Fragment {
+public class DiscoveryActivity extends ACCIFragment {
 
     private RecipeAdapter recipeAdapter;
     private RecyclerView recyclerView;
 
-    private MainActivity mainActivity;
 
     public DiscoveryActivity(MainActivity mainActivity){
-        this.mainActivity = mainActivity;
+        super(mainActivity);
+
     }
 
     @Override
@@ -58,7 +56,6 @@ public class DiscoveryActivity extends Fragment {
 
         List<Recipe> recipeList = rm.getRecipes();
 
-
         recipeAdapter = new RecipeAdapter(this.getContext(), recipeList, recipeClickListener);
         recyclerView.setAdapter(recipeAdapter);
     }
@@ -66,12 +63,7 @@ public class DiscoveryActivity extends Fragment {
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            //Toast.makeText(getContext(), "Hello World", Toast.LENGTH_SHORT).show();
-            // Open recipe view with recipe
-            // open view, not switch view.
-            // no nav bar
-
-            mainActivity.setFragment(new RecipeViewActivity(mainActivity, recipe));
+            getAppCompact().setFragment(new RecipeViewActivity(getAppCompact(), recipe));
         }
     };
 

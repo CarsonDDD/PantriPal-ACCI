@@ -1,26 +1,27 @@
-package comp3350.acci.presentation;
+package comp3350.acci.presentation.fragments;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import comp3350.acci.R;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.presentation.MainActivity;
+import comp3350.acci.presentation.fragments.ACCIFragment;
 
-public class RecipeViewActivity extends Fragment {
+public class RecipeViewActivity extends ACCIFragment {
 
     private Recipe recipe;
-    private MainActivity mainActivity;
 
-    public RecipeViewActivity(MainActivity mainActivity,Recipe recipe){
-        this.mainActivity = mainActivity;
+    public RecipeViewActivity(MainActivity mainActivity, Recipe recipe){
+        super(mainActivity);
         this.recipe = recipe;
+
+        hasNavigationBar = false;
     }
 
     @Nullable
@@ -33,9 +34,7 @@ public class RecipeViewActivity extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        //mainActivity.hideNavigationBar();
 
-        mainActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
