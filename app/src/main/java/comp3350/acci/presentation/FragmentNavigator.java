@@ -42,6 +42,7 @@ public class FragmentNavigator {
 
     // returns if fragment changed
     public boolean undoFragment(){
+        // Stack should ALWAYS contain a single element, if there are 0 elements there is no screen!
         if(fragmentHistory.size() > 1){
             fragmentHistory.pop();
             return updateManager();
