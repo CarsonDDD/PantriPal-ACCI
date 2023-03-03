@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import comp3350.acci.R;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 
 public class RecipeViewActivity extends ACCIFragment {
 

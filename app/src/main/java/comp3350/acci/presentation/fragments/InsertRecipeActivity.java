@@ -14,7 +14,6 @@ import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 
 /**
     This class is the linked Java class to the activity_insert_recipe.xml layout file

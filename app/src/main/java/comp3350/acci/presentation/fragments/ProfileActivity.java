@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import comp3350.acci.R;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 
 public class ProfileActivity extends ACCIFragment {
 

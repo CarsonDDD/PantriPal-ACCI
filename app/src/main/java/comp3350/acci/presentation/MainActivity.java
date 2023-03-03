@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // Make current top, current fragment
         switch (item.getItemId()) {
             case android.R.id.home:
-                Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
                 fragmentNavigator.undoFragment();// Possible to edit this function to not update the display, then set it using the local function here to isolate code
                 adjustCurrentFragment();
                 return true;
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         ACCIFragment currentFragment = fragmentNavigator.currentFragment();
 
         // Only change if a change is required
-        // TODO: Change names, they are to similar
         if(currentFragment.hasBackButton() != isShowingBackButton){
             getSupportActionBar().setDisplayHomeAsUpEnabled(currentFragment.hasBackButton());
             isShowingBackButton = !isShowingBackButton;
@@ -102,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
             setNavigationBar(currentFragment.hasNavigationBar());
             isShowingNavigationBar = !isShowingNavigationBar;
         }
-        //setNavigationBar(currentFragment.hasNavigationBar());
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(currentFragment.hasBackButton());
-
     }
 
     public void setNavigationBar(boolean showBar){
