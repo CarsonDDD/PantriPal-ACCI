@@ -1,4 +1,4 @@
-package comp3350.acci.presentation;
+package comp3350.acci.presentation.fragments;
 
 import android.os.Bundle;
 
@@ -16,53 +16,23 @@ import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.presentation.MainActivity;
+import comp3350.acci.presentation.fragments.ACCIFragment;
 
 /**
-    This class is the linked Java class to the activity_insert_recipe.xml layout file
-    Where the layout decides what is shown/parameters, this file decides logical operations that can be performed
+ /**
+ This class is the linked Java class to the activity_insert_recipe.xml layout file
+ Where the layout decides what is shown/parameters, this file decides logical operations that can be performed
 
-    Last Updated: Caelan Myskiw 02/11/2023
+ Last Updated: Carson Dickinson 03/02/2023
  */
-public class InsertRecipeActivity extends Fragment implements View.OnClickListener {
+public class InsertRecipeActivity extends ACCIFragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public InsertRecipeActivity(MainActivity mainActivity) {
+        super(mainActivity);
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public InsertRecipeActivity() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InsertRecipeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InsertRecipeActivity newInstance(String param1, String param2) {
-        InsertRecipeActivity fragment = new InsertRecipeActivity();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        this.hasNavigationBar = true;
+        this.hasBackButton = false;
 
     }
 
