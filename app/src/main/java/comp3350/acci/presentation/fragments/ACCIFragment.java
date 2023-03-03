@@ -3,9 +3,8 @@ package comp3350.acci.presentation.fragments;
 import androidx.fragment.app.Fragment;
 
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.IACCIFragment;
 
-public abstract class ACCIFragment extends Fragment implements IACCIFragment {
+public abstract class ACCIFragment extends Fragment implements ACCIFragmentable {
 
     // If a fragment should display the bottom navigation bar
     protected boolean hasNavigationBar = true;
