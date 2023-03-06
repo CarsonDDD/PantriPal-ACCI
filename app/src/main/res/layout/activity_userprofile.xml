@@ -1,0 +1,146 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- User's profile picture -->
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/defaultfoodimg" />
+
+    <!-- User's name -->
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_picture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="John Doe"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- User's email -->
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="john.doe@example.com"
+        android:textSize="16sp" />
+
+    <!-- Tabs to switch between Saved Recipes, Added Recipes, and Pantry -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_email"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:elevation="4dp"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/green"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/green"
+        app:tabTextColor="@color/black">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_saved_recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saved Recipes" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_added_recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Added Recipes" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_pantry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pantry" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tabs"
+        android:layout_marginTop="16dp"
+        android:background="@color/design_default_color_background" />
+
+    <!-- User's saved recipes -->
+    <TextView
+        android:id="@+id/saved_recipes_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Saved Recipes"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/saved_recipes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/saved_recipes_heading"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <!-- User's added recipes -->
+    <TextView
+        android:id="@+id/added_recipes_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Added Recipes"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/added_recipes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/added_recipes_heading"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <!-- User's pantry -->
+    <TextView
+        android:id="@+id/pantry_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Pantry"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pantry_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pantry_heading"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+</RelativeLayout>
