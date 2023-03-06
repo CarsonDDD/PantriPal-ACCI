@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             //adjustCurrentFragment();
             return true;
         });
+
     }
 
     // Gets called when the back button is pressed.
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(layout);
-        constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,0);
+        constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,(int)convertDpToPixel(55));
         constraintSet.applyTo(layout);
     }
 

@@ -55,8 +55,8 @@ public class RecipeViewActivity extends ACCIFragment {
         instructionView.setText("Instructions:\n" + recipe.getInstructions());
 
     }
-    @Override
+    /*@Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
+    }*/
 }
