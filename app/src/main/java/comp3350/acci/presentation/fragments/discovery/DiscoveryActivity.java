@@ -31,6 +31,7 @@ public class DiscoveryActivity extends ACCIFragment {
         super(mainActivity);
         this.hasNavigationBar = true;
         this.hasBackButton = false;
+        this.hasActionBar = false;
     }
 
     @Override

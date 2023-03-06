@@ -26,6 +26,7 @@ public class RecipeViewActivity extends ACCIFragment {
 
         hasNavigationBar = false;
         hasBackButton = true;
+        hasActionBar = true;
     }
 
     @Nullable
@@ -54,8 +55,8 @@ public class RecipeViewActivity extends ACCIFragment {
         instructionView.setText("Instructions:\n" + recipe.getInstructions());
 
     }
-    @Override
+    /*@Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
+    }*/
 }

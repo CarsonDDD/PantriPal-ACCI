@@ -33,6 +33,7 @@ public class InsertRecipeActivity extends ACCIFragment implements View.OnClickLi
 
         this.hasNavigationBar = true;
         this.hasBackButton = false;
+        hasActionBar = false;
 
     }
 

@@ -1,9 +1,16 @@
 package comp3350.acci.presentation;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,6 +26,7 @@ import comp3350.acci.presentation.fragments.discovery.DiscoveryActivity;
 import comp3350.acci.presentation.fragments.ACCIFragment;
 import comp3350.acci.presentation.fragments.InsertRecipeActivity;
 
+// This class acts as the engine which runs/controls the fragment interactions
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -26,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isShowingNavigationBar;
     private boolean isShowingBackButton;
+    private boolean isShowingActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());// Set app display to this file
 
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Starting conditions for back button and ActionBar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        hideActionBar();
 
         // Set starting fragment
         fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
@@ -42,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
         // init layout variables to the starting fragment.
         isShowingBackButton = fragmentNavigator.currentFragment().hasBackButton();
         isShowingNavigationBar = fragmentNavigator.currentFragment().hasNavigationBar();
+        isShowingActionBar = fragmentNavigator.currentFragment().hasActionBar();
 
+        //adjustCurrentFragment();
 
         // Event Handler for bottom nav menu
         binding.navigationBar.setOnItemSelectedListener(item -> {
@@ -61,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             //adjustCurrentFragment();
             return true;
         });
+
     }
 
     // Gets called when the back button is pressed.
@@ -88,19 +106,39 @@ public class MainActivity extends AppCompatActivity {
 
     // Update layout variables, only if they are different.
     // This function needs to be called everytime a fragment is changed (so the main components update)
-    // Probably a better way around this, but thats for later.
+    // Probably a better way around this, but that's for later.
     public void adjustCurrentFragment(){
         ACCIFragment currentFragment = fragmentNavigator.currentFragment();
 
         // Only change if a change is required
-        if(currentFragment.hasBackButton() != isShowingBackButton){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(currentFragment.hasBackButton());
-            isShowingBackButton = !isShowingBackButton;
+        boolean curBack = currentFragment.hasBackButton();
+        boolean curNavbar = currentFragment.hasNavigationBar();
+        boolean curAction = currentFragment.hasActionBar();
+
+        if(curBack != isShowingBackButton){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(curBack);
+            isShowingBackButton = curBack;
         }
-        if(currentFragment.hasNavigationBar() != isShowingNavigationBar) {
-            setNavigationBar(currentFragment.hasNavigationBar());
-            isShowingNavigationBar = !isShowingNavigationBar;
+        if(curNavbar != isShowingNavigationBar) {
+            setNavigationBar(curNavbar);
+            isShowingNavigationBar = curNavbar;
         }
+        if(curAction != isShowingActionBar){
+            if(curAction){
+                //getSupportActionBar().show();
+                showActionBar();
+            }
+            else{
+                //getSupportActionBar().hide();
+                hideActionBar();
+            }
+
+            isShowingActionBar = curAction;
+        }
+    }
+
+    public float convertDpToPixel(float dp){
+        return dp * ((float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     public void setNavigationBar(boolean showBar){
@@ -114,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
     // 1. Make the navigation bar invisible: set the height to 0.
     // 2. Make the fragment fullscreen/take its place: re-wire the constraint; tie the fragment to the bottom of the screen (instead of the top of the nav bar.)
     private void hideNavigationBar(){
-        BottomNavigationView bar = binding.navigationBar;
         FragmentContainerView fragment = binding.currentFragment;
+        BottomNavigationView bar = binding.navigationBar;
         ConstraintLayout layout = binding.container;
 
         bar.getLayoutParams().height = 0;
@@ -128,15 +166,40 @@ public class MainActivity extends AppCompatActivity {
 
     // Reset the height and constraints.
     private void showNavigationBar(){
-        BottomNavigationView bar = binding.navigationBar;
         FragmentContainerView fragment = binding.currentFragment;
+        BottomNavigationView bar = binding.navigationBar;
         ConstraintLayout layout = binding.container;
 
         bar.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(layout);
-        constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,0);
+        constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,(int)convertDpToPixel(55));
+        constraintSet.applyTo(layout);
+    }
+
+    private void hideActionBar(){
+        getSupportActionBar().hide();
+
+        FragmentContainerView fragment = binding.currentFragment;
+        ConstraintLayout layout = binding.container;
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(layout);
+        constraintSet.connect(fragment.getId(),ConstraintSet.TOP,layout.getId(),ConstraintSet.TOP,0);
+        constraintSet.applyTo(layout);
+    }
+
+    // Reset the height and constraints.
+    private void showActionBar(){
+        getSupportActionBar().show();
+
+        FragmentContainerView fragment = binding.currentFragment;
+        ConstraintLayout layout = binding.container;
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(layout);
+        constraintSet.connect(fragment.getId(),ConstraintSet.TOP,layout.getId(),ConstraintSet.TOP,(int)convertDpToPixel(55));
         constraintSet.applyTo(layout);
     }
 
