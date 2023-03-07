@@ -11,9 +11,10 @@ public interface LikedPersistence {
 
     Liked insertLiked(Liked liked);
 
-    Liked updateLiked(Liked liked);
 
     List<Recipe> getLikedRecipesByUser(User user);
+
+    List<User> getUserLikesByRecipe(Recipe recipe);
 
     void deleteLiked(Liked liked);
 }

@@ -40,6 +40,10 @@ public class User
 		count++;
 	}
 
+	public int getUserID() {
+		return userID;
+	}
+
 	public String getBio() {
 		return bio;
 	}

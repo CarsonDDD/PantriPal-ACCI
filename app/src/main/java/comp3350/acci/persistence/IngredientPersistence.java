@@ -9,7 +9,7 @@ public interface IngredientPersistence {
 
     Ingredient insertIngredient(Ingredient ingredient);
 
-    Ingredient updateIngredient(Ingredient ingredient);
+    Ingredient getIngredient(String ingredient);
 
     void deleteIngredient(Ingredient ingredient);
 }
