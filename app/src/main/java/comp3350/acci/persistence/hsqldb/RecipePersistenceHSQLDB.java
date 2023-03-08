@@ -9,9 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.acci.application.Services;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
+import comp3350.acci.persistence.UserPersistence;
 
 public class RecipePersistenceHSQLDB implements RecipePersistence {
     private final String dbPath;
@@ -29,7 +31,6 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         final List<Recipe> recipes = new ArrayList<>();
 
         try (final Connection c = connection()) {
-            System.out.println("logged in");
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM RECIPE");
             while (rs.next())
@@ -54,7 +55,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
 
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE recipeID=?");
-            st.setString(1, Integer.toString(id));
+            st.setInt(1, id);
             final ResultSet rs = st.executeQuery();
             if (rs.next())
             {
@@ -77,9 +78,33 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     }
 
     @Override
+    public List<Recipe> getUserRecipes(User user) {
+        final List<Recipe> recipes = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID=?");
+            st.setInt(1, user.getUserID());
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final Recipe recipe = fromResultSet(rs);
+                recipes.add(recipe);
+            }
+            rs.close();
+            st.close();
+
+            return recipes;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
     public Recipe insertRecipe(Recipe recipe) {
         try (final Connection c = connection()) {
-            UserPersistenceHSQLDB userPersistence = new UserPersistenceHSQLDB(dbPath);
+            UserPersistence userPersistence = Services.getUserPersistence();
             User author = userPersistence.getUser(recipe.getAuthor().getUserID());
             if (author == null) {
                 author = userPersistence.getUser(1); // use test user
@@ -132,7 +157,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     private Recipe fromResultSet(final ResultSet rs) throws SQLException {
         final int recipeID = rs.getInt("recipeID");
         final String name = rs.getString("name");
-        UserPersistenceHSQLDB userPersistence = new UserPersistenceHSQLDB(dbPath);
+        UserPersistence userPersistence = Services.getUserPersistence();
         final User author = userPersistence.getUser(rs.getInt("authorID"));
         final String instructions = rs.getString("instructions");
         final String difficulty = rs.getString("difficulty");
