@@ -29,7 +29,6 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         final List<Recipe> recipes = new ArrayList<>();
 
         try (final Connection c = connection()) {
-            System.out.println("logged in");
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM RECIPE");
             while (rs.next())
@@ -54,7 +53,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
 
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE recipeID=?");
-            st.setString(1, Integer.toString(id));
+            st.setInt(1, id);
             final ResultSet rs = st.executeQuery();
             if (rs.next())
             {
@@ -74,6 +73,30 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     @Override
     public Recipe getRecipe(Recipe recipe) {
         return getRecipeByID(recipe.getRecipeID());
+    }
+
+    @Override
+    public List<Recipe> getUserRecipes(User user) {
+        final List<Recipe> recipes = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID=?");
+            st.setInt(1, user.getUserID());
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final Recipe recipe = fromResultSet(rs);
+                recipes.add(recipe);
+            }
+            rs.close();
+            st.close();
+
+            return recipes;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
