@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipe_container"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/recipe_card_border"
+    android:orientation="vertical">
+
+
+
+    <ImageView
+        android:id="@+id/imageView_food"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/defaultfoodimg"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="Test Recipe"
+        android:visibility="visible"/>
+
+
+</androidx.cardview.widget.CardView>

@@ -69,12 +69,13 @@ public class ProfileActivity extends ACCIFragment {
         List<Recipe> userRecipes = recipeList;
         List<Recipe> savedRecipes = recipeList;
 
-        savedRecipesView.setAdapter(new RecipeAdapter(this.getContext(), savedRecipes, recipeClickListener));
-        savedRecipesView.setLayoutManager(new LinearLayoutManager(getContext()));// I dont know what this line does/why I need it; however without it, chaos imbues the app.
+        savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, recipeClickListener));
+        savedRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+        savedRecipesView.setHasFixedSize(true);
 
-        userRecipesView.setAdapter(new RecipeAdapter(this.getContext(), userRecipes, recipeClickListener));
-        userRecipesView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        userRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, userRecipes, recipeClickListener));
+        userRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+        savedRecipesView.setHasFixedSize(false);
 
         // Tab switcher, show correct recycler, hide incorrect one
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

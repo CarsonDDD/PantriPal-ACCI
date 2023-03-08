@@ -58,7 +58,7 @@ public class DiscoveryActivity extends ACCIFragment {
 
         List<Recipe> recipeList = rm.getRecipes();
 
-        recipeAdapter = new RecipeAdapter(this.getContext(), recipeList, recipeClickListener);
+        recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList,recipeClickListener);
         recyclerView.setAdapter(recipeAdapter);
     }
 
