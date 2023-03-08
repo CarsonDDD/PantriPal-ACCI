@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
             File outFile = new File(copyPath);
 
-            //if (!outFile.exists()) {
+            if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
                 out.close();
                 in.close();
-            //}
+            }
         }
     }
 
