@@ -5,6 +5,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,23 +14,26 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder> implements Filterable {
     Context context;
-    List<Recipe> list;
+    List<Recipe> recipes;
     RecipeClickListener listener;
     int cardID;
+    List<Recipe> filteredRecipes;
 
     public RecipeAdapter(/*Context context, */int cardID, List<Recipe> list,RecipeClickListener listener) {
         //this.context = context;
-        this.list = list;
+        this.recipes = list;
         this.listener= listener;
         this.cardID = cardID;
+
     }
 
     @NonNull
@@ -39,7 +44,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecipeCardViewHolder holder, int position) {
-        holder.textView_title.setText(list.get(position).getName());
+        holder.textView_title.setText(recipes.get(position).getName());
         //holder.textView_favorites.setText("3");
         //holder.textView_author.setText(list.get(position).getAuthor().getUserName());
         //holder.textView_instructions.setText(list.get(position).getInstructions());
@@ -51,14 +56,48 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
             @Override
             public void onClick(View view) {
                 // This may be getBindingAdapterPosition as holder.getAdapterPosition() is depreciated
-                listener.onRecipeClick(list.get(holder.getAbsoluteAdapterPosition()));
+                listener.onRecipeClick(recipes.get(holder.getAbsoluteAdapterPosition()));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return recipes.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String input = charSequence.toString().toLowerCase().trim();
+
+                List<Recipe> filteredList = new ArrayList<>();
+                // no input = show all
+                if (input.isEmpty()) {
+                    filteredList.addAll(recipes);
+                }
+                else {
+                    for (Recipe recipe : recipes) {
+                        if (recipe.getName().toLowerCase().contains(input)) {
+                            filteredList.add(recipe);
+                        }
+                    }
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredRecipes.clear();
+                filteredRecipes.addAll((List<Recipe>) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
     }
 }
 
