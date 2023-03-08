@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,7 +31,7 @@ public class ProfileActivity extends ACCIFragment {
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
 
-    // This should also take a user as a parameter
+    // TODO: This should also take a user as a parameter and inflate the view with its data
     public ProfileActivity(MainActivity mainActivity) {
         super(mainActivity);
         this.hasNavigationBar = true;
@@ -52,24 +54,27 @@ public class ProfileActivity extends ACCIFragment {
         savedRecipesView = view.findViewById(R.id.saved_recipes_recycler);
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
 
-        // set up TabLayout
+        // set up TabLayout. This is done programmatically for no specific reasons (its what the tutorial had.)
         tabLayout.addTab(tabLayout.newTab().setText("Saved Recipes"));
-        tabLayout.getTabAt(0).setCustomView(savedRecipesView);
-
         tabLayout.addTab(tabLayout.newTab().setText("User Recipes"));// Possible change this to <username>
-        tabLayout.getTabAt(1).setCustomView(userRecipesView);
 
-        // set up RecyclerViews+
+
+        // set up RecyclerViews
+        // TODO: use correct recipe lists
         RecipeManager rm = new RecipeCreator();
         List<Recipe> recipeList = rm.getRecipes();
 
         List<Recipe> userRecipes = recipeList;
         List<Recipe> savedRecipes = recipeList;
-        savedRecipesView.setAdapter(new RecipeAdapter(this.getContext(), savedRecipes, recipeClickListener));
-        userRecipesView.setAdapter(new RecipeAdapter(this.getContext(), userRecipes, recipeClickListener));
 
-        // hide/show correct recipe for given tab? Do I need this? Does this get handled
-        // by the tab layout itself? as in no overlapping views?
+        savedRecipesView.setAdapter(new RecipeAdapter(this.getContext(), savedRecipes, recipeClickListener));
+        savedRecipesView.setLayoutManager(new LinearLayoutManager(getContext()));// I dont know what this line does/why I need it; however without it, chaos imbues the app.
+
+        userRecipesView.setAdapter(new RecipeAdapter(this.getContext(), userRecipes, recipeClickListener));
+        userRecipesView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        // Tab switcher, show correct recycler, hide incorrect one
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
