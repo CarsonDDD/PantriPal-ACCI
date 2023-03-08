@@ -15,6 +15,7 @@ public interface RecipeManager {
 
     public void setInstructions(Recipe recipe, String newInstructions);
     public String getInstructions(Recipe recipe);
-
     public String getInstructionsByID(int recipeID);
+
+    List<Recipe> getUsersRecipes(User author);
 }

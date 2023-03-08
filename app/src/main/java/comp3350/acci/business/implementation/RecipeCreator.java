@@ -77,4 +77,7 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
         Recipe recipe = getRecipeByID(recipeID);
         return recipe.getInstructions();
     }
+    public List<Recipe> getUsersRecipes(User author) {
+        return recipePersistence.getUserRecipes(author);
+    }
 }

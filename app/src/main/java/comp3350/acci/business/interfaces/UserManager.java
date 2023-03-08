@@ -10,7 +10,8 @@ public interface UserManager {
     public List<User> getUsers();
     User setBio(int userID, String newBio);
 
-    public int getCurrUserID();
+    public User getCurrUser();
+    public void setCurrUser(User currUser);
     public List<Recipe> getUsersSavedRecipes(User user);
 
     public User getUser(int userID);

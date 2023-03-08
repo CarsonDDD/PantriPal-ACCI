@@ -21,10 +21,13 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.application.Services;
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.fragments.discovery.RecipeAdapter;
 
@@ -63,11 +66,12 @@ public class ProfileActivity extends ACCIFragment {
 
         // set up RecyclerViews
         // TODO: use correct recipe lists
-        RecipeManager rm = new RecipeCreator();
+        RecipeManager rm = Services.getRecipeManager();
+        UserManager um = Services.getUserManager();
+        User currUser  = um.getCurrUser();
         List<Recipe> recipeList = rm.getRecipes();
-
-        List<Recipe> userRecipes = recipeList;
-        List<Recipe> savedRecipes = recipeList;
+        List<Recipe> userRecipes =  rm.getUsersRecipes(currUser);
+        List<Recipe> savedRecipes = um.getUsersSavedRecipes(currUser);
 
         savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, recipeClickListener));
         savedRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));

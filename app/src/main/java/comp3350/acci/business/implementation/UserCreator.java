@@ -36,8 +36,11 @@ public class UserCreator implements UserManager {
         user = userPersistence.updateUser(user);
         return user;
     }
-    public int getCurrUserID()  {
-        return null;
+    public User getCurrUser()  {
+        return userPersistence.getCurrentUser();
+    }
+    public void setCurrUser(User currUser) {
+        userPersistence.setCurrentUser(currUser);
     }
     public List<Recipe> getUsersSavedRecipes(User user) {
         return savedPersistence.getSavedRecipesByUser(user);
