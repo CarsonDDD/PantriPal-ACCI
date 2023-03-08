@@ -3,6 +3,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profile_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:menu="@menu/menu_profile">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/action_font_size"
+            android:textStyle="bold"
+            android:text="User Name"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <!-- pfp and edit page -->
     <LinearLayout
         android:id="@+id/profile_header"
@@ -10,6 +27,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:layout_below="@id/profile_menu"
         android:padding="16dp">
 
         <ImageView
@@ -24,44 +42,26 @@
             android:layout_width="16dp"
             android:layout_height="match_parent"/>
 
-        <Button
-            android:id="@+id/edit_profile_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/edit_profile"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:background="@color/colorPrimary"/>
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:text="Bio"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-    <!-- name and bio -->
+    <!-- old bio bar, reuse later -->
     <LinearLayout
         android:id="@+id/user_info_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_below="@id/profile_header"
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:text="User Name"/>
-
-        <TextView
-            android:id="@+id/bio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/dark_gray"
-            android:layout_marginTop="8dp"
-            android:text="Bio"/>
 
     </LinearLayout>
 

@@ -3,12 +3,14 @@ package comp3350.acci.presentation.fragments;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +38,7 @@ public class ProfileActivity extends ACCIFragment {
         super(mainActivity);
         this.hasNavigationBar = true;
         this.hasBackButton = false;
-        hasActionBar = true;
+        hasActionBar = false;
     }
 
     @Override
@@ -96,6 +98,20 @@ public class ProfileActivity extends ACCIFragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
+        Toolbar action = view.findViewById(R.id.profile_menu);
+        //action.inflateMenu(R.menu.menu_profile);
+        action.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_edit_profile:
+                        Toast.makeText(getAppCompact(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
+            }
         });
     }
 
