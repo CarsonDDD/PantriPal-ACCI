@@ -26,6 +26,16 @@ public class UserPersistenceStub implements UserPersistence {
         return null;
     }
 
+    @Override
+    public User getCurrentUser() {
+        return null;
+    }
+
+    @Override
+    public User setCurrentUser(User user) {
+        return null;
+    }
+
 
     @Override
     public User insertUser(User user) {

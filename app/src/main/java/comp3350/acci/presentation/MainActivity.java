@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());// Set app display to this file
 
         copyDatabaseToDevice();
-        System.out.println("===================finished copying db to device");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -128,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
             File outFile = new File(copyPath);
 
-            if (!outFile.exists()) {
+            //if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
                 out.close();
                 in.close();
-            }
+            //}
         }
     }
 
