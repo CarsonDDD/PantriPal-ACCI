@@ -57,7 +57,14 @@ public class LikedPersistenceStub implements LikedPersistence {
 
     @Override
     public List<User> getUserLikesByRecipe(Recipe recipe) {
-        return null;
+        List<User> result = new ArrayList<>();
+
+        for (int i=0; i<likedList.size(); i++){
+            if (likedList.get(i).getRecipe().equals(recipe)) {
+                result.add(likedList.get(i).getUser());
+            }
+        }
+        return result;
     }
 
     @Override

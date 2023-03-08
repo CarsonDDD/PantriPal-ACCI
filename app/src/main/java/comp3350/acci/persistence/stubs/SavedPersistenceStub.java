@@ -57,7 +57,14 @@ public class SavedPersistenceStub implements SavedPersistence {
 
     @Override
     public List<User> getUserSavesByRecipe(Recipe recipe) {
-        return null;
+        List<User> result = new ArrayList<>();
+
+        for (int i=0; i<savedList.size(); i++){
+            if (savedList.get(i).getRecipe().equals(recipe)) {
+                result.add(savedList.get(i).getUser());
+            }
+        }
+        return result;
     }
 
     @Override
