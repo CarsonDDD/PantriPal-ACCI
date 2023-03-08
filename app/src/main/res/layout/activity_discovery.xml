@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- appbarlayout allows for it to scroll away when scrolling-->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -16,15 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways"
-            android:background="@color/white"
+            android:background="@color/colorPrimary"
             android:elevation="4dp">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                app:queryHint="Apple pie . . ." />
+                app:iconifiedByDefault="false"
+                app:queryBackground="@color/white"
+                app:queryHint="Apple pie . . ."/>
 
         </androidx.appcompat.widget.Toolbar>
 
