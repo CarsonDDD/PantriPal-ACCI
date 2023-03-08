@@ -44,18 +44,6 @@ public class SavedPersistenceStub implements SavedPersistence {
     }
 
     @Override
-    public Saved updateSaved(Saved saved) {
-        int index;
-
-        index = savedList.indexOf(saved);
-        if (index >= 0)
-        {
-            savedList.set(index, saved);
-        }
-        return saved;
-    }
-
-    @Override
     public List<Recipe> getSavedRecipesByUser(User user) {
         List<Recipe> result = new ArrayList<>();
 
@@ -65,6 +53,11 @@ public class SavedPersistenceStub implements SavedPersistence {
             }
         }
         return result;
+    }
+
+    @Override
+    public List<User> getUserSavesByRecipe(Recipe recipe) {
+        return null;
     }
 
     @Override

@@ -9,4 +9,8 @@ public interface ACCIFragmentable {
     default boolean hasBackButton() {
         return false;
     }
+
+    default boolean hasActionBar() {
+        return true;
+    }
 }

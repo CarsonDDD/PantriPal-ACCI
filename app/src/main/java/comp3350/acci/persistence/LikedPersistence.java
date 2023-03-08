@@ -11,9 +11,9 @@ public interface LikedPersistence {
 
     Liked insertLiked(Liked liked);
 
-    Liked updateLiked(Liked liked); //Is there any reason to have this?
-
     List<Recipe> getLikedRecipesByUser(User user);
+
+    List<User> getUserLikesByRecipe(Recipe recipe);
 
     void deleteLiked(Liked liked);
 }

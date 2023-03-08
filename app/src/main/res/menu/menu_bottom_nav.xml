@@ -11,10 +11,10 @@
         android:icon="@drawable/ic_recipe_add"
         android:title="@string/add_recipe" />
 
-    <!--
+
     <item
         android:id="@+id/menu_profile"
         android:icon="@drawable/ic_person"
-        android:title="@string/profile" />-->
+        android:title="@string/profile" />
 
 </menu>
