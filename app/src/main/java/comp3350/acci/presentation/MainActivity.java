@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.databinding.ActivityMainBinding;
+import comp3350.acci.presentation.fragments.ProfileActivity;
 import comp3350.acci.presentation.fragments.discovery.DiscoveryActivity;
 import comp3350.acci.presentation.fragments.ACCIFragment;
 import comp3350.acci.presentation.fragments.InsertRecipeActivity;
@@ -80,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_insert_recipe:
                     changeFragment(new InsertRecipeActivity(this));
                     break;
-                /*case R.id.menu_profile:
-                    replaceFragment(new ProfileActivity());
-                    break;*/
+                case R.id.menu_profile:
+                    changeFragment(new ProfileActivity(this));
+                    break;
             }
             //adjustCurrentFragment();
             return true;

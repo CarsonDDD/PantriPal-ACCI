@@ -38,14 +38,6 @@
         android:scaleType="fitCenter"
         android:src="@drawable/defaultfoodimg" />
 
-    <TextView
-        android:id="@+id/textView_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:scrollbars="vertical"
-        android:text="TextVieddddddddddddddddd" />
     <!--Bottom Menu-->
     <LinearLayout
         android:layout_width="match_parent"
