@@ -69,7 +69,6 @@ public class ProfileActivity extends ACCIFragment {
         RecipeManager rm = Services.getRecipeManager();
         UserManager um = Services.getUserManager();
         User currUser  = um.getCurrUser();
-        List<Recipe> recipeList = rm.getRecipes();
         List<Recipe> userRecipes =  rm.getUsersRecipes(currUser);
         List<Recipe> savedRecipes = um.getUsersSavedRecipes(currUser);
 
