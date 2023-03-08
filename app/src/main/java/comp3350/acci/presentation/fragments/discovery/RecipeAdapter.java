@@ -21,12 +21,11 @@ import comp3350.acci.R;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder> implements Filterable {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
     Context context;
     List<Recipe> recipes;
     RecipeClickListener listener;
     int cardID;
-    List<Recipe> filteredRecipes;
 
     public RecipeAdapter(/*Context context, */int cardID, List<Recipe> list,RecipeClickListener listener) {
         //this.context = context;
@@ -64,40 +63,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder> im
     @Override
     public int getItemCount() {
         return recipes.size();
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String input = charSequence.toString().toLowerCase().trim();
-
-                List<Recipe> filteredList = new ArrayList<>();
-                // no input = show all
-                if (input.isEmpty()) {
-                    filteredList.addAll(recipes);
-                }
-                else {
-                    for (Recipe recipe : recipes) {
-                        if (recipe.getName().toLowerCase().contains(input)) {
-                            filteredList.add(recipe);
-                        }
-                    }
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredRecipes.clear();
-                filteredRecipes.addAll((List<Recipe>) filterResults.values);
-                notifyDataSetChanged();
-            }
-        };
     }
 }
 
