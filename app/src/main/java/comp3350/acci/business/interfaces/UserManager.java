@@ -8,7 +8,7 @@ import comp3350.acci.objects.User;
 public interface UserManager {
     public User createUser(String username, String userBio);
     public List<User> getUsers();
-    User setBio(int userID, String newBio);
+
 
     public User getCurrUser();
     public void setCurrUser(User currUser);
@@ -17,6 +17,7 @@ public interface UserManager {
     public User getUser(int userID);
 
     public String getUsername(int userID);
-
+    public void setUsername(int userID, String newUsername);
     public String getBio(int userID);
+    void setBio(int userID, String newBio);
 }

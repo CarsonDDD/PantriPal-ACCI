@@ -30,11 +30,10 @@ public class UserCreator implements UserManager {
         return  userPersistence.getUsers();
     }
 
-    public User setBio(int userID, String newBio) {
+    public void setBio(int userID, String newBio) {
         User user = userPersistence.getUser(userID);
         user.setBio(newBio);
         user = userPersistence.updateUser(user);
-        return user;
     }
     public User getCurrUser()  {
         return userPersistence.getCurrentUser();
@@ -54,6 +53,11 @@ public class UserCreator implements UserManager {
         return userPersistence.getUser(userID).getUserName();
     }
 
+    public void setUsername(int userID, String newUsername) {
+        User user = userPersistence.getUser(userID);
+        user.setUserName(newUsername);
+        userPersistence.updateUser(user);
+    }
     @Override
     public String getBio(int userID) {
         return userPersistence.getUser(userID).getBio();
