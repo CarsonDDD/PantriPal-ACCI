@@ -8,10 +8,20 @@ public class Contain {
 
     private double quantity;
 
+    private String unit;
+
     public Contain(Recipe recipe, Ingredient ingredient, double quantity){
         this.recipe = recipe;
         this.ingredient = ingredient;
         this.quantity = quantity;
+        this.unit = "";
+    }
+
+    public Contain(Recipe recipe, Ingredient ingredient, double quantity, String unit){
+        this.recipe = recipe;
+        this.ingredient = ingredient;
+        this.quantity = quantity;
+        this.unit = unit;
     }
 
     public Recipe getRecipe(){
@@ -26,12 +36,16 @@ public class Contain {
         return quantity;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
     public String toString(){
-        return String.format("Contain: {%s, %s, quantity: %f}", recipe.toString(), ingredient.toString(), quantity);
+        return String.format("Contain: {%s, %s, quantity: %f, unit: %s}", recipe.toString(), ingredient.toString(), quantity, unit);
     }
 
 }

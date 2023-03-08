@@ -37,8 +37,8 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
             return null;
         }
         User author = new User(authorName, "PLACEHOLDER bio");
+        author = Services.getUserPersistence().insertUser(author); //TODO this violates single responsiblity, make this a call to user manager or refactor code otherwise.
         Recipe newRecipe = createRecipe(author, recipeName, instructions, isPrivate, difficulty);
-        Services.getUserPersistence().insertUser(author); //TODO this violates single responsiblity, make this a call to user manager or refactor code otherwise.
         return newRecipe;
     }
 

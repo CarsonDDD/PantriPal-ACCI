@@ -7,6 +7,8 @@ import comp3350.acci.objects.User;
 public interface UserPersistence {
     List<User> getUsers();
 
+    User getUser(int userID);
+
     User insertUser(User user);
 
     User updateUser(User user);
