@@ -9,6 +9,10 @@ public interface UserPersistence {
 
     User getUser(int userID);
 
+    User getCurrentUser();
+
+    User setCurrentUser(User user);
+
     User insertUser(User user);
 
     User updateUser(User user);

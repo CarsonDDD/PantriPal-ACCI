@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());// Set app display to this file
 
         copyDatabaseToDevice();
-        System.out.println("===================finished copying db to device");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
