@@ -51,7 +51,14 @@ public class RecipePersistenceStub implements RecipePersistence {
 
     @Override
     public List<Recipe> getUserRecipes(User user) {
-        return null;
+        List<Recipe> result = new ArrayList<>();
+
+        for (int i=0; i<recipes.size(); i++){
+            if (recipes.get(i).getAuthor().equals(user)) {
+                result.add(recipes.get(i));
+            }
+        }
+        return result;
     }
 
     @Override

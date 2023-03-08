@@ -38,7 +38,14 @@ public class IngredientPersistenceStub implements IngredientPersistence {
 
     @Override
     public Ingredient getIngredient(String ingredient) {
-        return null;
+        Ingredient result = null;
+
+        for (int i=0; i<ingredients.size(); i++){
+            if (ingredients.get(i).getName().equals(ingredient)) {
+                result = ingredients.get(i);
+            }
+        }
+        return result;
     }
 
     @Override
