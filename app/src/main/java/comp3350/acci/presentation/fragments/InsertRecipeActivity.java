@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
@@ -65,7 +66,6 @@ public class InsertRecipeActivity extends ACCIFragment implements View.OnClickLi
 
         Switch privacySwitch = (Switch) getView().findViewById(R.id.insert_recipe_swtchPrivacy);
 
-        TextView confirmationText = (TextView) getView().findViewById(R.id.insert_recipe_confirmation);
 
         //convert text fields to strings
         String recipeName = recipeText.getText().toString();
@@ -79,13 +79,13 @@ public class InsertRecipeActivity extends ACCIFragment implements View.OnClickLi
         Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, isPrivate, difficulty);
         if(addedRecipe != null) {
             //make the screen look like we did something (cuz we did)
-            confirmationText.setText("Recipe was added successfully!\nPlease add next recipe");
+            Toast.makeText(getAppCompact(), "Recipe added successfully!", Toast.LENGTH_SHORT).show();
             recipeText.getText().clear();
             difficultyText.getText().clear();
             instructionText.getText().clear();
             privacySwitch.setChecked(false);
         }else {
-            confirmationText.setText("Some issue was found in recipe fields\nPlease fix them and try again");
+            Toast.makeText(getAppCompact(), "Some fields were empty\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
         }
     }
 }

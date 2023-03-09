@@ -116,13 +116,6 @@
                     android:layout_height="88dp"
                     android:text="Add Recipe!"
                     />
-                <TextView
-                    android:id="@+id/insert_recipe_confirmation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Please add recipe"
-                    android:textSize="16dp"
-                    />
 
             </TableRow>
         </TableLayout>
