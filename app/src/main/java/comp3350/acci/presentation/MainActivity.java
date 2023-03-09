@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     changeFragment(new InsertRecipeActivity(this));
                     break;
                 case R.id.menu_profile:
-                    changeFragment(new ProfileActivity(this));
+                    changeFragment(new ProfileActivity(this,Services.getUserManager().getCurrUser()));
                     break;
             }
             //adjustCurrentFragment();

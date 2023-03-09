@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -35,10 +38,11 @@ public class ProfileActivity extends ACCIFragment {
 
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
+    private User user;
 
-    // TODO: This should also take a user as a parameter and inflate the view with its data
-    public ProfileActivity(MainActivity mainActivity) {
+    public ProfileActivity(MainActivity mainActivity, User user) {
         super(mainActivity);
+        this.user = user;
         this.hasNavigationBar = true;
         this.hasBackButton = false;
         hasActionBar = false;
@@ -55,22 +59,24 @@ public class ProfileActivity extends ACCIFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        // populate layout
+        TextView name = view.findViewById(R.id.user_name);
+        name.setText(user.getUserName());
+
+        TextView bio = view.findViewById(R.id.bio);
+        bio.setText(user.getBio());
+
+        // set up TabLayout.
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         savedRecipesView = view.findViewById(R.id.saved_recipes_recycler);
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
-
-        // set up TabLayout. This is done programmatically for no specific reasons (its what the tutorial had.)
         tabLayout.addTab(tabLayout.newTab().setText("Saved Recipes"));
         tabLayout.addTab(tabLayout.newTab().setText("User Recipes"));// Possible change this to <username>
 
 
         // set up RecyclerViews
-        // TODO: use correct recipe lists
-        RecipeManager rm = Services.getRecipeManager();
-        UserManager um = Services.getUserManager();
-        User currUser  = um.getCurrUser();
-        List<Recipe> userRecipes =  rm.getUsersRecipes(currUser);
-        List<Recipe> savedRecipes = um.getUsersSavedRecipes(currUser);
+        List<Recipe> userRecipes =  Services.getRecipeManager().getUsersRecipes(user);
+        List<Recipe> savedRecipes = Services.getUserManager().getUsersSavedRecipes(user);
 
         savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, recipeClickListener));
         savedRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
