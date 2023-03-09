@@ -27,8 +27,15 @@ DiscoveryActivity provides a feed of user created recipes that users can view, l
 The business layer handles the application's logic and functionality, and connects the persistence/DSO layer with the presentation layer.
 
 ### RecipeManager
+The recipe manager is the interface required for users to create new recipe objects and add them to the database, as well as view, modify and search for existing recipes by recipe ID.
+### RecipeCreator
+The recipe creator is the implementatiion of the recipe manager interface. The constructor requires it to be passed the necessary persistences.
 
-The recipe manager provides all of the functionality required for users to create new recipe objects and add them to the database, as well as view, modify and search for existing recipes by recipe ID.
+### UserManager
+The user manager is the interface responsible for managing the user accounts and related data such as saved recipes.
+
+### UserCreator
+The user creator is the implementation of the UserManager. the constructor requires it to be passed the related persistences.
 
 ## Persistence Layer
 
