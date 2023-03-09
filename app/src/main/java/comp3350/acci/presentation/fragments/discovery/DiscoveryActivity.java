@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.application.Services;
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
@@ -58,7 +59,7 @@ public class DiscoveryActivity extends ACCIFragment{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        RecipeManager rm = new RecipeCreator();
+        RecipeManager rm = Services.getRecipeManager();
 
         List<Recipe> recipeList = rm.getRecipes();
 

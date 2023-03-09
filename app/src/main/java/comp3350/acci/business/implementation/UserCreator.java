@@ -21,7 +21,7 @@ public class UserCreator implements UserManager {
     //creates a DSO: User with the given username and bio
     public User createUser(String username, String userBio) {
         User newUser = new User(username, userBio);
-        userPersistence.insertUser(newUser);
+        newUser = userPersistence.insertUser(newUser);
         return newUser;
     }
 
