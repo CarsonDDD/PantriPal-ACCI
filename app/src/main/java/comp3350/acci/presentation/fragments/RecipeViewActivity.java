@@ -52,11 +52,7 @@ public class RecipeViewActivity extends ACCIFragment {
         titleView.setText(recipe.getName());
         authorView.setText("By " + recipe.getAuthor().getUserName());
         difficultyView.setText("Difficulty: " + recipe.getDifficulty());
-        instructionView.setText("Instructions:\n" + recipe.getInstructions());
+        instructionView.setText("Instructions:\n" + recipe.getInstructions().replace("\\n", "\n"));
 
     }
-    /*@Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }*/
 }
