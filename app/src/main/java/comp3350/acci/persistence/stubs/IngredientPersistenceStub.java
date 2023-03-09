@@ -37,15 +37,15 @@ public class IngredientPersistenceStub implements IngredientPersistence {
     }
 
     @Override
-    public Ingredient updateIngredient(Ingredient ingredient) {
-        int index;
+    public Ingredient getIngredient(String ingredient) {
+        Ingredient result = null;
 
-        index = ingredients.indexOf(ingredient);
-        if (index >= 0)
-        {
-            ingredients.set(index, ingredient);
+        for (int i=0; i<ingredients.size(); i++){
+            if (ingredients.get(i).getName().equals(ingredient)) {
+                result = ingredients.get(i);
+            }
         }
-        return ingredient;
+        return result;
     }
 
     @Override

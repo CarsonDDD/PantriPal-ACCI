@@ -10,15 +10,38 @@ import comp3350.acci.persistence.UserPersistence;
 public class UserPersistenceStub implements UserPersistence {
     private List<User> users;
 
+    private User currentUser;
+
     public UserPersistenceStub() {
         this.users = new ArrayList<>();
 
-        users.add(new User(0, "600cows", "hi im ayden"));
-        users.add(new User(1, "testuser", "bio"));;
+        User user1 = new User(0, "600cows", "hi im ayden");
+        User user2 = new User(1, "testuser", "bio");
+
+        users.add(user1);
+        users.add(user2);;
+
+        this.currentUser = user2;
     }
     @Override
     public List<User> getUsers() {
         return Collections.unmodifiableList(users);
+    }
+
+    @Override
+    public User getUser(int userID) {
+        return null;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    @Override
+    public User setCurrentUser(User user) {
+        currentUser = user;
+        return user;
     }
 
 

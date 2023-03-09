@@ -11,9 +11,10 @@ public interface SavedPersistence {
 
     Saved insertSaved(Saved saved);
 
-    Saved updateSaved(Saved saved);
 
     List<Recipe> getSavedRecipesByUser(User user);
+
+    List<User> getUserSavesByRecipe(Recipe recipe);
 
     void deleteSaved(Saved saved);
 }

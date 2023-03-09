@@ -62,6 +62,10 @@ public class Recipe
 		return author;
 	}
 
+	public void setAuthor(User user) {
+		this.author = user;
+	}
+
 	public String getDifficulty() {
 		return difficulty;
 	}

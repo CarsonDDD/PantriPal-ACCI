@@ -44,24 +44,24 @@ public class LikedPersistenceStub implements LikedPersistence {
     }
 
     @Override
-    public Liked updateLiked(Liked liked) {
-        int index;
-
-        index = likedList.indexOf(liked);
-        if (index >= 0)
-        {
-            likedList.set(index, liked);
-        }
-        return liked;
-    }
-
-    @Override
     public List<Recipe> getLikedRecipesByUser(User user) {
         List<Recipe> result = new ArrayList<>();
 
         for (int i=0; i<likedList.size(); i++){
             if (likedList.get(i).getUser().equals(user)) {
                 result.add(likedList.get(i).getRecipe());
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<User> getUserLikesByRecipe(Recipe recipe) {
+        List<User> result = new ArrayList<>();
+
+        for (int i=0; i<likedList.size(); i++){
+            if (likedList.get(i).getRecipe().equals(recipe)) {
+                result.add(likedList.get(i).getUser());
             }
         }
         return result;
