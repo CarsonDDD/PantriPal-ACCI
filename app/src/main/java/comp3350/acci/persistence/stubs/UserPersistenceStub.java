@@ -30,6 +30,11 @@ public class UserPersistenceStub implements UserPersistence {
 
     @Override
     public User getUser(int userID) {
+        for (int i = 0; i<users.size(); i++){
+            if (users.get(i).getUserID() == userID) {
+                return users.get(i);
+            }
+        }
         return null;
     }
 

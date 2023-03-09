@@ -13,15 +13,15 @@ import comp3350.acci.persistence.UserPersistence;
 public class UserCreator implements UserManager {
     private UserPersistence userPersistence;
     private SavedPersistence savedPersistence;
-    public UserCreator() {
-        userPersistence = Services.getUserPersistence();
-        savedPersistence = Services.getSavedPersistence();
+    public UserCreator(UserPersistence up, SavedPersistence sp) {
+        userPersistence = up;
+        savedPersistence = sp;
     }
 
     //creates a DSO: User with the given username and bio
     public User createUser(String username, String userBio) {
         User newUser = new User(username, userBio);
-        userPersistence.insertUser(newUser);
+        newUser = userPersistence.insertUser(newUser);
         return newUser;
     }
 

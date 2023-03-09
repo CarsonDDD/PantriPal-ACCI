@@ -19,8 +19,8 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
     //needs to interface with DSO: recipe
     private RecipePersistence recipePersistence;
 
-    public RecipeCreator() {
-        recipePersistence = Services.getRecipePersistence();
+    public RecipeCreator(RecipePersistence rp) {
+        recipePersistence = rp;
     }
 
     //creates a DSO: recipe with a given name, ingredients, and instructions. returns the recipe ID
