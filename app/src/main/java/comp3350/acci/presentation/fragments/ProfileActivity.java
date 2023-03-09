@@ -66,7 +66,7 @@ public class ProfileActivity extends ACCIFragment {
         TextView bio = view.findViewById(R.id.bio);
         bio.setText(user.getBio());
 
-        // set up TabLayout.
+        // set up TabLayout
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         savedRecipesView = view.findViewById(R.id.saved_recipes_recycler);
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
