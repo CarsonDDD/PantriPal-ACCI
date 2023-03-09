@@ -41,7 +41,9 @@ The user creator is the implementation of the UserManager. the constructor requi
 
 The persistence layer handles all the functionality of saving and retrieving data. It consists of two parts: Interfaces and the classes that implement the interfaces. The interfaces lay out all of the functionality that will be provided to the Business layer, including function names, the arguments they take, and the form of the output that they will provide. This interface acts as a promise to the business layer, so the business layer can call the interface regardless of the class that actually implements the interface.
 
-In our current iteration, the classes that implement the interfaces are stubs. These provide all the needed functionality of the interface when an app is running. but all the modified data is lost once the app is closed. Currently, the stubs save lists of each of their respective DSOs, and have working functions that modify them. Commonly, the function return a given DSO (i.e. for the RecipePersistenceStub, the getRecipe function will return a Recipe object).
+In Iteration 1, the classes that implemented the interfaces were stubs. These provided all the needed functionality of the interface when an app is running. but all the modified data is lost once the app is closed. The stubs saved lists of each of their respective DSOs, and have working functions that modify them. Commonly, the function return a given DSO (i.e. for the RecipePersistenceStub, the getRecipe function will return a Recipe object).
+
+Currently, the classes that the app uses to implement the interfaces use HSQLDB. This is a database implementation made for Java and it uses sql commands to create tables, add entries, update entries, and delete entries. There is an implementation for each respective DSO and Interface, and since they implement the same interface as the Stubs, they have the same arguments and return types for each fuction.
 
 ## Domain Specific Objects
 
@@ -61,11 +63,11 @@ The Ingredient DSO is the final primary object. It represents an ingredient that
 
 ### Pantry
 
-The Pantry DSO represents the many-to-many relationship between the User and Ingredient table. It represents the ingredients that a user currently has. Each entry has an associated User and Ingredient, but also has a quantity. For example, a user could have three apples in their pantry.
+The Pantry DSO represents the many-to-many relationship between the User and Ingredient table. It represents the ingredients that a user currently has. Each entry has an associated User and Ingredient, but also has a quantity and a unit. For example, a user could have three apples in their pantry, or 6 slices of bread.
 
 ### Contains
 
-The Contains DSO represents the many-to-many relationship between the Recipe and Ingredient table. It is similar to the Pantry DSO, but represents the ingredients that are required for a given recipe. Each entry has a Recipe and Ingredient, as well as a quantity.
+The Contains DSO represents the many-to-many relationship between the Recipe and Ingredient table. It is similar to the Pantry DSO, but represents the ingredients that are required for a given recipe. Each entry has a Recipe and Ingredient, as well as a quantity and a unit.
 
 ### Liked
 
