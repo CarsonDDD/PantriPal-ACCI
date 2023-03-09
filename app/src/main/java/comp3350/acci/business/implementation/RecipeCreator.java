@@ -25,22 +25,14 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
 
     //creates a DSO: recipe with a given name, ingredients, and instructions. returns the recipe ID
     public Recipe createRecipe(User author, String name, String instructions, boolean isPrivate, String difficulty) {
-
+        if(author == null|| name.equals("") || instructions.equals("") ||difficulty.equals("") ) {
+            return null;
+        }
         Recipe newRecipe = new Recipe(author, name, instructions, isPrivate, difficulty);
         newRecipe = recipePersistence.insertRecipe(newRecipe);
         return newRecipe;
     }
 
-    //creates a recipe for a user without an account (who just provides a name)
-    public Recipe createRecipe(String authorName, String recipeName, String instructions, boolean isPrivate, String difficulty) {
-        if(authorName.equals("")|| recipeName.equals("") || instructions.equals("") ||difficulty.equals("") ) {
-            return null;
-        }
-        User author = new User(authorName, "PLACEHOLDER bio");
-        author = Services.getUserPersistence().insertUser(author); //TODO this violates single responsiblity, make this a call to user manager or refactor code otherwise.
-        Recipe newRecipe = createRecipe(author, recipeName, instructions, isPrivate, difficulty);
-        return newRecipe;
-    }
 
     public List<Recipe> getRecipes() {
         return recipePersistence.getRecipes();
