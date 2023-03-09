@@ -15,6 +15,7 @@ import android.widget.TextView;
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.fragments.ACCIFragment;
@@ -59,7 +60,6 @@ public class InsertRecipeActivity extends ACCIFragment implements View.OnClickLi
 
         //Get user inputted text fields
         EditText recipeText = (EditText) getView().findViewById(R.id.insert_recipe_txtname);
-        EditText authorText = (EditText) getView().findViewById(R.id.insert_recipe_txtauthor);
         EditText difficultyText = (EditText) getView().findViewById(R.id.insert_recipe_txtdifficulty);
         EditText instructionText = (EditText) getView().findViewById(R.id.insert_recipe_txtInstructions);
 
@@ -69,20 +69,18 @@ public class InsertRecipeActivity extends ACCIFragment implements View.OnClickLi
 
         //convert text fields to strings
         String recipeName = recipeText.getText().toString();
-        String authorName = authorText.getText().toString();
         String difficulty = difficultyText.getText().toString();
         String instructions = instructionText.getText().toString();
         Boolean isPrivate = privacySwitch.isChecked();
         //get the manager from services
         RecipeManager manager = Services.getRecipeManager();
+        UserManager userManager = Services.getUserManager();
 
-
-        Recipe addedRecipe = manager.createRecipe(authorName, recipeName,instructions, isPrivate, difficulty);
+        Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, isPrivate, difficulty);
         if(addedRecipe != null) {
             //make the screen look like we did something (cuz we did)
             confirmationText.setText("Recipe was added successfully!\nPlease add next recipe");
             recipeText.getText().clear();
-            authorText.getText().clear();
             difficultyText.getText().clear();
             instructionText.getText().clear();
             privacySwitch.setChecked(false);
