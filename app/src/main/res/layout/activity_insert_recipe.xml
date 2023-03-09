@@ -42,27 +42,6 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Author: "
-                    android:textSize="32dp" />
-
-                <EditText
-                    android:id="@+id/insert_recipe_txtauthor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Author's name"
-                    android:inputType="textPersonName"
-                    android:textSize="20dp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,28 +58,6 @@
                     android:inputType="textMultiLine"
                     android:textSize="20dp" />
 
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Instructions:"
-                    android:textSize="32dp" />
-
-                <EditText
-                    android:id="@+id/insert_recipe_txtInstructions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="Recipe Instructions"
-                    android:inputType="textMultiLine"
-                    android:textSize="20dp"
-                    />
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -126,6 +83,30 @@
                     android:textOn="ON"
                     />
             </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructions:"
+                    android:textSize="32dp" />
+
+
+            </TableRow>
+
+            <EditText
+                android:id="@+id/insert_recipe_txtInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Write instructions here"
+                android:inputType="textMultiLine"
+                android:textSize="20dp"
+                />
             <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
