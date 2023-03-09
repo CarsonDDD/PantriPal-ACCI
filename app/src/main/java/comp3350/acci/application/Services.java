@@ -56,7 +56,7 @@ public class Services
     }
     public static synchronized RecipeManager getRecipeManager() {
         if(recipeManager == null) {
-            recipeManager = new RecipeCreator();
+            recipeManager = new RecipeCreator(getRecipePersistence());
         }
         return recipeManager;
     }
@@ -82,7 +82,7 @@ public class Services
     }
     public static synchronized UserManager getUserManager() {
         if(userManager == null) {
-            userManager = new UserCreator();
+            userManager = new UserCreator(getUserPersistence(), getSavedPersistence());
         }
         return userManager;
     }

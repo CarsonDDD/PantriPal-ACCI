@@ -9,6 +9,8 @@ import java.util.List;
 import comp3350.acci.business.implementation.UserCreator;
 import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.stubs.SavedPersistenceStub;
+import comp3350.acci.persistence.stubs.UserPersistenceStub;
 
 public class UserManagerTest extends TestCase {
     public UserManagerTest(String arg0 ) {
@@ -16,7 +18,7 @@ public class UserManagerTest extends TestCase {
     }
     @Test
     public void testCreateUser() {
-        UserManager userManager = new UserCreator();
+        UserManager userManager = new UserCreator(new UserPersistenceStub(), new SavedPersistenceStub());
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
         User createdUser = userManager.createUser(username, bio);
@@ -28,7 +30,7 @@ public class UserManagerTest extends TestCase {
 
     @Test
     public void testUserBio() {
-        UserManager userManager = new UserCreator();
+        UserManager userManager = new UserCreator(new UserPersistenceStub(), new SavedPersistenceStub());
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
         User createdUser = userManager.createUser(username, bio);
@@ -44,7 +46,7 @@ public class UserManagerTest extends TestCase {
 
     @Test
     public void testUsername() {
-        UserManager userManager = new UserCreator();
+        UserManager userManager = new UserCreator(new UserPersistenceStub(), new SavedPersistenceStub());
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
         User createdUser = userManager.createUser(username, bio);
