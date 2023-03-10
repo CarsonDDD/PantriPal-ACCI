@@ -109,3 +109,7 @@ The Liked DSO represents one of the many-to-many relationships between the User 
 ### Saved
 
 The Saved DSO represents the other many-to-many relationship between the User and Recipe DSOs. A Saved object has a User and Recipe and is created when a user Saves a recipe. The difference betwheen the Liked and Saved DSOs is where they will be displayed. We plan to display the number of users that like a recipe on each recipe card, while a user will be able to navigate to a Saved Recipies page to view all of the recipes that they saved.
+
+## Architectural Diagram
+
+![Architectural Diagram](ArchitecturalDiagram.png "Architectural Diagram")
