@@ -5,6 +5,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
@@ -20,43 +23,46 @@ import comp3350.acci.objects.Recipe;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
     Context context;
-    List<Recipe> list;
+    List<Recipe> recipes;
     RecipeClickListener listener;
+    int cardID;
 
-    public RecipeAdapter(Context context, List<Recipe> list, RecipeClickListener listener) {
-        this.context = context;
-        this.list = list;
+    public RecipeAdapter(/*Context context, */int cardID, List<Recipe> list,RecipeClickListener listener) {
+        //this.context = context;
+        this.recipes = list;
         this.listener= listener;
+        this.cardID = cardID;
+
     }
 
     @NonNull
     @Override
     public RecipeCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecipeCardViewHolder(LayoutInflater.from(context).inflate(R.layout.recipe_card, parent, false));
+        return new RecipeCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(cardID, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecipeCardViewHolder holder, int position) {
-        holder.textView_title.setText(list.get(position).getName());
+        holder.textView_title.setText(recipes.get(position).getName());
         //holder.textView_favorites.setText("3");
-        holder.textView_author.setText(list.get(position).getAuthor().getUserName());
+        //holder.textView_author.setText(list.get(position).getAuthor().getUserName());
         //holder.textView_instructions.setText(list.get(position).getInstructions());
-        holder.textView_difficulty.setText(list.get(position).getDifficulty());
+        //holder.textView_difficulty.setText(list.get(position).getDifficulty());
         //holder.imageView_food.setImageBitmap();
 
         // Do not treat position as fixed; only use immediately and call holder.getAdapterPosition() to look it up later
-        holder.imageView_food.setOnClickListener(new View.OnClickListener() {
+        holder.recipe_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // This may be getBindingAdapterPosition as holder.getAdapterPosition() is depreciated
-                listener.onRecipeClick(list.get(holder.getAbsoluteAdapterPosition()));
+                listener.onRecipeClick(recipes.get(holder.getAbsoluteAdapterPosition()));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return recipes.size();
     }
 }
 
@@ -68,7 +74,7 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
     TextView textView_difficulty;
     ImageView imageView_food;
     //TextView textView_favorites;
-    TextView textView_author;
+    //TextView textView_author;
 
     public RecipeCardViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -76,11 +82,7 @@ class RecipeCardViewHolder extends RecyclerView.ViewHolder{
         recipe_container = itemView.findViewById(R.id.recipe_container);
         textView_title = itemView.findViewById(R.id.textView_title);
         imageView_food = itemView.findViewById(R.id.imageView_food);
-        textView_author = itemView.findViewById(R.id.textView_author);
-        //textView_favorites = itemView.findViewById(R.id.textView_favorites);
-        //textView_instructions = itemView.findViewById(R.id.textView_instructions);
-        textView_difficulty = itemView.findViewById(R.id.textView_difficulty);
-        //textView_instructions.setMovementMethod(new ScrollingMovementMethod());
+
 
     }
 }

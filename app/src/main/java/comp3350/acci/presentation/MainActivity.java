@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());// Set app display to this file
 
         copyDatabaseToDevice();
-        System.out.println("===================finished copying db to device");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     changeFragment(new InsertRecipeActivity(this));
                     break;
                 case R.id.menu_profile:
-                    changeFragment(new ProfileActivity(this));
+                    changeFragment(new ProfileActivity(this,Services.getUserManager().getCurrUser()));
                     break;
             }
             //adjustCurrentFragment();

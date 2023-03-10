@@ -11,10 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.fragments.ACCIFragment;
@@ -59,35 +61,31 @@ public class InsertRecipeActivity extends ACCIFragment implements View.OnClickLi
 
         //Get user inputted text fields
         EditText recipeText = (EditText) getView().findViewById(R.id.insert_recipe_txtname);
-        EditText authorText = (EditText) getView().findViewById(R.id.insert_recipe_txtauthor);
         EditText difficultyText = (EditText) getView().findViewById(R.id.insert_recipe_txtdifficulty);
         EditText instructionText = (EditText) getView().findViewById(R.id.insert_recipe_txtInstructions);
 
         Switch privacySwitch = (Switch) getView().findViewById(R.id.insert_recipe_swtchPrivacy);
 
-        TextView confirmationText = (TextView) getView().findViewById(R.id.insert_recipe_confirmation);
 
         //convert text fields to strings
         String recipeName = recipeText.getText().toString();
-        String authorName = authorText.getText().toString();
         String difficulty = difficultyText.getText().toString();
         String instructions = instructionText.getText().toString();
         Boolean isPrivate = privacySwitch.isChecked();
         //get the manager from services
         RecipeManager manager = Services.getRecipeManager();
+        UserManager userManager = Services.getUserManager();
 
-
-        Recipe addedRecipe = manager.createRecipe(authorName, recipeName,instructions, isPrivate, difficulty);
+        Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, isPrivate, difficulty);
         if(addedRecipe != null) {
             //make the screen look like we did something (cuz we did)
-            confirmationText.setText("Recipe was added successfully!\nPlease add next recipe");
+            Toast.makeText(getAppCompact(), "Recipe added successfully!", Toast.LENGTH_SHORT).show();
             recipeText.getText().clear();
-            authorText.getText().clear();
             difficultyText.getText().clear();
             instructionText.getText().clear();
             privacySwitch.setChecked(false);
         }else {
-            confirmationText.setText("Some issue was found in recipe fields\nPlease fix them and try again");
+            Toast.makeText(getAppCompact(), "Some fields were empty\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
         }
     }
 }

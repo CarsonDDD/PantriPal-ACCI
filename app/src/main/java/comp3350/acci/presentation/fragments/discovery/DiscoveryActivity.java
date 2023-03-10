@@ -7,12 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.application.Services;
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
@@ -21,7 +26,7 @@ import comp3350.acci.presentation.fragments.ACCIFragment;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.fragments.RecipeViewActivity;
 
-public class DiscoveryActivity extends ACCIFragment {
+public class DiscoveryActivity extends ACCIFragment{
 
     private RecipeAdapter recipeAdapter;
     private RecyclerView recyclerView;
@@ -52,14 +57,39 @@ public class DiscoveryActivity extends ACCIFragment {
 
         recyclerView = view.findViewById(R.id.recycler_recipe);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(),1));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        RecipeManager rm = new RecipeCreator();
+        RecipeManager rm = Services.getRecipeManager();
 
         List<Recipe> recipeList = rm.getRecipes();
 
-        recipeAdapter = new RecipeAdapter(this.getContext(), recipeList, recipeClickListener);
+        recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList,recipeClickListener);
         recyclerView.setAdapter(recipeAdapter);
+
+        SearchView searchView = view.findViewById(R.id.search_view);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                List<Recipe> filtered = new ArrayList<Recipe>();
+
+                for(Recipe recipe : recipeAdapter.recipes){
+                    if (recipe.getName().toLowerCase().contains(newText)) {
+                        filtered.add(recipe);
+                    }
+                }
+
+                RecipeAdapter filteredAdapter = new RecipeAdapter(R.layout.recipe_card, filtered, recipeClickListener);
+                recyclerView.setAdapter(filteredAdapter);
+                return true;
+            }
+        });
     }
 
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
@@ -68,5 +98,4 @@ public class DiscoveryActivity extends ACCIFragment {
             getAppCompact().changeFragment(new RecipeViewActivity(getAppCompact(), recipe));
         }
     };
-
 }

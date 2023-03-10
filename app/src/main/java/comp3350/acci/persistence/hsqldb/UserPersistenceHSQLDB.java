@@ -78,6 +78,43 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     }
 
     @Override
+    public User getCurrentUser() {
+        User user = null;
+
+        try (final Connection c = connection()) {
+            final Statement st = c.createStatement();
+            final ResultSet rs = st.executeQuery("SELECT * FROM keyvalues WHERE key='current_user'");
+            if (rs.next())
+            {
+                int userID = rs.getInt("value");
+                user = getUser(userID);
+            }
+            rs.close();
+            st.close();
+
+            return user;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public User setCurrentUser(User user) {
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("UPDATE keyvalues SET value = ? where key = ?");
+            st.setInt(1, user.getUserID());
+            st.setString(2, "current_user");
+            st.executeUpdate();
+            st.close();
+            return user;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
     public User insertUser(User user) {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO user (userName, bio) VALUES(?, ?)");

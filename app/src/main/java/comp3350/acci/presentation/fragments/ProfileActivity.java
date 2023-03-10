@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,13 +19,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.application.Services;
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.fragments.discovery.RecipeAdapter;
 
@@ -32,10 +38,11 @@ public class ProfileActivity extends ACCIFragment {
 
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
+    private User user;
 
-    // TODO: This should also take a user as a parameter and inflate the view with its data
-    public ProfileActivity(MainActivity mainActivity) {
+    public ProfileActivity(MainActivity mainActivity, User user) {
         super(mainActivity);
+        this.user = user;
         this.hasNavigationBar = true;
         this.hasBackButton = false;
         hasActionBar = false;
@@ -52,29 +59,32 @@ public class ProfileActivity extends ACCIFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        // populate layout
+        TextView name = view.findViewById(R.id.user_name);
+        name.setText(user.getUserName());
+
+        TextView bio = view.findViewById(R.id.bio);
+        bio.setText(user.getBio());
+
+        // set up TabLayout
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         savedRecipesView = view.findViewById(R.id.saved_recipes_recycler);
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
-
-        // set up TabLayout. This is done programmatically for no specific reasons (its what the tutorial had.)
         tabLayout.addTab(tabLayout.newTab().setText("Saved Recipes"));
         tabLayout.addTab(tabLayout.newTab().setText("User Recipes"));// Possible change this to <username>
 
 
         // set up RecyclerViews
-        // TODO: use correct recipe lists
-        RecipeManager rm = new RecipeCreator();
-        List<Recipe> recipeList = rm.getRecipes();
+        List<Recipe> userRecipes =  Services.getRecipeManager().getUsersRecipes(user);
+        List<Recipe> savedRecipes = Services.getUserManager().getUsersSavedRecipes(user);
 
-        List<Recipe> userRecipes = recipeList;
-        List<Recipe> savedRecipes = recipeList;
+        savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, recipeClickListener));
+        savedRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+        savedRecipesView.setHasFixedSize(true);
 
-        savedRecipesView.setAdapter(new RecipeAdapter(this.getContext(), savedRecipes, recipeClickListener));
-        savedRecipesView.setLayoutManager(new LinearLayoutManager(getContext()));// I dont know what this line does/why I need it; however without it, chaos imbues the app.
-
-        userRecipesView.setAdapter(new RecipeAdapter(this.getContext(), userRecipes, recipeClickListener));
-        userRecipesView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        userRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, userRecipes, recipeClickListener));
+        userRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+        savedRecipesView.setHasFixedSize(false);
 
         // Tab switcher, show correct recycler, hide incorrect one
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
