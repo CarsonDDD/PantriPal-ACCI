@@ -39,7 +39,7 @@ public class RecipeInsertFragment extends ACCIFragment implements View.OnClickLi
                              Bundle savedInstanceState) {
 
         // Inflate the view for this fragment (ie. show it on the screen)
-        View view =  inflater.inflate(R.layout.activity_insert_recipe, container, false);
+        View view =  inflater.inflate(R.layout.fragment_recipe_insert, container, false);
 
         //make sure this class knows it's the on listening for this button to be pressed
         Button addRecipe = (Button) view.findViewById(R.id.insert_recipe_btnadd);

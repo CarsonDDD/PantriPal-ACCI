@@ -32,7 +32,7 @@ public class RecipeViewFragment extends ACCIFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.activity_recipeview, container, false);
+        return inflater.inflate(R.layout.fragment_recipe_view, container, false);
     }
 
     @Override
