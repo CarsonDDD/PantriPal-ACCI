@@ -5,18 +5,14 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.FragmentContainerView;
@@ -29,10 +25,10 @@ import java.io.InputStreamReader;
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.databinding.ActivityMainBinding;
-import comp3350.acci.presentation.fragments.ProfileActivity;
-import comp3350.acci.presentation.fragments.discovery.DiscoveryActivity;
+import comp3350.acci.presentation.fragments.ProfileViewFragment;
+import comp3350.acci.presentation.fragments.DiscoveryViewFragment;
 import comp3350.acci.presentation.fragments.ACCIFragment;
-import comp3350.acci.presentation.fragments.InsertRecipeActivity;
+import comp3350.acci.presentation.fragments.RecipeInsertFragment;
 
 // This class acts as the engine which runs/controls the fragment interactions
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set starting fragment
         fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
-        fragmentNavigator.setFragment(new DiscoveryActivity(this));
+        fragmentNavigator.setFragment(new DiscoveryViewFragment(this));
 
         // init layout variables to the starting fragment.
         isShowingBackButton = fragmentNavigator.currentFragment().hasBackButton();
@@ -75,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
             fragmentNavigator.clear();// Clear navigation history. This is a design choice to not have a back button on a "main" menu
             switch (item.getItemId()){
                 case R.id.menu_discovery:
-                    changeFragment(new DiscoveryActivity(this));
+                    changeFragment(new DiscoveryViewFragment(this));
                     break;
                 case R.id.menu_insert_recipe:
-                    changeFragment(new InsertRecipeActivity(this));
+                    changeFragment(new RecipeInsertFragment(this));
                     break;
                 case R.id.menu_profile:
-                    changeFragment(new ProfileActivity(this,Services.getUserManager().getCurrUser()));
+                    changeFragment(new ProfileViewFragment(this,Services.getUserManager().getCurrUser()));
                     break;
             }
             //adjustCurrentFragment();
@@ -154,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 //Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
                 fragmentNavigator.undoFragment();// Possible to edit this function to not update the display, then set it using the local function here to isolate code
-                adjustCurrentFragment();
+                adjustLayoutToCurrentFragment();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -163,14 +159,14 @@ public class MainActivity extends AppCompatActivity {
     // Public function to be used outside this class without needing to touch its caller
     public boolean changeFragment(ACCIFragment f){
         boolean hasChanged = fragmentNavigator.setFragment(f);
-        adjustCurrentFragment();
+        adjustLayoutToCurrentFragment();
         return hasChanged;
     }
 
     // Update layout variables, only if they are different.
     // This function needs to be called everytime a fragment is changed (so the main components update)
     // Probably a better way around this, but that's for later.
-    public void adjustCurrentFragment(){
+    private void adjustLayoutToCurrentFragment(){
         ACCIFragment currentFragment = fragmentNavigator.currentFragment();
 
         // Only change if a change is required
@@ -212,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // To hide the nav bar in a constraint layout, we need to do 2 things
+    // Yes there is a better way to do this since all the code is similar, but I was getting strange issues so we are keeping this for now.
     // 1. Make the navigation bar invisible: set the height to 0.
     // 2. Make the fragment fullscreen/take its place: re-wire the constraint; tie the fragment to the bottom of the screen (instead of the top of the nav bar.)
     private void hideNavigationBar(){
