@@ -3,6 +3,7 @@ package comp3350.acci.tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import comp3350.acci.tests.business.PantryManagerTest;
 import comp3350.acci.tests.business.RecipeManagerTest;
 import comp3350.acci.tests.business.UserManagerTest;
 import comp3350.acci.tests.objects.ContainTest;
@@ -23,7 +24,8 @@ import comp3350.acci.tests.objects.UserTest;
         PantryTest.class,
         ContainTest.class,
         RecipeManagerTest.class,
-        UserManagerTest.class
+        UserManagerTest.class,
+        PantryManagerTest.class
 })
 public class AllTests
 {
