@@ -2,25 +2,54 @@
 
 Our application follows the common three-layer architecture discussed in class. This consists of the presentation, business, and persistence layers, with domain specific objects that are accessed by all layers. This design increases the independence of each layer, to create layers that have low coupling. Further details about each layer is provided below.
 
+---
+
 ## Presentation Layer
-
-The presentation layer handles the application's GUI. It contains activities for different features, and fragments for use in multiple different activities.
-
-### InsertRecipeActivity
-
-InsertRecipeActivity implements the GUI and it's functionality for creating new recipes. It is linked to the recipe manager, which implements the functions required for creating and modifying recipes.
+The presentation layer controls the user interface and displays data to the user in your recipe manager database app. It acts as a bridge between the user and the app's functionality and interacts with the business logic and data layers to ensure the user is presented with accurate and relevant data.
 
 ### MainActivity
+-   The only `AppCompactActivity` in the project.
+-   Its layout contains a `FragmentContainerView`, `BottomNavigationView`, and `ToolBar`.
+-   Controls admin/system tasks/functionality and delegates display logic to the `Fragment` (`ACCIFragment`) contained inside its `FragmentContainerView`.
+-   Uses a `FragmentNavigator` to manage navigation between different fragments.
 
-MainActivity is the starting point of the application, created on launch. It includes a feed of user recipes implemented through the DiscoveryActivity and RecipeAdapter fragment, as well as a navigation bar at the bottom of the screen for switching between discovery, adding recipes and the user's profile.
+### FragmentNavigator
+-   A helper object that manages navigation between different fragments.
+-   Implemented as a stack which updates the display every time a fragment is pushed or popped.
+-   The top of the stack is the fragment to be displayed.
+-   Keeps a history of previously displayed fragments, allowing users to return to previous pages without creating new instances of the fragment.
 
-### ProfileActivity
+### RecipeAdapter
+-   Adapts a given list of `Recipe` objects to a `RecyclerView` of `RecipeCardViewHolder`.
 
-ProfileActivity will implement a place for users to view and modify their profile.
+### RecipeCardViewHolder
+-   The item that populates the `RecyclerView`.
+-   Holds the recipe's title, image, and an event listener that opens the recipe page for the selected item.
 
-### DiscoveryActivity
+## Fragments
 
-DiscoveryActivity provides a feed of user created recipes that users can view, like and review. It implements the recipe_card fragment with functionality from RecipeAdapter.java.
+### ACCIFragment
+-   A subclass of `Fragment` that adds new functionality for controlling display, such as showing/hiding action bar and navigation bar.
+
+### ACCIFragmentable
+-   An interface for `ACCIFragment`.
+
+### RecipeInsertFragment
+-   Implements the GUI and functionality for creating new recipes.
+-   Linked to the recipe manager to create and modify recipes.
+
+### ProfileViewFragment
+-   Populates the layout with data of a given user.
+-   Allows users to view and modify their profile.
+
+### RecipeViewFragment
+-   Populates the data on the recipe page with a given recipe.
+
+### DiscoveryViewFragment
+-   Provides a `RecyclerView` with a feed of recipes from the database.
+-   Contains functionality to search for specific items in the view.
+
+---
 
 ## Business Layer
 
@@ -37,6 +66,8 @@ The user manager is the interface responsible for managing the user accounts and
 ### UserCreator
 The user creator is the implementation of the UserManager. the constructor requires it to be passed the related persistences.
 
+---
+
 ## Persistence Layer
 
 The persistence layer handles all the functionality of saving and retrieving data. It consists of two parts: Interfaces and the classes that implement the interfaces. The interfaces lay out all of the functionality that will be provided to the Business layer, including function names, the arguments they take, and the form of the output that they will provide. This interface acts as a promise to the business layer, so the business layer can call the interface regardless of the class that actually implements the interface.
@@ -44,6 +75,8 @@ The persistence layer handles all the functionality of saving and retrieving dat
 In Iteration 1, the classes that implemented the interfaces were stubs. These provided all the needed functionality of the interface when an app is running. but all the modified data is lost once the app is closed. The stubs saved lists of each of their respective DSOs, and have working functions that modify them. Commonly, the function return a given DSO (i.e. for the RecipePersistenceStub, the getRecipe function will return a Recipe object).
 
 Currently, the classes that the app uses to implement the interfaces use HSQLDB. This is a database implementation made for Java and it uses sql commands to create tables, add entries, update entries, and delete entries. There is an implementation for each respective DSO and Interface, and since they implement the same interface as the Stubs, they have the same arguments and return types for each fuction.
+
+---
 
 ## Domain Specific Objects
 
