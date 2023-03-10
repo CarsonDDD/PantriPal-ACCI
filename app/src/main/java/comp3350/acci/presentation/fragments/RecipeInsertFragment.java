@@ -2,15 +2,12 @@ package comp3350.acci.presentation.fragments;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import comp3350.acci.R;
@@ -19,7 +16,6 @@ import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 
 /**
  /**
@@ -28,15 +24,14 @@ import comp3350.acci.presentation.fragments.ACCIFragment;
 
  Last Updated: Carson Dickinson 03/02/2023
  */
-public class InsertRecipeActivity extends ACCIFragment implements View.OnClickListener {
+public class RecipeInsertFragment extends ACCIFragment implements View.OnClickListener {
 
-    public InsertRecipeActivity(MainActivity mainActivity) {
+    public RecipeInsertFragment(MainActivity mainActivity) {
         super(mainActivity);
 
         this.hasNavigationBar = true;
         this.hasBackButton = false;
-        hasActionBar = false;
-
+        this.hasActionBar = false;
     }
 
     @Override
