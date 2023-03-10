@@ -3,70 +3,59 @@ package comp3350.acci.presentation.fragments;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
-import comp3350.acci.business.implementation.RecipeCreator;
-import comp3350.acci.business.interfaces.RecipeManager;
-import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.discovery.RecipeAdapter;
+import comp3350.acci.presentation.RecipeAdapter;
 
-public class ProfileActivity extends ACCIFragment {
+public class ProfileViewFragment extends ACCIFragment {
 
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
     private User user;
 
-    public ProfileActivity(MainActivity mainActivity, User user) {
+    public ProfileViewFragment(MainActivity mainActivity, User user) {
         super(mainActivity);
         this.user = user;
         this.hasNavigationBar = true;
         this.hasBackButton = false;
-        hasActionBar = false;
+        this.hasActionBar = false;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_userprofile, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        // populate layout
         TextView name = view.findViewById(R.id.user_name);
         name.setText(user.getUserName());
 
         TextView bio = view.findViewById(R.id.bio);
         bio.setText(user.getBio());
 
-        // set up TabLayout.
+        // set up TabLayout
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         savedRecipesView = view.findViewById(R.id.saved_recipes_recycler);
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
@@ -110,7 +99,8 @@ public class ProfileActivity extends ACCIFragment {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        Toolbar action = view.findViewById(R.id.profile_menu);
+        // Edit profile button. Disabled until Iteration 3. Make sure to readd back into xml
+        /*Toolbar action = view.findViewById(R.id.profile_menu);
         //action.inflateMenu(R.menu.menu_profile);
         action.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -122,7 +112,7 @@ public class ProfileActivity extends ACCIFragment {
                 }
                 return true;
             }
-        });
+        });*/
     }
 
     // This function is copypaste from DiscoveryActivity, as clicking on the card should have the same
@@ -132,10 +122,11 @@ public class ProfileActivity extends ACCIFragment {
     // feels too dirty (even for me ;] ) and probably breaks something mentioned in the lectures; for now it stays here.
     // TODO: make this function not need to be hardcoded into the classes which use a RecipeAdapter. All RecipeAdapters
     //  should(?) have the same functionality when clicking on a recipe card.
+    // Iteration 3 moment
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            getAppCompact().changeFragment(new RecipeViewActivity(getAppCompact(), recipe));
+            getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
         }
     };
 }

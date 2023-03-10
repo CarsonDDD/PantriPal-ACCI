@@ -1,12 +1,9 @@
-package comp3350.acci.presentation.fragments.discovery;
+package comp3350.acci.presentation;
 
 import android.content.Context;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
@@ -22,17 +18,20 @@ import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeCardViewHolder>{
-    Context context;
-    List<Recipe> recipes;
-    RecipeClickListener listener;
-    int cardID;
+    //Context context;
+    private List<Recipe> recipes;
+    private RecipeClickListener listener;
+    private int cardID;
 
     public RecipeAdapter(/*Context context, */int cardID, List<Recipe> list,RecipeClickListener listener) {
         //this.context = context;
         this.recipes = list;
         this.listener= listener;
         this.cardID = cardID;
+    }
 
+    public List<Recipe> getRecipes(){
+        return recipes;
     }
 
     @NonNull

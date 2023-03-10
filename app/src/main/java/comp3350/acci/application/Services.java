@@ -2,8 +2,10 @@ package comp3350.acci.application;
 
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.implementation.UserCreator;
+import comp3350.acci.business.interfaces.PantryManager;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.interfaces.UserManager;
+import comp3350.acci.business.implementation.PantryCreator;
 import comp3350.acci.persistence.ContainPersistence;
 
 import comp3350.acci.persistence.IngredientPersistence;
@@ -21,19 +23,14 @@ import comp3350.acci.persistence.hsqldb.PantryPersistenceHSQLDB;
 import comp3350.acci.persistence.hsqldb.RecipePersistenceHSQLDB;
 import comp3350.acci.persistence.hsqldb.SavedPersistenceHSQLDB;
 import comp3350.acci.persistence.hsqldb.UserPersistenceHSQLDB;
-import comp3350.acci.persistence.stubs.ContainPersistenceStub;
-import comp3350.acci.persistence.stubs.IngredientPersistenceStub;
-import comp3350.acci.persistence.stubs.LikedPersistenceStub;
-import comp3350.acci.persistence.stubs.PantryPersistenceStub;
-import comp3350.acci.persistence.stubs.RecipePersistenceStub;
-import comp3350.acci.persistence.stubs.SavedPersistenceStub;
-import comp3350.acci.persistence.stubs.UserPersistenceStub;
 
 public class Services
 {
 
     private static RecipePersistence recipePersistence = null;
     private static RecipeManager recipeManager = null;
+
+    private static PantryManager pantryManager = null;
     private static PantryPersistence pantryPersistence = null;
     private static IngredientPersistence ingredientPersistence = null;
     private static UserPersistence userPersistence = null;
@@ -56,7 +53,7 @@ public class Services
     }
     public static synchronized RecipeManager getRecipeManager() {
         if(recipeManager == null) {
-            recipeManager = new RecipeCreator();
+            recipeManager = new RecipeCreator(getRecipePersistence());
         }
         return recipeManager;
     }
@@ -74,6 +71,13 @@ public class Services
         return pantryPersistence;
     }
 
+    public static synchronized PantryManager getPantryManager() {
+        if(pantryManager == null) {
+            pantryManager = new PantryCreator(getPantryPersistence());
+        }
+        return pantryManager;
+    }
+
     public static synchronized UserPersistence getUserPersistence() {
         if(userPersistence == null) {
             userPersistence = new UserPersistenceHSQLDB(getDBPathName());
@@ -82,7 +86,7 @@ public class Services
     }
     public static synchronized UserManager getUserManager() {
         if(userManager == null) {
-            userManager = new UserCreator();
+            userManager = new UserCreator(getUserPersistence(), getSavedPersistence());
         }
         return userManager;
     }

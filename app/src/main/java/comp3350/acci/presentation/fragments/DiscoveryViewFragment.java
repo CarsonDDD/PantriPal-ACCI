@@ -1,4 +1,4 @@
-package comp3350.acci.presentation.fragments.discovery;
+package comp3350.acci.presentation.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,30 +8,27 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
-import comp3350.acci.business.implementation.RecipeCreator;
+import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.fragments.RecipeViewActivity;
+import comp3350.acci.presentation.RecipeAdapter;
 
-public class DiscoveryActivity extends ACCIFragment{
+public class DiscoveryViewFragment extends ACCIFragment{
 
     private RecipeAdapter recipeAdapter;
     private RecyclerView recyclerView;
 
 
-    public DiscoveryActivity(MainActivity mainActivity){
+    public DiscoveryViewFragment(MainActivity mainActivity){
         super(mainActivity);
         this.hasNavigationBar = true;
         this.hasBackButton = false;
@@ -47,7 +44,7 @@ public class DiscoveryActivity extends ACCIFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_discovery, container, false);
+        return inflater.inflate(R.layout.fragment_discovery, container, false);
     }
 
     @Override
@@ -58,15 +55,14 @@ public class DiscoveryActivity extends ACCIFragment{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        RecipeManager rm = new RecipeCreator();
-
+        // Populate RecyclerView from database
+        RecipeManager rm = Services.getRecipeManager();
         List<Recipe> recipeList = rm.getRecipes();
-
         recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList,recipeClickListener);
         recyclerView.setAdapter(recipeAdapter);
 
+        // Set up searchbar
         SearchView searchView = view.findViewById(R.id.search_view);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -78,7 +74,7 @@ public class DiscoveryActivity extends ACCIFragment{
 
                 List<Recipe> filtered = new ArrayList<Recipe>();
 
-                for(Recipe recipe : recipeAdapter.recipes){
+                for(Recipe recipe : recipeAdapter.getRecipes()){
                     if (recipe.getName().toLowerCase().contains(newText)) {
                         filtered.add(recipe);
                     }
@@ -91,10 +87,11 @@ public class DiscoveryActivity extends ACCIFragment{
         });
     }
 
+    // TODO: Pass this to the profile page in iteration 3 to remove duplicate code
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            getAppCompact().changeFragment(new RecipeViewActivity(getAppCompact(), recipe));
+            getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
         }
     };
 }

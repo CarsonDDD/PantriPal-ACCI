@@ -10,6 +10,7 @@ import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.stubs.RecipePersistenceStub;
 
 public class RecipeManagerTest extends TestCase {
 
@@ -20,13 +21,13 @@ public class RecipeManagerTest extends TestCase {
     @Test
     public void testCreateRecipe() {
         System.out.println("\nStarting recipe creation test");
-        RecipeManager manager = new RecipeCreator();
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
         User user = new User("Caelan", "I'm the coolest");
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
         Recipe manRep = manager.getRecipeFromPersistence(rep1);
 
-        Recipe rep2 = manager.createRecipe("", "", "", false, "");
+        Recipe rep2 = manager.createRecipe(null, "", "", false, "");
         assertNull(rep2);
         assertNotNull("Recipe manager should not have given back a null recipe",rep1);
         assertNotNull("Recipe manager should successfully give back a non-null recipe from the persistence",manRep);
@@ -44,30 +45,11 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("Created Recipe had all expected fields");
     }
     @Test
-    public void testUserlessCreateRecipe() {
-        System.out.println("\nStarting userless recipe creation test");
-        RecipeManager manager = new RecipeCreator();
-        String authorName = "Caelan";
-        Recipe rep1 = manager.createRecipe(authorName, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
-
-        Recipe manRep = manager.getRecipeFromPersistence(rep1);
-
-        assertNotNull("Recipe should not be NULL",rep1);
-        assertNotNull("Recipe from persistence should not be NULL", manRep);
-
-        assertEquals("author name values should match", authorName, manRep.getAuthor().getUserName());
-
-        assertEquals("Name should be the same", "PB&J", rep1.getName());
-        assertEquals("Instructions should be the same","Put peanut butter and jam on toast.", rep1.getInstructions());
-        assertFalse("Private bool should be false", rep1.getIsPrivate());
-        System.out.println("Created Userless Recipe had all expected fields");
-    }
-    @Test
     public void testRecipePrivacy() {
         System.out.println("\nStarting Recipe privacy Test:");
 
         User user = new User("Caelan", "I'm the coolest");
-        RecipeManager manager = new RecipeCreator();
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -88,7 +70,7 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("\nStarting recipe instruction Tests:");
 
         User user = new User("Caelan", "I'm the coolest");
-        RecipeManager manager = new RecipeCreator();
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -110,7 +92,7 @@ public class RecipeManagerTest extends TestCase {
     public void testGetNullRecipe() {
         System.out.println("\nStarting null recipe search Tests:");
 
-        RecipeManager manager = new RecipeCreator();
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
 
         User user = new User("Caelan", "I'm the coolest");
         Recipe rep1 = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
