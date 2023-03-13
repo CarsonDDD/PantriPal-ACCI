@@ -3,12 +3,15 @@ package comp3350.acci.presentation.fragments;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -100,19 +103,25 @@ public class ProfileViewFragment extends ACCIFragment {
         });
 
         // Edit profile button. Disabled until Iteration 3. Make sure to readd back into xml
-        /*Toolbar action = view.findViewById(R.id.profile_menu);
+        Toolbar action = view.findViewById(R.id.profile_menu);
         //action.inflateMenu(R.menu.menu_profile);
         action.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.action_pantry:
+                        Toast.makeText(getAppCompact(), "View Pantry!", Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.action_edit_profile:
                         Toast.makeText(getAppCompact(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_login:
+                        Toast.makeText(getAppCompact(), "Login as!", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;
             }
-        });*/
+        });
     }
 
     // This function is copypaste from DiscoveryActivity, as clicking on the card should have the same

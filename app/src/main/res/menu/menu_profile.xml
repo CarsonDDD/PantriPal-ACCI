@@ -2,8 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_pantry"
+        android:title="Pantry"
+        android:icon="@drawable/ic_edit"/>
+
+    <item
         android:id="@+id/action_edit_profile"
         android:title="Edit Profile"
-        android:icon="@drawable/ic_edit"
-        app:showAsAction="always"/>
+        android:icon="@drawable/ic_edit"/>
+
+    <item
+        android:id="@+id/action_login"
+        android:title="Login as"
+        android:icon="@drawable/ic_edit"/>
 </menu>
