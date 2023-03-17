@@ -3,124 +3,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.fragments.RecipeInsertFragment">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TableLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:title="Add Recipe"/>
 
-            <TableRow
+        <LinearLayout
+            android:id="@+id/ll_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+        <!--== Single line input==-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/toolbar"
+            android:id="@+id/ll_singleLine">
+
+            <!--==title input==-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Title:"
-                    android:textSize="32dp" />
+                    android:text="Recipe Title:"
+                    android:textSize="@dimen/input_size"/>
 
                 <EditText
-                    android:id="@+id/insert_recipe_txtname"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/et_title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Recipe Name"
-                    android:inputType="textPersonName"
-                    android:textSize="20dp" />
+                    android:layout_weight="1"
+                    android:hint="Carrot Cake"/>
+            </LinearLayout>
 
-            </TableRow>
-
-            <TableRow
+            <!--==difficulty input==-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Difficulty:"
-                    android:textSize="32dp" />
+                    android:text="Diffuculty:"
+                    android:textSize="@dimen/input_size"/>
 
                 <EditText
-                    android:id="@+id/insert_recipe_txtdifficulty"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/et_difficulty"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:hint="Recipe Difficulty"
-                    android:inputType="textMultiLine"
-                    android:textSize="20dp" />
+                    android:layout_weight="1"
+                    android:hint="How hard is this dish to make?"
+                    android:inputType="textAutoComplete"/>
+            </LinearLayout>
 
-            </TableRow>
-            <TableRow
+            <!--== Images ==-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_image"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/insert_recipe_privacyQuestion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Private?"
-                    android:textSize="32dp" />
+                    android:text="Images:"
+                    android:textSize="@dimen/input_size"/>
 
-                <Switch
-                    android:id="@+id/insert_recipe_swtchPrivacy"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    android:textSize="20dp"
-                    android:text=""
-                    android:textOff="OFF"
-                    android:textOn="ON"
-                    />
-            </TableRow>
-            <TableRow
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/ib_image1"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="4dp"
+                        android:src="@drawable/ic_add_photo"
+                        android:background="@color/dark_gray">
+                    </ImageButton>
+                    <ImageButton
+                        android:id="@+id/ib_image2"
+                        android:layout_margin="4dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_add_photo"
+                        android:background="@color/dark_gray">
+                    </ImageButton>
+                    <ImageButton
+                        android:id="@+id/ib_image3"
+                        android:layout_margin="4dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_add_photo"
+                        android:background="@color/dark_gray">
+                    </ImageButton>
+                    <ImageButton
+                        android:id="@+id/ib_image4"
+                        android:layout_margin="4dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_add_photo"
+                        android:background="@color/dark_gray">
+                    </ImageButton>
+                </LinearLayout>
+
+                <!--==Privacy input==-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Privacy:"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/input_size"/>
+
+                    <ToggleButton
+                        android:id="@+id/tb_public"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:text="ToggleButton"
+                        android:textOff="Private"
+                        android:textOn="Public" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- description -->
+        <LinearLayout
+            android:id="@+id/ll_desciption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_singleLine"
+            android:orientation="vertical">
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Instructions:"
-                    android:textSize="32dp" />
-
-
-            </TableRow>
+                android:layout_height="wrap_content"
+                android:text="Guide:"
+                android:textSize="@dimen/input_size"/>
 
             <EditText
-                android:id="@+id/insert_recipe_txtInstructions"
+                android:id="@+id/et_instructions"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Write instructions here"
-                android:inputType="textMultiLine"
-                android:textSize="20dp"
-                />
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <Button
-                    android:id="@+id/insert_recipe_btnadd"
-                    android:layout_width="match_parent"
-                    android:layout_height="88dp"
-                    android:text="Add Recipe!"
-                    />
+                android:layout_height="wrap_content"
+                android:maxLines="15"
+                android:scrollbars="vertical"
+                android:hint="Write Instructions here."
+                android:inputType="textMultiLine"/>
 
-            </TableRow>
-        </TableLayout>
+        </LinearLayout>
 
+            <!-- submit -->
+            <Button
+                android:id="@+id/btn_publish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Publish Recipe"
+                android:layout_below="@id/ll_desciption"/>
+        </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>

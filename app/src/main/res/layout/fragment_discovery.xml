@@ -2,14 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TODO: add nested constraint layout to fix action bar fr?-->
-    <!-- appbarlayout allows for it to scroll away when scrolling-->
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -35,7 +31,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_recipe"
+        android:id="@+id/rv_recipelist"
         android:layout_margin="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

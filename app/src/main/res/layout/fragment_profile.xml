@@ -4,20 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/profile_menu"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:menu="@menu/menu_profile">
-
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/action_font_size"
-            android:textStyle="bold"
-            android:text="User Name"/>
-
+        app:menu="@menu/menu_profile"
+        app:title="User Name">
     </androidx.appcompat.widget.Toolbar>
 
     <!-- pfp and edit page -->
@@ -27,7 +19,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:layout_below="@id/profile_menu"
+        android:layout_below="@id/toolbar"
         android:padding="16dp">
 
         <ImageView
@@ -53,23 +45,11 @@
 
     </LinearLayout>
 
-    <!-- old bio bar, reuse later -->
-    <LinearLayout
-        android:id="@+id/user_info_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/profile_header"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-    </LinearLayout>
-
     <!-- Tabs for saved and user Recipes -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_info_layout"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profile_header"
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
         android:padding="4dp">
@@ -94,13 +74,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saved_recipes_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_recipes_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:visibility="gone"/>
 
     </LinearLayout>
