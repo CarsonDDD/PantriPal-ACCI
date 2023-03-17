@@ -30,9 +30,6 @@ public class DiscoveryViewFragment extends ACCIFragment{
 
     public DiscoveryViewFragment(MainActivity mainActivity){
         super(mainActivity);
-        this.hasNavigationBar = true;
-        this.hasBackButton = false;
-        this.hasActionBar = false;
     }
 
     @Override
@@ -51,7 +48,7 @@ public class DiscoveryViewFragment extends ACCIFragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recycler_recipe);
+        recyclerView = view.findViewById(R.id.rv_recipelist);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

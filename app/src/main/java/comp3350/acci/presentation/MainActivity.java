@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentNavigator fragmentNavigator;
 
-    private @MenuRes int currentToolbarMenu = -1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,26 +50,6 @@ public class MainActivity extends AppCompatActivity {
         // Set starting fragment
         fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
         fragmentNavigator.setFragment(new DiscoveryViewFragment(this));
-
-        // Event Handler for bottom nav menu
-        BottomNavigationView nav = findViewById(R.id.navigation_bar);
-        nav.setOnItemSelectedListener(item -> {
-            fragmentNavigator.clear();// Clear navigation history. This is a design choice to not have a back button on a "main" menu
-            switch (item.getItemId()){
-                case R.id.menu_discovery:
-                    changeFragment(new DiscoveryViewFragment(this));
-                    break;
-                case R.id.menu_insert_recipe:
-                    changeFragment(new RecipeInsertFragment(this));
-                    break;
-                case R.id.menu_profile:
-                    changeFragment(new ProfileViewFragment(this,Services.getUserManager().getCurrUser()));
-                    break;
-            }
-            //adjustCurrentFragment();
-            return true;
-        });
-
     }
 
     private void copyDatabaseToDevice() {
@@ -127,60 +105,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Only set menu if menu exists
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(currentToolbarMenu != -1){
-            getMenuInflater().inflate(currentToolbarMenu, menu);
-        }
-        return true;
-    }
-
-    // Gets called when the back button is pressed.
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // Pop stack, switching between THESE menus should clear the history as the fragmentNavigator is used to handle submenus/subfragments
-        // Make current top, current fragment
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
-                fragmentNavigator.undoFragment();// Possible to edit this function to not update the display, then set it using the local function here to isolate code
-                //adjustLayoutToCurrentFragment();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     // Public function to be used outside this class without needing to touch its caller
     public boolean changeFragment(ACCIFragment f){
         boolean hasChanged = fragmentNavigator.setFragment(f);
         //adjustLayoutToCurrentFragment();
         return hasChanged;
-    }
-
-    // Used from other fragments to populate apps toolbar with its own
-    // while keeping the standard/cross fragment toolbar features (hamburger menu)
-    // Passing -1 as menu will remove it
-    public void setToolbar(Toolbar toolbar){
-        setToolbar(toolbar, true);
-    }
-
-    public void setToolbar(Toolbar toolbar, boolean showDrawer){
-        setToolbar(toolbar, -1, showDrawer);
-    }
-
-    public void setToolbar(Toolbar toolbar, @MenuRes int menu){
-        setToolbar(toolbar, menu, true);
-    }
-
-    public void setToolbar(Toolbar toolbar, @MenuRes int menu, boolean showDrawer) {
-        // Set toolbar
-        setSupportActionBar(toolbar);
-
-        // Set current toolbar.
-        currentToolbarMenu = menu;
-
-        invalidateOptionsMenu(); // The internet says this calls onCreateOptionsMenu, wonder what else?
     }
 
     public void setNavigationBar(boolean showBar){

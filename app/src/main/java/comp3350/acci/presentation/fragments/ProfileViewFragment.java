@@ -36,9 +36,6 @@ public class ProfileViewFragment extends ACCIFragment {
     public ProfileViewFragment(MainActivity mainActivity, User user) {
         super(mainActivity);
         this.user = user;
-        this.hasNavigationBar = true;
-        this.hasBackButton = false;
-        this.hasActionBar = false;
     }
 
     @Override
@@ -51,9 +48,10 @@ public class ProfileViewFragment extends ACCIFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+        // TODO: HANDLE TOOLBAR
 
-        TextView name = view.findViewById(R.id.user_name);
-        name.setText(user.getUserName());
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle(user.getUserName());
 
         TextView bio = view.findViewById(R.id.bio);
         bio.setText(user.getBio());
@@ -103,7 +101,7 @@ public class ProfileViewFragment extends ACCIFragment {
         });
 
         // Edit profile button. Disabled until Iteration 3. Make sure to readd back into xml
-        Toolbar action = view.findViewById(R.id.profile_menu);
+        /*Toolbar action = view.findViewById(R.id.profile_menu);
         //action.inflateMenu(R.menu.menu_profile);
         action.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -121,7 +119,7 @@ public class ProfileViewFragment extends ACCIFragment {
                 }
                 return true;
             }
-        });
+        });*/
     }
 
     // This function is copypaste from DiscoveryActivity, as clicking on the card should have the same
