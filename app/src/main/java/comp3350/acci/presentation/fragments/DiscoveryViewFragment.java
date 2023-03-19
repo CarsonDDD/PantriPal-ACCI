@@ -57,7 +57,7 @@ public class DiscoveryViewFragment extends Fragment {
         // Populate RecyclerView from database
         RecipeManager rm = Services.getRecipeManager();
         List<Recipe> recipeList = rm.getRecipes();
-        recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList,recipeClickListener);
+        recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList, ((MainActivity)getActivity()).CLICK_RECIPE));
         recyclerView.setAdapter(recipeAdapter);
 
         // Set up searchbar
