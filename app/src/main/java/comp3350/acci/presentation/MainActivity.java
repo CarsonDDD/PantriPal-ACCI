@@ -132,7 +132,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 //Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
+                showNavigationBar(true);
                 fragmentNavigator.undoFragment();// Possible to edit this function to not update the display, then set it using the local function here to isolate code
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
