@@ -47,7 +47,7 @@ public class DiscoveryViewFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         // Add toolbar + menu to app
-        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_discovery_search);
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
         recyclerView = view.findViewById(R.id.rv_recipelist);
         recyclerView.setHasFixedSize(true);

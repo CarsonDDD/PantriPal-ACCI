@@ -38,7 +38,7 @@ public class RecipeInsertFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         // Add toolbar + menu to app
-        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_profile);
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
         Button btnPublish = view.findViewById(R.id.btn_publish);
         btnPublish.setOnClickListener(new View.OnClickListener() {
@@ -83,5 +83,4 @@ public class RecipeInsertFragment extends Fragment {
     }
 
     // TODO: HANDLE IMAGE BUTTONS
-
 }

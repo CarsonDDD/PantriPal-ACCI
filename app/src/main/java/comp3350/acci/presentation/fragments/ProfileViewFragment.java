@@ -67,7 +67,7 @@ public class ProfileViewFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(user.getUserName());
         // Add toolbar + menu to app
-        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_profile);
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
         // Set bio
         TextView bio = view.findViewById(R.id.bio);

@@ -35,8 +35,6 @@ public class RecipeViewFragment extends Fragment {
 
     private Recipe recipe;
 
-    private MenuProvider menuProvider;
-
     public RecipeViewFragment(Recipe recipe){
         this.recipe = recipe;
     }
@@ -50,7 +48,14 @@ public class RecipeViewFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_recipe_current, menu);
+        if(Services.getRecipeManager().getUsersRecipes(Services.getUserManager().getCurrUser()).contains(recipe)){
+            // User recipe. show edit button
+            inflater.inflate(R.menu.menu_recipe_current, menu);
+        }
+        else{
+            // non user recipe. Show like button
+            inflater.inflate(R.menu.menu_recipe_other, menu);
+        }
     }
 
     @Nullable
@@ -67,7 +72,7 @@ public class RecipeViewFragment extends Fragment {
 
         // Toolbar/menu settings
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_recipe_current);
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity)getActivity()).showNavigationBar(true);
 

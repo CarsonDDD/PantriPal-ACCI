@@ -34,7 +34,6 @@ import comp3350.acci.presentation.fragments.RecipeViewFragment;
 public class MainActivity extends AppCompatActivity {
 
     private FragmentNavigator fragmentNavigator;
-    private @MenuRes int currentToolbarMenu = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,31 +154,6 @@ public class MainActivity extends AppCompatActivity {
             nav.setVisibility(View.VISIBLE);
         else
             nav.setVisibility(View.GONE);
-    }
-
-    // Used from other fragments to populate apps toolbar with its own
-    // while keeping the standard/cross fragment toolbar features (hamburger menu)
-    // Passing -1 as menu will remove it
-    public void setToolbar(Toolbar toolbar){
-        setToolbar(toolbar, false);
-    }
-
-    public void setToolbar(Toolbar toolbar, boolean showBack){
-        setToolbar(toolbar, -1, showBack);
-    }
-
-    public void setToolbar(Toolbar toolbar, @MenuRes int menu){
-        setToolbar(toolbar, menu, false);
-    }
-
-    public void setToolbar(Toolbar toolbar, @MenuRes int menu, boolean showDrawer) {
-        // Set toolbar
-        setSupportActionBar(toolbar);
-
-        // Set current toolbar. I dont know the proper way to do this. However InvalidateOptionsMenu() will recall onCreateOptionsMenu() with the new currentToolBarMenu
-        currentToolbarMenu = menu;
-
-        invalidateOptionsMenu(); // Might need to call this after showDrawer check. The internet says this calls onCreateOptionsMenu, wonder what else?
     }
 
     public final RecipeClickListener CLICK_RECIPE = new RecipeClickListener() {
