@@ -3,6 +3,8 @@ package comp3350.acci.presentation.fragments;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,11 +82,11 @@ public class ProfileViewFragment extends Fragment {
         List<Recipe> userRecipes =  Services.getRecipeManager().getUsersRecipes(user);
         List<Recipe> savedRecipes = Services.getUserManager().getUsersSavedRecipes(user);
 
-        savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, recipeClickListener));
+        savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, ((MainActivity)getActivity()).CLICK_RECIPE));
         savedRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
         savedRecipesView.setHasFixedSize(true);
 
-        userRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, userRecipes, recipeClickListener));
+        userRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, userRecipes, ((MainActivity)getActivity()).CLICK_RECIPE));
         userRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
         savedRecipesView.setHasFixedSize(false);
 
@@ -133,20 +135,23 @@ public class ProfileViewFragment extends Fragment {
         });
     }
 
-    // This function is copypaste from DiscoveryActivity, as clicking on the card should have the same
-    // effect. I dont know to make it properly/automatic where I dont need to copy paste this function.
-    // One option would be to move this listener into the RecipeAdapter itself, however, that means we would
-    // need to pass a reference to the AppCompact (since we change the display on click). Passing it in
-    // feels too dirty (even for me ;] ) and probably breaks something mentioned in the lectures; for now it stays here.
-    // TODO: make this function not need to be hardcoded into the classes which use a RecipeAdapter. All RecipeAdapters
-    //  should(?) have the same functionality when clicking on a recipe card.
-    // Iteration 3 moment
-    private RecipeClickListener recipeClickListener = new RecipeClickListener() {
-        @Override
-        public void onRecipeClick(Recipe recipe) {
-            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
-            MainActivity activity = (MainActivity)getActivity();
-            activity.changeFragment(new RecipeViewFragment(recipe));
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_recipe_current, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit_recipe:
+                Toast.makeText(getContext(), "Edit!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_save_recipe:
+                Toast.makeText(getContext(), "Like!", Toast.LENGTH_SHORT).show();
+                break;
         }
-    };
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

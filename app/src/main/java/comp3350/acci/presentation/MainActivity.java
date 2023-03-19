@@ -23,9 +23,12 @@ import java.io.InputStreamReader;
 
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
+import comp3350.acci.business.listeners.RecipeClickListener;
+import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.fragments.ProfileViewFragment;
 import comp3350.acci.presentation.fragments.DiscoveryViewFragment;
 import comp3350.acci.presentation.fragments.RecipeInsertFragment;
+import comp3350.acci.presentation.fragments.RecipeViewFragment;
 
 // This class acts as the engine which runs/controls the fragment interactions
 public class MainActivity extends AppCompatActivity {
@@ -178,4 +181,12 @@ public class MainActivity extends AppCompatActivity {
 
         invalidateOptionsMenu(); // Might need to call this after showDrawer check. The internet says this calls onCreateOptionsMenu, wonder what else?
     }
+
+    public final RecipeClickListener CLICK_RECIPE = new RecipeClickListener() {
+        @Override
+        public void onRecipeClick(Recipe recipe) {
+            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            changeFragment(new RecipeViewFragment(recipe));
+        }
+    };
 }

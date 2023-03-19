@@ -79,21 +79,10 @@ public class DiscoveryViewFragment extends Fragment {
                     }
                 }
 
-                RecipeAdapter filteredAdapter = new RecipeAdapter(R.layout.recipe_card, filtered, recipeClickListener);
+                RecipeAdapter filteredAdapter = new RecipeAdapter(R.layout.recipe_card, filtered, ((MainActivity)getActivity()).CLICK_RECIPE));
                 recyclerView.setAdapter(filteredAdapter);
                 return true;
             }
         });
     }
-
-    // TODO: Pass this to the profile page in iteration 3 to remove duplicate code
-    private RecipeClickListener recipeClickListener = new RecipeClickListener() {
-        @Override
-        public void onRecipeClick(Recipe recipe) {
-            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
-            MainActivity activity = (MainActivity)getActivity();
-            activity.changeFragment(new RecipeViewFragment(recipe));
-
-        }
-    };
 }
