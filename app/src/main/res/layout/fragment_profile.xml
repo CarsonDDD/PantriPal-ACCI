@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:menu="@menu/menu_profile"
-        app:title="User Name">
+        app:title="User Name"
+        app:titleTextAppearance="@style/BigTitle">
     </androidx.appcompat.widget.Toolbar>
 
     <!-- pfp and edit page -->
@@ -30,9 +31,6 @@
             android:scaleType="centerCrop"
             android:background="@color/dark_gray"/>
 
-        <View
-            android:layout_width="16dp"
-            android:layout_height="match_parent"/>
 
         <TextView
             android:id="@+id/bio"
@@ -40,6 +38,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:text="Bio"
+            android:layout_marginStart="16dp"
             android:textColor="@color/dark_gray"
             android:textSize="16sp" />
 
@@ -76,14 +75,14 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_recipes_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
     </LinearLayout>
 

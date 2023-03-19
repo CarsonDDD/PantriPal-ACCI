@@ -17,7 +17,8 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     app:menu="@menu/menu_recipe_current"
-    app:title="RECIPE TITLE"/>
+    app:title="RECIPE TITLE"
+    app:titleTextAppearance="@style/BigTitle"/>
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="4dp">
+            android:layout_marginStart="8dp">
 
         <!--==Author name==-->
         <LinearLayout
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Created by: "
-                android:textSize="@dimen/input_size"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tv_author"
@@ -72,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="Author"
                 android:textStyle="bold"
-                android:textSize="@dimen/input_size"/>
+                android:textSize="20sp"/>
         </LinearLayout>
             <!--==Difficulty==-->
             <LinearLayout
