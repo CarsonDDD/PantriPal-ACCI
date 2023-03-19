@@ -45,9 +45,12 @@ public class RecipeViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Create a new MenuProvider for this fragment
-        //menuProvider = new MenuProvider(requireActivity(), R.menu.menu_recipe_current);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_recipe_current, menu);
     }
 
     @Nullable
@@ -94,23 +97,20 @@ public class RecipeViewFragment extends Fragment {
         if(authorView.getText().length() > 10){
             authorView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28 - authorView.getText().length());
         }
-    }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_recipe_current, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_edit_recipe:
-                Toast.makeText(getContext(), "Edit!", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_save_recipe:
-                Toast.makeText(getContext(), "Like!", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_edit_recipe:
+                        Toast.makeText(getContext(), "Edit Recipe!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_save_recipe:
+                        Toast.makeText(getContext(), "Save Recipe!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
+            }
+        });
     }
 }

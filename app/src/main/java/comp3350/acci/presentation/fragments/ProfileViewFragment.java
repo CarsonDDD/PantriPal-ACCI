@@ -43,8 +43,6 @@ public class ProfileViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Tell the system that this fragment has an options menu
         setHasOptionsMenu(true);
     }
 
@@ -53,6 +51,12 @@ public class ProfileViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    // inflate toolbar with menu
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_profile, menu);
     }
 
     @Override
@@ -134,24 +138,4 @@ public class ProfileViewFragment extends Fragment {
             }
         });
     }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_recipe_current, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_edit_recipe:
-                Toast.makeText(getContext(), "Edit!", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_save_recipe:
-                Toast.makeText(getContext(), "Like!", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
 }
