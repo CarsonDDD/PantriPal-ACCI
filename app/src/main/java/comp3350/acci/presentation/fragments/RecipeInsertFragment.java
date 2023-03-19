@@ -11,6 +11,9 @@ import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
@@ -25,11 +28,7 @@ import comp3350.acci.presentation.MainActivity;
 
  Last Updated: Carson Dickinson 03/02/2023
  */
-public class RecipeInsertFragment extends ACCIFragment {
-
-    public RecipeInsertFragment(MainActivity mainActivity) {
-        super(mainActivity);
-    }
+public class RecipeInsertFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,16 +36,20 @@ public class RecipeInsertFragment extends ACCIFragment {
         // Inflate the view for this fragment (ie. show it on the screen)
         View view =  inflater.inflate(R.layout.fragment_recipe_insert, container, false);
 
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        // Add toolbar + menu to app
+        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_profile);
+
         Button btnPublish = view.findViewById(R.id.btn_publish);
         btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //Get user inputted text fields
-                EditText recipeText = v.findViewById(R.id.et_title);
-                EditText difficultyText = v.findViewById(R.id.et_difficulty);
-                EditText instructionText = v.findViewById(R.id.et_instructions);
-                ToggleButton privacySwitch = v.findViewById(R.id.tb_public);
+                EditText recipeText = view.findViewById(R.id.et_title);
+                EditText difficultyText = view.findViewById(R.id.et_difficulty);
+                EditText instructionText = view.findViewById(R.id.et_instructions);
+                ToggleButton privacySwitch = view.findViewById(R.id.tb_public);
 
                 // TODO: DO SOMETHING WITH IMAGES
 
@@ -63,7 +66,8 @@ public class RecipeInsertFragment extends ACCIFragment {
                 Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, !isPublic, difficulty);
                 if(addedRecipe != null) {
                     //make the screen look like we did something (cuz we did)
-                    Toast.makeText(getAppCompact(), "Recipe added successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Recipe added successfully!", Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).changeFragment(new ProfileViewFragment(Services.getUserManager().getCurrUser()));
                     // Reset is not needed if we change views
                     // TODO: CHANGE VIEWS
                     /*recipeText.getText().clear();
@@ -71,7 +75,7 @@ public class RecipeInsertFragment extends ACCIFragment {
                     instructionText.getText().clear();
                     privacySwitch.setChecked(false);*/
                 }else {
-                    Toast.makeText(getAppCompact(), "Some fields were empty\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Some fields were empty\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });

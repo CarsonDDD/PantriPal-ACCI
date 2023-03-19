@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,15 +24,11 @@ import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.RecipeAdapter;
 
-public class DiscoveryViewFragment extends ACCIFragment{
+public class DiscoveryViewFragment extends Fragment {
 
     private RecipeAdapter recipeAdapter;
     private RecyclerView recyclerView;
 
-
-    public DiscoveryViewFragment(MainActivity mainActivity){
-        super(mainActivity);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +45,10 @@ public class DiscoveryViewFragment extends ACCIFragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        // Add toolbar + menu to app
+        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_discovery_search);
 
         recyclerView = view.findViewById(R.id.rv_recipelist);
         recyclerView.setHasFixedSize(true);
@@ -88,7 +90,10 @@ public class DiscoveryViewFragment extends ACCIFragment{
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            MainActivity activity = (MainActivity)getActivity();
+            activity.changeFragment(new RecipeViewFragment(recipe));
+
         }
     };
 }

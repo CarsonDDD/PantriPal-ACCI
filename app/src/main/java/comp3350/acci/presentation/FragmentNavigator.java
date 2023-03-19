@@ -1,16 +1,16 @@
 package comp3350.acci.presentation;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.Stack;
 
 import comp3350.acci.R;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 
 public class FragmentNavigator {
 
-    private Stack<ACCIFragment> fragmentHistory = new Stack<>();
+    private Stack<Fragment> fragmentHistory = new Stack<>();
 
     private FragmentManager manager;
 
@@ -18,12 +18,12 @@ public class FragmentNavigator {
         manager = supportFragmentManger;
     }
 
-    public ACCIFragment currentFragment(){
+    public Fragment currentFragment(){
         return fragmentHistory.peek();
     }
 
     // returns if fragment changed
-    public boolean setFragment(ACCIFragment f){
+    public boolean setFragment(Fragment f){
         fragmentHistory.push(f);
         return updateManager();
     }

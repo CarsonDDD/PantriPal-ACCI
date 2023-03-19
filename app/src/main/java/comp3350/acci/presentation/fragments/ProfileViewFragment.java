@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,15 +28,22 @@ import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.RecipeAdapter;
 
-public class ProfileViewFragment extends ACCIFragment {
+public class ProfileViewFragment extends Fragment {
 
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
     private User user;
 
-    public ProfileViewFragment(MainActivity mainActivity, User user) {
-        super(mainActivity);
+    public ProfileViewFragment(User user) {
         this.user = user;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Tell the system that this fragment has an options menu
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -48,11 +56,14 @@ public class ProfileViewFragment extends ACCIFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        // TODO: HANDLE TOOLBAR
 
+        // Set Name
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setTitle(user.getUserName());
+        // Add toolbar + menu to app
+        ((MainActivity)getActivity()).setToolbar(toolbar,R.menu.menu_profile);
 
+        // Set bio
         TextView bio = view.findViewById(R.id.bio);
         bio.setText(user.getBio());
 
@@ -62,6 +73,7 @@ public class ProfileViewFragment extends ACCIFragment {
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
         tabLayout.addTab(tabLayout.newTab().setText("Saved Recipes"));
         tabLayout.addTab(tabLayout.newTab().setText("User Recipes"));// Possible change this to <username>
+        tabLayout.getTabAt(1).select();
 
 
         // set up RecyclerViews
@@ -101,25 +113,24 @@ public class ProfileViewFragment extends ACCIFragment {
         });
 
         // Edit profile button. Disabled until Iteration 3. Make sure to readd back into xml
-        /*Toolbar action = view.findViewById(R.id.profile_menu);
         //action.inflateMenu(R.menu.menu_profile);
-        action.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.action_pantry:
-                        Toast.makeText(getAppCompact(), "View Pantry!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_edit_profile:
-                        Toast.makeText(getAppCompact(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_login:
-                        Toast.makeText(getAppCompact(), "Login as!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;
             }
-        });*/
+        });
     }
 
     // This function is copypaste from DiscoveryActivity, as clicking on the card should have the same
@@ -133,7 +144,9 @@ public class ProfileViewFragment extends ACCIFragment {
     private RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClick(Recipe recipe) {
-            getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            MainActivity activity = (MainActivity)getActivity();
+            activity.changeFragment(new RecipeViewFragment(recipe));
         }
     };
 }
