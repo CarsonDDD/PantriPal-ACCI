@@ -18,6 +18,10 @@ public class RecipeManagerTest extends TestCase {
         super(arg0);
     }
 
+    //TODO LIST
+    //1. add @Before and @After for set up and teardown of tests
+    //2. Turn stubs into mocks (mockito)
+
     @Test
     public void testCreateRecipe() {
         System.out.println("\nStarting recipe creation test");
