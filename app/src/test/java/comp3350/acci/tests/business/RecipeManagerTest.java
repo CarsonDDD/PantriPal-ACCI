@@ -4,14 +4,17 @@ package comp3350.acci.tests.business;
 //java imports
 import junit.framework.TestCase;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 //project imports
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.RecipePersistence;
 import comp3350.acci.persistence.stubs.RecipePersistenceStub;
 
+//@RunWith(MockitoJUnitRunner.class)
 public class RecipeManagerTest extends TestCase {
 
     public RecipeManagerTest(String arg0 ) {
@@ -21,7 +24,8 @@ public class RecipeManagerTest extends TestCase {
     //TODO LIST
     //1. add @Before and @After for set up and teardown of tests
     //2. Turn stubs into mocks (mockito)
-
+   // @Mock
+    RecipePersistence repMock;
     @Test
     public void testCreateRecipe() {
         System.out.println("\nStarting recipe creation test");
