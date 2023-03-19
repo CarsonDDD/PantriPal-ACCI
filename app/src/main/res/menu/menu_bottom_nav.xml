@@ -2,18 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_discovery"
+        android:id="@+id/nav_discovery"
         android:icon="@drawable/ic_home"
-        android:title="@string/home"/>
+        android:title="@string/home"
+        android:state_checked="true"/>
 
     <item
-        android:id="@+id/menu_insert_recipe"
+        android:id="@+id/nav_insert_recipe"
         android:icon="@drawable/ic_recipe_add"
         android:title="@string/add_recipe" />
 
 
     <item
-        android:id="@+id/menu_profile"
+        android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person"
         android:title="@string/profile" />
 
