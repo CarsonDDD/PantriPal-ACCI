@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -32,10 +33,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recipelist"
-        android:layout_margin="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="60dp"
         tools:listitem="@layout/recipe_card">
     </androidx.recyclerview.widget.RecyclerView>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
