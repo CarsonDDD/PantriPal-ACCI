@@ -142,12 +142,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Public function to be used outside this class without needing to touch its caller
-    public boolean changeFragment(Fragment f){
+    public void changeFragment(Fragment f){
         // reset nav bar. this makes fragments need to give the flag only for false without lingering effects
-
         showNavigationBar(true);
-        boolean hasChanged = fragmentNavigator.setFragment(f);
-        return hasChanged;
+        fragmentNavigator.setFragment(f);
+    }
+
+    public void undoFragment(){
+        fragmentNavigator.undoFragment();
     }
 
     public void showNavigationBar(boolean showBar){
