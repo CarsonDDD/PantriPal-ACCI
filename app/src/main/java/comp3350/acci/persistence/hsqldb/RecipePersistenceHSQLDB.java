@@ -78,6 +78,30 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
     }
 
     @Override
+    public List<Recipe> getUserAndPublicRecipes(User user) {
+        final List<Recipe> recipes = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID=? OR isPrivate = false");
+            st.setInt(1, user.getUserID());
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final Recipe recipe = fromResultSet(rs);
+                recipes.add(recipe);
+            }
+            rs.close();
+            st.close();
+
+            return recipes;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
     public List<Recipe> getUserRecipes(User user) {
         final List<Recipe> recipes = new ArrayList<>();
 
