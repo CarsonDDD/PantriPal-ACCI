@@ -23,20 +23,18 @@ public class FragmentNavigator {
     }
 
     // returns if fragment changed
-    public boolean setFragment(Fragment f){
+    public void setFragment(Fragment f){
         fragmentHistory.push(f);
-        return updateManager();
+        updateManager();
     }
 
-    // returns if fragment changed
-    public boolean undoFragment(){
+    public void undoFragment() throws IndexOutOfBoundsException{
         // Stack should ALWAYS contain a single element, if there are 0 elements there is no screen!
         if(fragmentHistory.size() > 1){
             fragmentHistory.pop();
-            return updateManager();
+            updateManager();
         }
-
-        return false;
+        throw new IndexOutOfBoundsException("Attempting to pop empty stack");
     }
 
     public void clear(){
@@ -45,14 +43,10 @@ public class FragmentNavigator {
 
     // Updates the FragmentManager with the current fragment
     // returns if fragment changed
-    private boolean updateManager(){
-        if(fragmentHistory.size() > 0){
-            FragmentTransaction fragmentTransaction = manager.beginTransaction();
-            fragmentTransaction.replace(R.id.current_fragment, currentFragment());
-            fragmentTransaction.commit();
-            return true;
-        }
-        return false;
+    private void updateManager(){
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        fragmentTransaction.replace(R.id.current_fragment, currentFragment());
+        fragmentTransaction.commit();
     }
 
 
