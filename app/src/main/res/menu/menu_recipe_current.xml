@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_edit_recipe"
         android:icon="@drawable/ic_edit"
-        android:title="add event"
+        android:title="Edit Recipe"
         android:checkable="true"
         app:showAsAction="always" />
 </menu>

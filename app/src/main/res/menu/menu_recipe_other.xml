@@ -6,6 +6,6 @@
         android:id="@+id/action_save_recipe"
         android:icon="@drawable/ic_star_border"
         app:showAsAction="always"
-        android:title="open calendar"/>
+        android:title="Save Recipe"/>
 
 </menu>
