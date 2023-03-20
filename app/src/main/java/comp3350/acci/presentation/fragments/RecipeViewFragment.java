@@ -33,10 +33,10 @@ import comp3350.acci.presentation.MainActivity;
 
 public class RecipeViewFragment extends Fragment {
 
-    private Recipe recipe;
+    private final Recipe RECIPE;
 
     public RecipeViewFragment(Recipe recipe){
-        this.recipe = recipe;
+        RECIPE = recipe;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class RecipeViewFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if(Services.getRecipeManager().getUsersRecipes(Services.getUserManager().getCurrUser()).contains(recipe)){
+        if(Services.getRecipeManager().getUsersRecipes(Services.getUserManager().getCurrUser()).contains(RECIPE)){
             // User recipe. show edit button
             inflater.inflate(R.menu.menu_recipe_current, menu);
         }
@@ -94,10 +94,10 @@ public class RecipeViewFragment extends Fragment {
         rvImages.setAdapter(imageAdapter);
 
         //set the textviews to the values from the recipe:
-        toolbar.setTitle(recipe.getName());
-        authorView.setText(recipe.getAuthor().getUserName());
-        difficultyView.setText(recipe.getDifficulty());
-        instructionView.setText(recipe.getInstructions().replace("\\n", "\n"));
+        toolbar.setTitle(RECIPE.getName());
+        authorView.setText(RECIPE.getAuthor().getUserName());
+        difficultyView.setText(RECIPE.getDifficulty());
+        instructionView.setText(RECIPE.getInstructions().replace("\\n", "\n"));
 
         if(authorView.getText().length() > 10){
             authorView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28 - authorView.getText().length());
@@ -108,6 +108,7 @@ public class RecipeViewFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.action_edit_recipe:
+                        ((MainActivity)getActivity()).changeFragment(new RecipeEditFragment(RECIPE));
                         Toast.makeText(getContext(), "Edit Recipe!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_save_recipe:

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -21,13 +20,6 @@ import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
 
-/**
- /**
- This class is the linked Java class to the activity_insert_recipe.xml layout file
- Where the layout decides what is shown/parameters, this file decides logical operations that can be performed
-
- Last Updated: Carson Dickinson 03/02/2023
- */
 public class RecipeInsertFragment extends Fragment {
 
     @Override
@@ -40,6 +32,7 @@ public class RecipeInsertFragment extends Fragment {
         // Add toolbar + menu to app
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
+        // Create button + logic
         Button btnPublish = view.findViewById(R.id.btn_publish);
         btnPublish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,27 +46,20 @@ public class RecipeInsertFragment extends Fragment {
 
                 // TODO: DO SOMETHING WITH IMAGES
 
-
                 //convert text fields to strings
                 String recipeName = recipeText.getText().toString();
                 String difficulty = difficultyText.getText().toString();
                 String instructions = instructionText.getText().toString();
                 Boolean isPublic = privacySwitch.isChecked();
+
                 //get the manager from services
                 RecipeManager manager = Services.getRecipeManager();
                 UserManager userManager = Services.getUserManager();
 
                 Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, !isPublic, difficulty);
                 if(addedRecipe != null) {
-                    //make the screen look like we did something (cuz we did)
                     Toast.makeText(getContext(), "Recipe added successfully!", Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).changeFragment(new ProfileViewFragment(Services.getUserManager().getCurrUser()));
-                    // Reset is not needed if we change views
-                    // TODO: CHANGE VIEWS
-                    /*recipeText.getText().clear();
-                    difficultyText.getText().clear();
-                    instructionText.getText().clear();
-                    privacySwitch.setChecked(false);*/
                 }else {
                     Toast.makeText(getContext(), "Some fields were empty\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
                 }

@@ -1,5 +1,6 @@
 package comp3350.acci.business.implementation;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 import comp3350.acci.application.Services;
@@ -33,6 +34,18 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
         return newRecipe;
     }
 
+    @Override
+    public void modify(Recipe output, String name, String instructions, boolean isPrivate, String difficulty) throws InvalidParameterException{
+        if(name.equals("") || instructions.equals("") ||difficulty.equals("") ) {
+            throw new InvalidParameterException("one or more properties are empty");
+        }
+
+        output.setName(name);
+        output.setInstructions(instructions);
+        output.setIsPrivate(isPrivate);
+        output.setDifficulty(difficulty);
+        recipePersistence.updateRecipe(output);
+    }
 
     public List<Recipe> getRecipes() {
         return recipePersistence.getRecipes();
