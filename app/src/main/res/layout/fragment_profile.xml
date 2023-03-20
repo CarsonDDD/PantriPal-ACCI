@@ -1,27 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/AppTheme">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:menu="@menu/menu_profile"
-        app:title="User Name"
-        app:titleTextAppearance="@style/BigTitle">
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/menu_profile"
+            app:title="User Name">
+        </androidx.appcompat.widget.Toolbar>
 
     <!-- pfp and edit page -->
     <LinearLayout
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="horizontal"
+        android:background="@color/orange"
         android:layout_below="@id/toolbar"
-        android:padding="16dp">
+        android:paddingTop="0dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
 
         <ImageView
             android:id="@+id/profile_picture"
@@ -29,7 +32,7 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_person"
             android:scaleType="centerCrop"
-            android:background="@color/dark_gray"/>
+            android:background="@drawable/darkgrey_rounded"/>
 
 
         <TextView
@@ -37,9 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
+            android:textColor="@color/white"
             android:text="Bio"
             android:layout_marginStart="16dp"
-            android:textColor="@color/dark_gray"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -49,9 +52,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/profile_header"
-        android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:gravity="center_horizontal"
+        android:foregroundGravity="center_horizontal">
 
         <!-- Tabs for saved and user Recipes -->
         <!-- TabLayouts contain tabs. Think radio button where only one is selected, and nothing else-->
@@ -59,22 +62,28 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:elevation="4dp"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
-            app:tabIndicatorColor="@color/black"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/dark_gray"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            android:background="@color/orange_dark"
+            app:tabTextColor="@color/dark_grey"
+            app:tabSelectedTextColor="@color/light_grey"/>
+        <!--app:tabIndicatorColor="@color/black"
+app:tabSelectedTextColor="@color/black"
+app:tabTextColor="@color/dark_gray" -->
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saved_recipes_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:padding="4dp"
+            android:foregroundGravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -82,7 +91,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="visible"/>
+            android:padding="4dp"
+            android:visibility="visible"
+            android:foregroundGravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            tools:listitem="@layout/recipe_card_small"/>
 
     </LinearLayout>
 

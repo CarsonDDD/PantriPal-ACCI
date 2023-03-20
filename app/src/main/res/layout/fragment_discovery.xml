@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways"
-            android:background="@color/colorPrimary"
             android:elevation="4dp"
             app:contentInsetStart="0dp">
 
@@ -22,9 +22,9 @@
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:searchIcon="@drawable/ic_search"
                 app:iconifiedByDefault="false"
-                app:queryBackground="@color/white"
-                app:queryHint="Apple pie . . ."/>
+                app:queryHint="Search for recipes" />
 
         </androidx.appcompat.widget.Toolbar>
 

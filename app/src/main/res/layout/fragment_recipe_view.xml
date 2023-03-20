@@ -4,21 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.fragments.RecipeViewFragment">
+    tools:context=".presentation.fragments.RecipeViewFragment"
+    android:theme="@style/AppTheme">
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
-    app:menu="@menu/menu_recipe_current"
-    app:title="RECIPE TITLE"
-    app:titleTextAppearance="@style/BigTitle"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_recipe_current"
+        app:title="RECIPE TITLE"/>
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -30,22 +30,26 @@
         android:layout_height="wrap_content"
         android:id="@+id/rv_images"/>
 
-    <!-- == Author == -->
+    <!-- == Author Info == -->
     <LinearLayout
         android:id="@+id/ll_author"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:orientation="horizontal"
+        android:background="@drawable/skyblue_rounded"
         android:layout_below="@id/rv_images"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/profile_picture"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:foregroundGravity="center"
             android:src="@drawable/ic_person"
             android:scaleType="centerCrop"
-            android:background="@color/dark_gray" />
+            android:background="@drawable/darkgrey_rounded"
+            android:layout_marginStart="4dp"/>
 
         <!--== info text ==-->
         <LinearLayout
