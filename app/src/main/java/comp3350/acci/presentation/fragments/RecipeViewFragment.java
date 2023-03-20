@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -116,6 +117,15 @@ public class RecipeViewFragment extends Fragment {
                         break;
                 }
                 return true;
+            }
+        });
+
+        LinearLayout authorBox = view.findViewById(R.id.ll_author);
+        authorBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: make sure this doesnt show private info
+                ((MainActivity)getActivity()).changeFragment(new ProfileViewFragment(RECIPE.getAuthor()));
             }
         });
     }
