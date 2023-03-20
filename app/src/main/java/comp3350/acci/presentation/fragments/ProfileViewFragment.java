@@ -62,6 +62,10 @@ public class ProfileViewFragment extends Fragment {
         if(isCurrentUser){
             inflater.inflate(R.menu.menu_profile, menu);
         }
+        else{
+            // show back button on non current
+            ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
