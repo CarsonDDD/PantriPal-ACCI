@@ -3,6 +3,7 @@
     <!-- Primary brand color. -->
     <color name="orange">#FFA500</color>
     <color name="orange_dark">#FF8C00</color>
+    <color name="orange_light">#FFB733</color>
 
     <!-- Accent color for buttons and links. -->
     <color name="sky_blue">#03A9F4</color>

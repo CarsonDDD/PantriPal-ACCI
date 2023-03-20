@@ -20,7 +20,11 @@
             android:layout_height="match_parent"
             app:searchIcon="@drawable/ic_search"
             app:iconifiedByDefault="false"
-            app:queryHint="Search for recipes" />
+            app:queryHint="Search for recipes"
+            android:layout_margin="8dp"
+            android:background="@drawable/lighorange_rounded"
+            android:outlineSpotShadowColor="@color/orange_light"
+            android:outlineAmbientShadowColor="@color/orange_light" />
 
     </androidx.appcompat.widget.Toolbar>
 
