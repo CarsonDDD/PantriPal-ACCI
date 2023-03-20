@@ -30,11 +30,13 @@ public class FragmentNavigator {
 
     public void undoFragment() throws IndexOutOfBoundsException{
         // Stack should ALWAYS contain a single element, if there are 0 elements there is no screen!
-        if(fragmentHistory.size() > 1){
+        if(fragmentHistory.size() > 0){
             fragmentHistory.pop();
             updateManager();
         }
-        throw new IndexOutOfBoundsException("Attempting to pop empty stack");
+        else{
+            throw new IndexOutOfBoundsException("Attempting to pop stack size: " + fragmentHistory.size());
+        }
     }
 
     public void clear(){
