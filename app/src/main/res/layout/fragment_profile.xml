@@ -69,6 +69,7 @@
             app:tabGravity="fill"
             app:tabMode="fixed"
             android:background="@color/orange_dark"
+            app:tabIndicatorColor="@color/light_grey"
             app:tabTextColor="@color/dark_grey"
             app:tabSelectedTextColor="@color/light_grey"/>
         <!--app:tabIndicatorColor="@color/black"

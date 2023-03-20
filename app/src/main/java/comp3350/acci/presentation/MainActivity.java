@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.MenuRes;
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.acci.R;
+import comp3350.acci.presentation.fragments.SearchViewFragment;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.listeners.RecipeClickListener;
 import comp3350.acci.objects.Recipe;
@@ -56,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_discovery:
                         changeFragment(new DiscoveryViewFragment());
+                        break;
+                    case R.id.nav_search:
+                        changeFragment(new SearchViewFragment());
                         break;
                     case R.id.nav_insert_recipe:
                         changeFragment(new RecipeInsertFragment());

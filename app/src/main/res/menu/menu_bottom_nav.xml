@@ -8,6 +8,12 @@
         android:state_checked="true"/>
 
     <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        android:state_checked="true"/>
+
+    <item
         android:id="@+id/nav_insert_recipe"
         android:icon="@drawable/ic_recipe_add"
         android:title="@string/add_recipe" />
