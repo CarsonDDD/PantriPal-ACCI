@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_search:
                         changeFragment(new SearchViewFragment());
+                        break;
+                    case R.id.nav_pantry:
+                        Toast.makeText(MainActivity.super.getBaseContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_insert_recipe:
                         changeFragment(new RecipeInsertFragment());

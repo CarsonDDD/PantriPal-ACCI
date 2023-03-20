@@ -119,4 +119,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="search">Search</string>
+    <string name="pantry">Pantry</string>
 </resources>

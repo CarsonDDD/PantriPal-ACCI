@@ -35,9 +35,11 @@ public class ProfileViewFragment extends Fragment {
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
     private User user;
+    private boolean isCurrentUser = false;
 
     public ProfileViewFragment(User user) {
         this.user = user;
+        isCurrentUser = user.getUserID() == Services.getUserManager().getCurrUser().getUserID();
     }
 
     @Override
@@ -56,7 +58,10 @@ public class ProfileViewFragment extends Fragment {
     // inflate toolbar with menu
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_profile, menu);
+        // Only show menu options if its the current users profile.
+        if(isCurrentUser){
+            inflater.inflate(R.menu.menu_profile, menu);
+        }
     }
 
     @Override

@@ -14,6 +14,12 @@
         android:state_checked="true"/>
 
     <item
+        android:id="@+id/nav_pantry"
+        android:icon="@drawable/ic_pantry"
+        android:title="@string/pantry"
+        android:state_checked="true"/>
+
+    <item
         android:id="@+id/nav_insert_recipe"
         android:icon="@drawable/ic_recipe_add"
         android:title="@string/add_recipe" />
