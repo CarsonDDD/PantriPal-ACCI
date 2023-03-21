@@ -14,6 +14,8 @@ public interface RecipePersistence {
 
     List<Recipe> getUserAndPublicRecipes(User user);
 
+    List<Recipe> getPublicUserRecipes(User user);
+
     List<Recipe> getUserRecipes(User user);
 
     Recipe insertRecipe(Recipe recipe);
