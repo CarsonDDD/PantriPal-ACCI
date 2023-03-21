@@ -3,12 +3,18 @@ package comp3350.acci.presentation.fragments;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,18 +30,22 @@ import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.RecipeAdapter;
 
-public class ProfileViewFragment extends ACCIFragment {
+public class ProfileViewFragment extends Fragment {
 
     private RecyclerView savedRecipesView;
     private RecyclerView userRecipesView;
     private User user;
+    private boolean isCurrentUser = false;
 
-    public ProfileViewFragment(MainActivity mainActivity, User user) {
-        super(mainActivity);
+    public ProfileViewFragment(User user) {
         this.user = user;
-        this.hasNavigationBar = true;
-        this.hasBackButton = false;
-        this.hasActionBar = false;
+        isCurrentUser = user.getUserID() == Services.getUserManager().getCurrUser().getUserID();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -45,13 +55,31 @@ public class ProfileViewFragment extends ACCIFragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+    // inflate toolbar with menu
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // Only show menu options if its the current users profile.
+        if(isCurrentUser){
+            inflater.inflate(R.menu.menu_profile, menu);
+        }
+        else{
+            // show back button on non current
+            ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        TextView name = view.findViewById(R.id.user_name);
-        name.setText(user.getUserName());
+        // Set Name
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle(user.getUserName());
+        // Add toolbar + menu to app
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity)getActivity()).showNavigationBar(true);
 
+        // Set bio
         TextView bio = view.findViewById(R.id.bio);
         bio.setText(user.getBio());
 
@@ -61,17 +89,18 @@ public class ProfileViewFragment extends ACCIFragment {
         userRecipesView = view.findViewById(R.id.user_recipes_recycler);
         tabLayout.addTab(tabLayout.newTab().setText("Saved Recipes"));
         tabLayout.addTab(tabLayout.newTab().setText("User Recipes"));// Possible change this to <username>
+        tabLayout.getTabAt(1).select();
 
 
         // set up RecyclerViews
         List<Recipe> userRecipes =  Services.getRecipeManager().getUsersRecipes(user);
         List<Recipe> savedRecipes = Services.getUserManager().getUsersSavedRecipes(user);
 
-        savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, recipeClickListener));
+        savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, ((MainActivity)getActivity()).CLICK_RECIPE));
         savedRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
         savedRecipesView.setHasFixedSize(true);
 
-        userRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, userRecipes, recipeClickListener));
+        userRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, userRecipes, ((MainActivity)getActivity()).CLICK_RECIPE));
         userRecipesView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
         savedRecipesView.setHasFixedSize(false);
 
@@ -100,33 +129,27 @@ public class ProfileViewFragment extends ACCIFragment {
         });
 
         // Edit profile button. Disabled until Iteration 3. Make sure to readd back into xml
-        /*Toolbar action = view.findViewById(R.id.profile_menu);
         //action.inflateMenu(R.menu.menu_profile);
-        action.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.action_pantry:
+                        Toast.makeText(getContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.action_edit_profile:
-                        Toast.makeText(getAppCompact(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_login:
+                        Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;
             }
-        });*/
+        });
     }
 
-    // This function is copypaste from DiscoveryActivity, as clicking on the card should have the same
-    // effect. I dont know to make it properly/automatic where I dont need to copy paste this function.
-    // One option would be to move this listener into the RecipeAdapter itself, however, that means we would
-    // need to pass a reference to the AppCompact (since we change the display on click). Passing it in
-    // feels too dirty (even for me ;] ) and probably breaks something mentioned in the lectures; for now it stays here.
-    // TODO: make this function not need to be hardcoded into the classes which use a RecipeAdapter. All RecipeAdapters
-    //  should(?) have the same functionality when clicking on a recipe card.
-    // Iteration 3 moment
-    private RecipeClickListener recipeClickListener = new RecipeClickListener() {
-        @Override
-        public void onRecipeClick(Recipe recipe) {
-            getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
-        }
-    };
+    public boolean isCurrentUser(){
+        return isCurrentUser;
+    }
 }
