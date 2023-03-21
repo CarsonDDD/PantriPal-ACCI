@@ -1,6 +1,8 @@
 package comp3350.acci.objects;
 
 
+import java.util.Objects;
+
 public class Ingredient
 {
 
@@ -16,6 +18,18 @@ public class Ingredient
 
 	public String getName() {
 		return name;
+	}
+
+	public boolean equals(Object other) {
+		boolean equals = false;
+
+		if (other instanceof Ingredient)
+		{
+			final Ingredient otherIngredient = (Ingredient) other;
+			equals = Objects.equals(this.name, otherIngredient.getName());
+		}
+
+		return equals;
 	}
 
 	public String toString(){

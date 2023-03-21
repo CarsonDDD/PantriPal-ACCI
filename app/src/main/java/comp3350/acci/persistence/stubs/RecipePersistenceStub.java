@@ -50,6 +50,16 @@ public class RecipePersistenceStub implements RecipePersistence {
     }
 
     @Override
+    public List<Recipe> getUserAndPublicRecipes(User user) {
+        return null;
+    }
+
+    @Override
+    public List<Recipe> getPublicUserRecipes(User user) {
+        return null;
+    }
+
+    @Override
     public List<Recipe> getUserRecipes(User user) {
         List<Recipe> result = new ArrayList<>();
 
