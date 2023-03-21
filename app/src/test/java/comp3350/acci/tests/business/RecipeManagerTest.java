@@ -55,7 +55,6 @@ public class RecipeManagerTest extends TestCase {
         User user = new User("Caelan", "I'm the coolest");
         Recipe testRep = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
-        //        Mockito.when(repMock.insertRecipe(Recipe recipe))).thenReturn(testRep);
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 //        Mockito.verify(repMock).insertRecipe();
