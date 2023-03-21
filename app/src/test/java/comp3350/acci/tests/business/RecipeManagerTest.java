@@ -5,6 +5,9 @@ package comp3350.acci.tests.business;
 import static org.mockito.Mockito.when;
 
 import junit.framework.TestCase;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -22,6 +25,7 @@ import comp3350.acci.persistence.stubs.RecipePersistenceStub;
 public class RecipeManagerTest extends TestCase {
     @Mock
     private RecipePersistence repMock;
+    private RecipeManager manager;
     public RecipeManagerTest(String arg0 ) {
         super(arg0);
 
@@ -31,21 +35,30 @@ public class RecipeManagerTest extends TestCase {
     //1. add @Before and @After for set up and teardown of tests
     //2. Turn stubs into mocks (mockito)
 
-
+    @Before
+    public void setUp() {
+        repMock = Mockito.mock(RecipePersistence.class);
+        manager = new RecipeCreator((repMock));
+    }
+    @After
+    public void tearDown() {
+        repMock = null;
+        manager = null;
+    }
     @Test
     public void testCreateRecipe() {
         System.out.println("\nStarting recipe creation test");
-        repMock = Mockito.mock(RecipePersistence.class);
+//        repMock = Mockito.mock(RecipePersistence.class);
 
-
-        RecipeManager manager = new RecipeCreator(repMock);
+//        Mockito.when(repMock.insertRecipe(Recipe rep)).thenReturn(Recipe rep);
+//        RecipeManager manager = new RecipeCreator(repMock);
         User user = new User("Caelan", "I'm the coolest");
         Recipe testRep = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
         //        Mockito.when(repMock.insertRecipe(Recipe recipe))).thenReturn(testRep);
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
-
+//        Mockito.verify(repMock).insertRecipe();
         Recipe manRep = manager.getRecipeFromPersistence(rep1);
 
         Recipe rep2 = manager.createRecipe(null, "", "", false, "");
