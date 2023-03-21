@@ -82,6 +82,7 @@ public class RecipeViewFragment extends Fragment {
         TextView authorView = view.findViewById(R.id.tv_author);
         TextView instructionView = view.findViewById(R.id.tv_instructions);
         TextView difficultyView = view.findViewById(R.id.tv_difficulty);
+        TextView updatedView = view.findViewById(R.id.tv_date);
         RecyclerView rvImages = view.findViewById(R.id.rv_images);
 
         // ------------- Fill Fields -------------------
@@ -99,6 +100,7 @@ public class RecipeViewFragment extends Fragment {
         authorView.setText(RECIPE.getAuthor().getUserName());
         difficultyView.setText(RECIPE.getDifficulty());
         instructionView.setText(RECIPE.getInstructions().replace("\\n", "\n"));
+        updatedView.setText(RECIPE.getUpdated().toString());
 
         if(authorView.getText().length() > 10){
             authorView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28 - authorView.getText().length());
