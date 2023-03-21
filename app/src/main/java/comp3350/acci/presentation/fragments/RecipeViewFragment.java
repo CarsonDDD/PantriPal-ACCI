@@ -75,7 +75,7 @@ public class RecipeViewFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity)getActivity()).showNavigationBar(false);
+        ((MainActivity)getActivity()).showNavigationBar(true);
 
         //Get the required textviews from the layout
         //TextView titleView = (TextView) getView().findViewById(R.id.tv);

@@ -31,6 +31,8 @@ public class SearchViewFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
+        ((MainActivity)getActivity()).showNavigationBar(true);
+
         // Set up searchbar
         SearchView searchView = view.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

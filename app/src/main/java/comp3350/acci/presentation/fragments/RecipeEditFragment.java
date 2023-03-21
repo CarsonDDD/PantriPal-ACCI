@@ -35,7 +35,7 @@ public class RecipeEditFragment extends Fragment {
         // Add toolbar + menu to app
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity)getActivity()).showNavigationBar(false);
+        ((MainActivity)getActivity()).showNavigationBar(true);
 
         // Setup fields with recipe data
         EditText recipeText = view.findViewById(R.id.et_title);

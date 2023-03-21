@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.acci.R;
+import comp3350.acci.presentation.fragments.PantryFragment;
+import comp3350.acci.presentation.fragments.RecipeEditFragment;
 import comp3350.acci.presentation.fragments.SearchViewFragment;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.listeners.RecipeClickListener;
@@ -33,8 +35,6 @@ import comp3350.acci.presentation.fragments.RecipeViewFragment;
 // This class acts as the engine which runs/controls the fragment interactions
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentNavigator fragmentNavigator;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         copyDatabaseToDevice();
 
-        // Starting conditions for back button and ActionBar.
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-        // Set starting fragment
-        fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
-        fragmentNavigator.setFragment(new DiscoveryViewFragment());
+        changeFragment(new DiscoveryViewFragment());
 
         BottomNavigationView navigation = findViewById(R.id.navigation_bar);
         navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -146,15 +141,48 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Public function to be used outside this class without needing to touch its caller
-    public void changeFragment(Fragment f){
-        // reset nav bar. this makes fragments need to give the flag only for false without lingering effects
-        showNavigationBar(true);
-        fragmentNavigator.setFragment(f);
+    public void changeFragment(Fragment fragment){
+        this.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.current_fragment,fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     public void undoFragment(){
-        showNavigationBar(true);
-        fragmentNavigator.undoFragment();
+        if(getSupportFragmentManager().getBackStackEntryCount() > 1){
+            getSupportFragmentManager().popBackStack();
+            updateNavigationBar();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        undoFragment();
+    }
+
+    // Make sure the navigation bar has the correct fragment checked
+    private void updateNavigationBar(){
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.current_fragment);
+        BottomNavigationView navbar = findViewById(R.id.navigation_bar);
+
+        if(currentFragment instanceof DiscoveryViewFragment){
+            navbar.setSelectedItemId(R.id.nav_discovery);
+        }
+        else if(currentFragment instanceof SearchViewFragment){
+            navbar.setSelectedItemId(R.id.nav_search);
+        }
+        else if(currentFragment instanceof PantryFragment){
+            navbar.setSelectedItemId(R.id.nav_pantry);
+        }
+        else if(currentFragment instanceof RecipeInsertFragment){
+            navbar.setSelectedItemId(R.id.nav_insert_recipe);
+        }
+        else if(currentFragment instanceof ProfileViewFragment && ((ProfileViewFragment)currentFragment).isCurrentUser()){
+            navbar.setSelectedItemId(R.id.nav_profile);
+        }
+
+        // else.... nothing.
     }
 
     public void showNavigationBar(boolean showBar){

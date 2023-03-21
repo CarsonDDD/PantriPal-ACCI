@@ -31,6 +31,7 @@ public class RecipeInsertFragment extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         // Add toolbar + menu to app
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity)getActivity()).showNavigationBar(true);
 
         // Create button + logic
         Button btnPublish = view.findViewById(R.id.btn_publish);

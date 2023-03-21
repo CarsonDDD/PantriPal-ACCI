@@ -77,6 +77,7 @@ public class ProfileViewFragment extends Fragment {
         toolbar.setTitle(user.getUserName());
         // Add toolbar + menu to app
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity)getActivity()).showNavigationBar(true);
 
         // Set bio
         TextView bio = view.findViewById(R.id.bio);
@@ -146,5 +147,9 @@ public class ProfileViewFragment extends Fragment {
                 return true;
             }
         });
+    }
+
+    public boolean isCurrentUser(){
+        return isCurrentUser;
     }
 }

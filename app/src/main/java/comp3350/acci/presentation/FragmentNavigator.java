@@ -23,19 +23,21 @@ public class FragmentNavigator {
     }
 
     // returns if fragment changed
-    public void setFragment(Fragment f){
-        fragmentHistory.push(f);
-        updateManager();
+    public void setFragment(Fragment fragment){
+        /*fragmentHistory.push(f);
+        updateManager();*/
+        manager.beginTransaction()
+                .replace(R.id.current_fragment,fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
-    public void undoFragment() throws IndexOutOfBoundsException{
+    public void undoFragment() {
         // Stack should ALWAYS contain a single element, if there are 0 elements there is no screen!
-        if(fragmentHistory.size() > 0){
-            fragmentHistory.pop();
-            updateManager();
-        }
-        else{
-            throw new IndexOutOfBoundsException("Attempting to pop stack size: " + fragmentHistory.size());
+        if(manager.getBackStackEntryCount() > 1){
+            /*fragmentHistory.pop();
+            updateManager();*/
+            manager.popBackStack();
         }
     }
 
