@@ -1,5 +1,7 @@
 package comp3350.acci.objects;
 
+import java.util.Objects;
+
 public class Liked {
 
     private User user;
@@ -17,6 +19,18 @@ public class Liked {
 
     public Recipe getRecipe(){
         return this.recipe;
+    }
+
+    public boolean equals(Object other) {
+        boolean equals = false;
+
+        if (other instanceof Liked)
+        {
+            final Liked otherLiked = (Liked) other;
+            equals = Objects.equals(this.user, otherLiked.getUser()) && Objects.equals(this.recipe, otherLiked.getRecipe());
+        }
+
+        return equals;
     }
 
     public String toString(){
