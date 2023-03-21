@@ -166,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.current_fragment);
         BottomNavigationView navbar = findViewById(R.id.navigation_bar);
 
+        // hmmmmmm. I believe .setSelectedItemId calls the above fragment switching code. This effectively modifies the stack in a way where nav buttons cannot be back swiped.
+        // This was the old behaviour before using the manager stack. Writing this code, I did not intent for this to work like this, nonetheless I am pleasantly pleased.
         if(currentFragment instanceof DiscoveryViewFragment){
             navbar.setSelectedItemId(R.id.nav_discovery);
         }
