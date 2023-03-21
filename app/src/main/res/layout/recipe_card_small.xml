@@ -4,11 +4,9 @@
     android:id="@+id/recipe_container"
     android:layout_width="100dp"
     android:layout_height="100dp"
-    android:layout_margin="10dp"
+    android:layout_margin="4dp"
     android:background="@drawable/recipe_card_border"
-    android:orientation="vertical">
-
-
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/imageView_food"
