@@ -28,7 +28,9 @@ import java.util.List;
 
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.objects.User;
 import comp3350.acci.presentation.ImageAdapter;
 import comp3350.acci.presentation.MainActivity;
 
@@ -113,7 +115,15 @@ public class RecipeViewFragment extends Fragment {
                         Toast.makeText(getContext(), "Edit Recipe!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_save_recipe:
-                        Toast.makeText(getContext(), "Save Recipe!", Toast.LENGTH_SHORT).show();
+
+                        UserManager userManager = Services.getUserManager();
+                        User currentUser = userManager.getCurrUser();
+                        boolean isSaved = userManager.toggleSaved(currentUser, RECIPE);
+                        if(isSaved) {
+                            Toast.makeText(getContext(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getContext(), "Recipe Unsaved!", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
                 return true;
