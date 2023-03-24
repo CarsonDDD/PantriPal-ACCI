@@ -58,6 +58,15 @@ public class RecipeViewFragment extends Fragment {
         else{
             // non user recipe. Show like button
             inflater.inflate(R.menu.menu_recipe_other, menu);
+
+            // Logic for determining filled state
+            // Starting condition for save icon
+            UserManager userManager = Services.getUserManager();
+            if(userManager.isSaved(userManager.getCurrUser(), RECIPE)){
+                MenuItem myMenuItem = menu.findItem(R.id.action_save_recipe);
+                myMenuItem.setIcon(R.drawable.ic_star_filled);
+                myMenuItem.setChecked(true);
+            }
         }
     }
 
@@ -119,9 +128,12 @@ public class RecipeViewFragment extends Fragment {
                         UserManager userManager = Services.getUserManager();
                         User currentUser = userManager.getCurrUser();
                         boolean isSaved = userManager.toggleSaved(currentUser, RECIPE);
+                        item.setChecked(isSaved);
                         if(isSaved) {
+                            item.setIcon(R.drawable.ic_star_filled);
                             Toast.makeText(getContext(), "Recipe Saved!", Toast.LENGTH_SHORT).show();
                         }else {
+                            item.setIcon(R.drawable.ic_star_border);
                             Toast.makeText(getContext(), "Recipe Unsaved!", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -140,3 +152,25 @@ public class RecipeViewFragment extends Fragment {
         });
     }
 }
+
+
+/*
+* case R.id.action_save:
+                        //Close your eyes
+                        Event currentEvent = event;
+                        item.setChecked(!item.isChecked());
+                        if (item.isChecked()) {
+                            item.setIcon(R.drawable.ic_star_filled);
+                            Toast.makeText(getContext(), "Bookmarked Event!", Toast.LENGTH_SHORT).show();
+
+                            ((MainActivity)getActivity()).getActiveUser().bookMark(currentEvent);
+                            // save the event
+                        } else {
+                            item.setIcon(R.drawable.ic_star_border);
+                            Toast.makeText(getContext(), "Removed Bookmark.", Toast.LENGTH_SHORT).show();
+                            ((MainActivity)getActivity()).getActiveUser().removeBookMark(currentEvent);
+                            // remove the saved event
+                        }
+                        break;
+*
+* */
