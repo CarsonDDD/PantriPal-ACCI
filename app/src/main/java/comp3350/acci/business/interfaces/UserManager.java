@@ -13,7 +13,8 @@ public interface UserManager {
     public User getCurrUser();
     public void setCurrUser(User currUser);
     public List<Recipe> getUsersSavedRecipes(User user);
-
+    public boolean toggleSaved(User user, Recipe recipe);
+    public boolean isSaved(User user, Recipe recipe);
     public User getUser(int userID);
 
     public String getUsername(int userID);
