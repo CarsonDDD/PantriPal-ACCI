@@ -1,6 +1,7 @@
 package comp3350.acci.tests.business;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import junit.framework.TestCase;
@@ -44,6 +45,8 @@ public class UserManagerTest extends TestCase {
         testUser = new User("JohnnyAppleseed", "Hey! I'm Johnny Appleseed. Nice to meet you");
         //define mock behaviour
         when(userMock.insertUser(any())).thenReturn(testUser);
+        when(userMock.getUser(anyInt())).thenReturn(testUser);
+        when(userMock.updateUser(any())).thenReturn(testUser);
 
 
     }
@@ -57,13 +60,13 @@ public class UserManagerTest extends TestCase {
 
     @Test
     public void testCreateUser() {
-//        UserManager userManager = new UserCreator(new UserPersistenceStub(), new SavedPersistenceStub());
-        Mockito.when(userMock.getUser(any())).thenReturn(testUser);
+
+
+
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
+
         User createdUser = userManager.createUser(username, bio);
-
-
         User receivedUser = userManager.getUser(createdUser.getUserID());
 
         assertEquals("User should have been added to persistence", createdUser, receivedUser);
@@ -72,11 +75,13 @@ public class UserManagerTest extends TestCase {
 
     @Test
     public void testUserBio() {
-        UserManager userManager = new UserCreator(new UserPersistenceStub(), new SavedPersistenceStub());
+
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
+
         User createdUser = userManager.createUser(username, bio);
         String testBio = userManager.getBio(createdUser.getUserID());
+
         assertEquals("Bio should be the same as persistent bio", bio, testBio);
 
         String newBio = "This is a new bio written by me";
@@ -88,11 +93,13 @@ public class UserManagerTest extends TestCase {
 
     @Test
     public void testUsername() {
-        UserManager userManager = new UserCreator(new UserPersistenceStub(), new SavedPersistenceStub());
+
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
+
         User createdUser = userManager.createUser(username, bio);
         String testUsername = userManager.getUsername(createdUser.getUserID());
+
         assertEquals("Username should be the same as persisten username",username, testUsername);
 
         String newName = "Mary Poppins";
