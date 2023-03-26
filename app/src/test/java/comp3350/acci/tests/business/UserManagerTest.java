@@ -61,8 +61,6 @@ public class UserManagerTest extends TestCase {
     @Test
     public void testCreateUser() {
 
-
-
         String username = "JohnnyAppleseed";
         String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
 

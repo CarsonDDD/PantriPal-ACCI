@@ -1,13 +1,26 @@
 package comp3350.acci.tests.business;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+
 import junit.framework.TestCase;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import comp3350.acci.business.implementation.PantryCreator;
 import comp3350.acci.business.interfaces.PantryManager;
 import comp3350.acci.objects.Ingredient;
 import comp3350.acci.objects.Pantry;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.PantryPersistence;
 import comp3350.acci.persistence.stubs.PantryPersistenceStub;
 
 public class PantryManagerTest extends TestCase{
@@ -16,17 +29,42 @@ public class PantryManagerTest extends TestCase{
         super(arg0);
     }
 
+    private PantryPersistence pantMock;
+    private Pantry testPantry;
+    @Before
+    public void setUp() {
+
+
+        pantMock = Mockito.mock(PantryPersistence.class);
+
+        //common mock behaviour
+
+    }
+    @After
+    public void tearDown() {
+        pantMock = null;
+        testPantry = null;
+    }
     @Test
     public void testInsertPantry(){
         System.out.println("\nStarting pantry insertion test:");
 
-        PantryPersistenceStub stub = new PantryPersistenceStub();
-        PantryManager manager = new PantryCreator(stub);
+        PantryManager manager = new PantryCreator(pantMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
-
         Ingredient bread = new Ingredient("Bread");
+
+        //pantry used by the mock
+        Pantry testPantry = new Pantry(user, bread, 1, "loaf");
+        List<Pantry> pantryList = new ArrayList<Pantry>();
+        //mock behaviour
+        Mockito.when(pantMock.insertPantry(any())).thenReturn(testPantry);
+        pantryList.add(testPantry);
+        Mockito.when(pantMock.getPantrys()).thenReturn(pantryList);
+        Mockito.when(pantMock.getPantrysByUser(any())).thenReturn(pantryList);
+
         Pantry pantry1 = manager.insertPantry(user, bread, 1, "loaf" );
+
         assertNotNull("Pantry1 should not be null", pantry1);
         assertTrue("Pantry1 was not added to the database", manager.getPantrys().contains(pantry1));
         assertTrue("Pantry1 was not added to the database with the correct user", manager.getPantrysByUser(user).contains(pantry1));
@@ -52,12 +90,15 @@ public class PantryManagerTest extends TestCase{
     public void testUpdatePantry(){
         System.out.println("\nStarting pantry update test:");
 
-        PantryPersistenceStub stub = new PantryPersistenceStub();
-        PantryManager manager = new PantryCreator(stub);
+        PantryManager manager = new PantryCreator(pantMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 
         Ingredient sugar = new Ingredient("Sugar");
+
+        Pantry testPantry = new Pantry(user, sugar, 0.5, "cup");
+        Mockito.when(pantMock.updatePantry(any())).thenReturn(testPantry);
+
         Pantry pantry1 = manager.insertPantry(user, sugar, 1, "cup");
 
         Pantry pantry2 = manager.updatePantry(user, sugar, 0.5, "cup");
