@@ -35,8 +35,8 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
         if(author == null|| name.equals("") || instructions.equals("") ||difficulty.equals("") ) {
             return null;
         }
-        Recipe newRecipe = new Recipe(author, name, instructions, isPrivate, difficulty);
-        newRecipe = recipePersistence.insertRecipe(newRecipe);
+
+        Recipe newRecipe = recipePersistence.insertRecipe(new Recipe(author, name, instructions, isPrivate, difficulty));
         return newRecipe;
     }
 
