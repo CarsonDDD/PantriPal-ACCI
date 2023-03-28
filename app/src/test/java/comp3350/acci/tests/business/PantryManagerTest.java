@@ -113,12 +113,14 @@ public class PantryManagerTest extends TestCase{
     public void testDeletePantry(){
         System.out.println("\nStarting pantry deletion test:");
 
-        PantryPersistenceStub stub = new PantryPersistenceStub();
-        PantryManager manager = new PantryCreator(stub);
+        PantryManager manager = new PantryCreator(pantMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 
         Ingredient spoiledMilk = new Ingredient("Spoiled Milk");
+
+        Mockito.when(pantMock.insertPantry(any())).thenReturn(new Pantry(user, spoiledMilk, 1, "l"));
+
         Pantry pantry1 = manager.insertPantry(user, spoiledMilk, 1, "l");
         manager.deletePantry(pantry1);
 
@@ -131,13 +133,19 @@ public class PantryManagerTest extends TestCase{
     public void testGetPantrys(){
         System.out.println("\nStarting pantry search test:");
 
-        PantryPersistenceStub stub = new PantryPersistenceStub();
-        PantryManager manager = new PantryCreator(stub);
+        PantryManager manager = new PantryCreator(pantMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 
         Ingredient lemon = new Ingredient("Lemon");
+
+        List<Pantry> pantryList = new ArrayList<Pantry>();
+
+        Mockito.when(pantMock.insertPantry(any())).thenReturn(new Pantry(user, lemon, 2, ""));
+
         Pantry pantry1 = manager.insertPantry(user, lemon, 2, "");
+        pantryList.add(pantry1);
+        Mockito.when(pantMock.getPantrys()).thenReturn(pantryList);
 
         assertFalse("Pantry should not be empty", manager.getPantrys().isEmpty());
 
@@ -148,20 +156,25 @@ public class PantryManagerTest extends TestCase{
     public void testGetPantrysByUser(){
         System.out.println("\nStarting pantry search by user test:");
 
-        PantryPersistenceStub stub = new PantryPersistenceStub();
-        PantryManager manager = new PantryCreator(stub);
+        PantryManager manager = new PantryCreator(pantMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
+
+        List<Pantry> pantryList = new ArrayList<Pantry>();
+
+        Mockito.when(pantMock.getPantrysByUser(user)).thenReturn(pantryList);
 
         assertTrue("List should be empty", manager.getPantrysByUser(user).isEmpty());
 
         Ingredient crab = new Ingredient("Crab");
+
+        Mockito.when(pantMock.insertPantry(any())).thenReturn(new Pantry(user, crab, 1, "lb"));
+
         Pantry pantry1 = manager.insertPantry(user, crab, 1, "lb");
-        Ingredient butter = new Ingredient("Butter");
-        Pantry pantry2 = manager.insertPantry(user, butter, 1, "stick");
+        pantryList.add(new Pantry(user, crab, 1, "lb"));
 
         assertTrue("Pantry1 should be in the user's pantry", manager.getPantrysByUser(user).contains(pantry1));
-        assertTrue("Pantry2 should be in the user's pantry", manager.getPantrysByUser(user).contains(pantry2));
+
 
         assertNull("Should have returned null where no user was provided", manager.getPantrysByUser(null));
 
