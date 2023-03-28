@@ -20,13 +20,18 @@ import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.ContainPersistence;
 import comp3350.acci.persistence.RecipePersistence;
 
 
 public class RecipeManagerTest extends TestCase {
     @Mock
     private RecipePersistence repMock;
+    @Mock
+    private ContainPersistence contMock;
+
     private RecipeManager manager;
+
     private User testAuthor;
     private Recipe testRep;
     public RecipeManagerTest(String arg0 ) {
@@ -36,7 +41,8 @@ public class RecipeManagerTest extends TestCase {
     @Before
     public void setUp() {
         repMock = Mockito.mock(RecipePersistence.class);
-        manager = new RecipeCreator((repMock));
+        contMock = Mockito.mock(ContainPersistence.class);
+        manager = new RecipeCreator(repMock, contMock);
         testAuthor = new User("Caelan", "I'm the coolest");
         testRep = new Recipe(testAuthor, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
         //define mock behaviour
