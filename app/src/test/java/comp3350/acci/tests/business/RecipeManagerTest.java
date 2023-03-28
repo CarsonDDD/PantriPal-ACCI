@@ -12,9 +12,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 //project imports
@@ -23,7 +21,7 @@ import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
-import comp3350.acci.persistence.stubs.RecipePersistenceStub;
+
 
 public class RecipeManagerTest extends TestCase {
     @Mock
@@ -35,11 +33,6 @@ public class RecipeManagerTest extends TestCase {
         super(arg0);
 
     }
-
-    //TODO LIST
-    //1. add @Before and @After for set up and teardown of tests
-    //2. Turn stubs into mocks (mockito)
-
     @Before
     public void setUp() {
         repMock = Mockito.mock(RecipePersistence.class);
