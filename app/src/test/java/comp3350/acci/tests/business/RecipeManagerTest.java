@@ -10,6 +10,7 @@ import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.stubs.ContainPersistenceStub;
 import comp3350.acci.persistence.stubs.RecipePersistenceStub;
 
 public class RecipeManagerTest extends TestCase {
@@ -21,7 +22,7 @@ public class RecipeManagerTest extends TestCase {
     @Test
     public void testCreateRecipe() {
         System.out.println("\nStarting recipe creation test");
-        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub(), new ContainPersistenceStub());
         User user = new User("Caelan", "I'm the coolest");
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -49,7 +50,7 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("\nStarting Recipe privacy Test:");
 
         User user = new User("Caelan", "I'm the coolest");
-        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub(), new ContainPersistenceStub());
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -70,7 +71,7 @@ public class RecipeManagerTest extends TestCase {
         System.out.println("\nStarting recipe instruction Tests:");
 
         User user = new User("Caelan", "I'm the coolest");
-        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub(), new ContainPersistenceStub());
 
         Recipe rep1 = manager.createRecipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
@@ -92,7 +93,7 @@ public class RecipeManagerTest extends TestCase {
     public void testGetNullRecipe() {
         System.out.println("\nStarting null recipe search Tests:");
 
-        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub());
+        RecipeManager manager = new RecipeCreator(new RecipePersistenceStub(), new ContainPersistenceStub());
 
         User user = new User("Caelan", "I'm the coolest");
         Recipe rep1 = new Recipe(user, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
