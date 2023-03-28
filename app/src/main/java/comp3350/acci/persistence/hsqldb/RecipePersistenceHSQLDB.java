@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,6 +211,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         final String instructions = rs.getString("instructions");
         final String difficulty = rs.getString("difficulty");
         final boolean isPrivate = rs.getBoolean("isPrivate");
-        return new Recipe(author, recipeID, name, instructions, isPrivate, difficulty);
+        final Timestamp updated = rs.getTimestamp("updated");
+        return new Recipe(author, recipeID, name, instructions, isPrivate, difficulty, updated);
     }
 }
