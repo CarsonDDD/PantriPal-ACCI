@@ -13,12 +13,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.business.implementation.RecipeCreator;
 import comp3350.acci.business.implementation.UserCreator;
 import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.objects.Saved;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
 import comp3350.acci.persistence.SavedPersistence;
@@ -43,7 +45,8 @@ public class UserManagerTest extends TestCase {
         savedMock = Mockito.mock(SavedPersistence.class);
         userManager = new UserCreator(userMock, savedMock);
         testUser = new User("JohnnyAppleseed", "Hey! I'm Johnny Appleseed. Nice to meet you");
-        //define mock behaviour
+
+        //define common mock behaviour
         when(userMock.insertUser(any())).thenReturn(testUser);
         when(userMock.getUser(anyInt())).thenReturn(testUser);
         when(userMock.updateUser(any())).thenReturn(testUser);
@@ -106,5 +109,27 @@ public class UserManagerTest extends TestCase {
         String changeName = userManager.getUsername(createdUser.getUserID());
         assertEquals("Username should be changed after setter", newName, changeName);
     }
+    @Test
+    public void testSaved() {
+        String username = "JohnnyAppleseed";
+        String bio = "Hey! I'm Johnny Appleseed. Nice to meet you";
+        User createdUser = userManager.createUser(username, bio);
+        Recipe testRecipe = new Recipe(testUser, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
+        List<Recipe> userSavedRecipes = new ArrayList<Recipe>();
+        List<Saved> allSaveds = new ArrayList<Saved>();
+
+        when(savedMock.getSavedRecipesByUser(any())).thenReturn(userSavedRecipes);
+
+        when(savedMock.getSaveds()).thenReturn(allSaveds);
+
+
+        assertTrue("ToggleSaved should return true for unsaved recipes", userManager.toggleSaved(createdUser, testRecipe));
+
+        userSavedRecipes.add(testRecipe);
+        allSaveds.add(new Saved(createdUser, testRecipe));
+
+        assertFalse("ToggleSaved should have unsaved the recipe and returned false", userManager.toggleSaved(createdUser, testRecipe));
+
+    }
 }
