@@ -74,7 +74,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="How hard is this dish to make?"
+                    android:hint="Easy, Hard, ect."
                     android:inputType="textAutoComplete"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
