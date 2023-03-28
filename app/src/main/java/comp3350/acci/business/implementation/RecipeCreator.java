@@ -4,9 +4,12 @@ import java.security.InvalidParameterException;
 import java.util.List;
 
 import comp3350.acci.application.Services;
+import comp3350.acci.objects.Contain;
+import comp3350.acci.objects.Ingredient;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
+import comp3350.acci.persistence.ContainPersistence;
 
 /*
     Name:           RecipeManager
@@ -19,9 +22,12 @@ import comp3350.acci.persistence.RecipePersistence;
 public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeManager {
     //needs to interface with DSO: recipe
     private RecipePersistence recipePersistence;
+    private ContainPersistence containPersistence;
 
-    public RecipeCreator(RecipePersistence rp) {
+    public RecipeCreator(RecipePersistence rp, ContainPersistence cp) {
         recipePersistence = rp;
+        containPersistence = cp;
+
     }
 
     //creates a DSO: recipe with a given name, ingredients, and instructions. returns the recipe ID
@@ -84,5 +90,32 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
     }
     public List<Recipe> getUsersRecipes(User author) {
         return recipePersistence.getUserRecipes(author);
+    }
+
+    public Contain insertContain(Recipe recipe, Ingredient ingredient, double amount, String unit){
+        Contain result = null;
+
+        if(recipe != null && ingredient != null && amount > 0){
+            result = containPersistence.insertContain(new Contain(recipe, ingredient, amount, unit));
+        }
+        return result;
+    }
+
+    public void deleteContain(Contain contain){
+        if(contain != null){
+            containPersistence.deleteContain(contain);
+        }
+    }
+
+    public List<Contain> getContainByRecipe(Recipe recipe){
+        List<Contain> result = null;
+        if(recipe != null){
+            result = containPersistence.getContainsByRecipe(recipe);
+        }
+        return result;
+    }
+
+    public List<Contain> getContain(){
+        return containPersistence.getContains();
     }
 }

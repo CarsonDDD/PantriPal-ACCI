@@ -53,7 +53,7 @@ public class Services
     }
     public static synchronized RecipeManager getRecipeManager() {
         if(recipeManager == null) {
-            recipeManager = new RecipeCreator(getRecipePersistence());
+            recipeManager = new RecipeCreator(getRecipePersistence(), getContainPersistence());
         }
         return recipeManager;
     }
