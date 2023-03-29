@@ -175,6 +175,9 @@ public class ProfileViewFragment extends Fragment {
                 // Update display
                 toolbar.setTitle(et_name.getText());
                 tv_bio.setText(et_bio.getText());
+
+                // Confirmation message
+                Toast.makeText(getContext(), "Edit Saved!", Toast.LENGTH_SHORT).show();
             }
         });
 

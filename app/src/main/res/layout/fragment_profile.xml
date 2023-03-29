@@ -44,11 +44,10 @@
             android:background="@drawable/darkgrey_rounded"/>
 
         <ScrollView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
-            android:fadeScrollbars="false"
-            android:isScrollContainer="true">
+            android:fadeScrollbars="false">
             <TextView
                 android:id="@+id/bio"
                 android:layout_width="match_parent"
