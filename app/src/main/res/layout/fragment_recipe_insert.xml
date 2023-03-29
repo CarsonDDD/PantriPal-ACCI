@@ -194,7 +194,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_desciption"
-                android:text="Publish Recipe" />
+                android:text="Publish Recipe"
+                android:backgroundTint="@color/sky_blue"/>
         </LinearLayout>
 
     </RelativeLayout>
