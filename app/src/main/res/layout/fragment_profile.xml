@@ -10,7 +10,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/menu_profile"
-            app:title="User Name">
+            app:title="">
+
+            <EditText
+                android:id="@+id/et_edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="@dimen/toolbar_text"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
         </androidx.appcompat.widget.Toolbar>
 
     <!-- pfp and edit page -->
@@ -34,16 +43,74 @@
             android:scaleType="centerCrop"
             android:background="@drawable/darkgrey_rounded"/>
 
-
-        <TextView
-            android:id="@+id/bio"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:isScrollContainer="true">
+            <TextView
+                android:id="@+id/bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:text="Bio\nBio\nBio\nBio\nBio\nBio\nBio\nBio\n"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                android:maxLines="5"
+                android:scrollbars="vertical"
+                android:fadeScrollbars="false"
+                android:isScrollContainer="true"
+                android:visibility="visible"/>
+        </ScrollView>
+
+        <EditText
+            android:id="@+id/et_edit_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@color/white"
-            android:text="Bio"
+            android:backgroundTint="@color/white"
+            android:text="bio"
             android:layout_marginStart="16dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:hint="I am a human!"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_header"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:background="@color/orange">
+
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel Edit"
+            android:backgroundTint="@color/orange_dark"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"/>
+
+        <Button
+            android:id="@+id/btn_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Edit"
+            android:backgroundTint="@color/sky_blue"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"/>
 
     </LinearLayout>
 
@@ -51,7 +118,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/profile_header"
+        android:layout_below="@id/ll_edit"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:foregroundGravity="center_horizontal">
