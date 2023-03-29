@@ -73,6 +73,33 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         }
     }
 
+    public Recipe updateRecipeFromDB(Recipe rcp) {
+        Recipe recipe = null;
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID = ? AND instructions = ? AND name = ? AND isPrivate = ? AND difficulty = ?");
+            st.setInt(1, rcp.getAuthor().getUserID());
+            st.setString(2, rcp.getInstructions());
+            st.setString(3, rcp.getName());
+            st.setBoolean(4, rcp.getIsPrivate());
+            st.setString(5, rcp.getDifficulty());
+
+            final ResultSet rs = st.executeQuery();
+            if (rs.next())
+            {
+                recipe = fromResultSet(rs);
+            }
+            rs.close();
+            st.close();
+
+            return recipe;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
     @Override
     public Recipe getRecipe(Recipe recipe) {
         return getRecipeByID(recipe.getRecipeID());
@@ -166,6 +193,8 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.setBoolean(4, recipe.getIsPrivate());
             st.setString(5, recipe.getDifficulty());
             st.executeUpdate();
+
+            recipe = updateRecipeFromDB(recipe);
             return recipe;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
