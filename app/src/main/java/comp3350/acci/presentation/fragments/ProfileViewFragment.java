@@ -196,6 +196,9 @@ public class ProfileViewFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.action_add_recipe:
+                        ((MainActivity)getActivity()).changeFragment(new RecipeInsertFragment());
+                        break;
                     case R.id.action_pantry:
                         Toast.makeText(getContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
                         break;
