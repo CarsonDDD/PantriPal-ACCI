@@ -2,6 +2,7 @@ package comp3350.acci.presentation.fragments;
 
 import android.os.Bundle;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -94,6 +95,7 @@ public class ProfileViewFragment extends Fragment {
         tv_bio = view.findViewById(R.id.bio);
         tv_bio.setVisibility(View.VISIBLE);
         tv_bio.setText(user.getBio());
+        tv_bio.setMovementMethod(new ScrollingMovementMethod());
 
         // Get and hide edit fields
         ll_edit = view.findViewById(R.id.ll_edit);
@@ -205,7 +207,7 @@ public class ProfileViewFragment extends Fragment {
                     case R.id.action_edit_profile:
                         // Hide/show visability to edit fields
                         showEditProfile();
-                        Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_login:
                         Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();

@@ -43,26 +43,19 @@
             android:scaleType="centerCrop"
             android:background="@drawable/darkgrey_rounded"/>
 
-        <ScrollView
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/white"
+            android:text="Bio\nBio\nBio\nBio\nBio\nBio\nBio\nBio\n"
+            android:textSize="16sp"
+            android:maxLines="5"
             android:scrollbars="vertical"
-            android:fadeScrollbars="false">
-            <TextView
-                android:id="@+id/bio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:text="Bio\nBio\nBio\nBio\nBio\nBio\nBio\nBio\n"
-                android:layout_marginStart="16dp"
-                android:textSize="16sp"
-                android:maxLines="5"
-                android:scrollbars="vertical"
-                android:fadeScrollbars="false"
-                android:isScrollContainer="true"
-                android:visibility="visible"/>
-        </ScrollView>
+            android:fadeScrollbars="false"
+            android:visibility="visible"/>
 
         <EditText
             android:id="@+id/et_edit_bio"
