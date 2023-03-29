@@ -237,8 +237,10 @@ public class ProfileViewFragment extends Fragment {
         rv_users.setLayoutManager(new LinearLayoutManager(this.getContext()));
         rv_users.setAdapter(new UserAdapter(users, new UserAdapter.UserClickListener() {
             @Override
-            public void onClick(User user) {
+            public void onClick(User selectedUser) {
                 // Change user and udpate display
+                Services.getUserManager().setCurrUser(selectedUser);
+                ((MainActivity)getActivity()).changeFragment(new ProfileViewFragment(selectedUser));
                 alertDialog.dismiss();
             }
         }));
