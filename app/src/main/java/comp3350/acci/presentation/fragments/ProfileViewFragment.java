@@ -17,13 +17,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
@@ -33,6 +36,7 @@ import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.RecipeAdapter;
+import comp3350.acci.presentation.UserAdapter;
 
 public class ProfileViewFragment extends Fragment {
 
@@ -210,6 +214,7 @@ public class ProfileViewFragment extends Fragment {
                         //Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_login:
+                        showSwitchUserDialog();
                         Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -217,6 +222,30 @@ public class ProfileViewFragment extends Fragment {
             }
         });
     }
+
+    private void showSwitchUserDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialogue_switch_user, null);
+        builder.setView(dialogView);
+
+        AlertDialog alertDialog = builder.create();
+
+        List<User> users = Services.getUserManager().getUsers();
+
+        RecyclerView rv_users = dialogView.findViewById(R.id.user_list);
+        rv_users.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        rv_users.setAdapter(new UserAdapter(users, new UserAdapter.UserClickListener() {
+            @Override
+            public void onClick(User user) {
+                // Change user and udpate display
+                alertDialog.dismiss();
+            }
+        }));
+
+        alertDialog.show();
+    }
+
 
     private void showEditProfile(){
         et_bio.setVisibility(View.VISIBLE);
