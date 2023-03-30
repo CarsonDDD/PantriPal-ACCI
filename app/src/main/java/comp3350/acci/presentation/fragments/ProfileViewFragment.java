@@ -2,6 +2,7 @@ package comp3350.acci.presentation.fragments;
 
 import android.os.Bundle;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,13 +17,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
@@ -32,6 +36,7 @@ import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.RecipeAdapter;
+import comp3350.acci.presentation.UserAdapter;
 
 public class ProfileViewFragment extends Fragment {
 
@@ -94,6 +99,7 @@ public class ProfileViewFragment extends Fragment {
         tv_bio = view.findViewById(R.id.bio);
         tv_bio.setVisibility(View.VISIBLE);
         tv_bio.setText(user.getBio());
+        tv_bio.setMovementMethod(new ScrollingMovementMethod());
 
         // Get and hide edit fields
         ll_edit = view.findViewById(R.id.ll_edit);
@@ -205,9 +211,10 @@ public class ProfileViewFragment extends Fragment {
                     case R.id.action_edit_profile:
                         // Hide/show visability to edit fields
                         showEditProfile();
-                        Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Edit Profile!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_login:
+                        showSwitchUserDialog();
                         Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -215,6 +222,32 @@ public class ProfileViewFragment extends Fragment {
             }
         });
     }
+
+    private void showSwitchUserDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialogue_switch_user, null);
+        builder.setView(dialogView);
+
+        AlertDialog alertDialog = builder.create();
+
+        List<User> users = Services.getUserManager().getUsers();
+
+        RecyclerView rv_users = dialogView.findViewById(R.id.user_list);
+        rv_users.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        rv_users.setAdapter(new UserAdapter(users, new UserAdapter.UserClickListener() {
+            @Override
+            public void onClick(User selectedUser) {
+                // Change user and udpate display
+                Services.getUserManager().setCurrUser(selectedUser);
+                ((MainActivity)getActivity()).changeFragment(new ProfileViewFragment(selectedUser));
+                alertDialog.dismiss();
+            }
+        }));
+
+        alertDialog.show();
+    }
+
 
     private void showEditProfile(){
         et_bio.setVisibility(View.VISIBLE);
