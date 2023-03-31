@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -39,14 +41,14 @@ public class RecipeEditFragment extends Fragment {
 
         // Setup fields with recipe data
         EditText recipeText = view.findViewById(R.id.et_title);
-        EditText difficultyText = view.findViewById(R.id.et_difficulty);
+        Spinner difficultyText = view.findViewById(R.id.sr_difficulty);
         EditText instructionText = view.findViewById(R.id.et_instructions);
-        ToggleButton privacySwitch = view.findViewById(R.id.tb_public);
+        CheckBox privacySwitch = view.findViewById(R.id.cb_private);
 
         recipeText.setText(RECIPE.getName());
-        difficultyText.setText(RECIPE.getDifficulty());
+        difficultyText.setSelection(0);// TODO: start on actual difficulty
         instructionText.setText(RECIPE.getInstructions());
-        privacySwitch.setChecked(!RECIPE.getIsPrivate());
+        privacySwitch.setChecked(RECIPE.getIsPrivate());
 
         // Create button + logic
         Button btnPublish = view.findViewById(R.id.btn_publish);
@@ -56,14 +58,14 @@ public class RecipeEditFragment extends Fragment {
 
                 //Get user inputted text fields
                 String title = ((EditText)view.findViewById(R.id.et_title)).getText().toString();
-                String difficulty = ((EditText)view.findViewById(R.id.et_difficulty)).getText().toString();
+                String difficulty = difficultyText.getSelectedItem().toString();
                 String instruction = ((EditText)view.findViewById(R.id.et_instructions)).getText().toString();
-                boolean isPublic = ((ToggleButton)view.findViewById(R.id.tb_public)).isChecked();
+                boolean isPrivate = ((CheckBox)view.findViewById(R.id.cb_private)).isChecked();
 
                 boolean isValid = !(title.isEmpty() || difficulty.isEmpty() || instruction.isEmpty());
 
                 if(isValid) {
-                    Services.getRecipeManager().modify(RECIPE, title, instruction, !isPublic, difficulty);
+                    Services.getRecipeManager().modify(RECIPE, title, instruction, isPrivate, difficulty);
 
                     Toast.makeText(getContext(), "Recipe Edited!", Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).undoFragment();

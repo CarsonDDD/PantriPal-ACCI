@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -41,23 +43,23 @@ public class RecipeInsertFragment extends Fragment {
 
                 //Get user inputted text fields
                 EditText recipeText = view.findViewById(R.id.et_title);
-                EditText difficultyText = view.findViewById(R.id.et_difficulty);
+                Spinner difficultyText = view.findViewById(R.id.sr_difficulty);
                 EditText instructionText = view.findViewById(R.id.et_instructions);
-                ToggleButton privacySwitch = view.findViewById(R.id.tb_public);
+                CheckBox privacySwitch = view.findViewById(R.id.cb_private);
 
                 // TODO: DO SOMETHING WITH IMAGES
 
                 //convert text fields to strings
                 String recipeName = recipeText.getText().toString();
-                String difficulty = difficultyText.getText().toString();
+                String difficulty = difficultyText.getSelectedItem().toString();
                 String instructions = instructionText.getText().toString();
-                Boolean isPublic = privacySwitch.isChecked();
+                Boolean isPrivate = privacySwitch.isChecked();
 
                 //get the manager from services
                 RecipeManager manager = Services.getRecipeManager();
                 UserManager userManager = Services.getUserManager();
 
-                Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, !isPublic, difficulty);
+                Recipe addedRecipe = manager.createRecipe(userManager.getCurrUser(), recipeName,instructions, isPrivate, difficulty);
                 if(addedRecipe != null) {
                     Toast.makeText(getContext(), "Recipe added successfully!", Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).changeFragment(new ProfileViewFragment(Services.getUserManager().getCurrUser()));
