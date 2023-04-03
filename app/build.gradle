@@ -37,6 +37,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:4.2.0'
+    testImplementation 'com.google.guava:guava:31.0.1-jre'
     implementation group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'
     implementation 'androidx.appcompat:appcompat:1.0.0'
 
