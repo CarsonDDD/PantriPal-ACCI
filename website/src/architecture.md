@@ -112,4 +112,4 @@ The Saved DSO represents the other many-to-many relationship between the User an
 
 ## Architectural Diagram
 
-![Architectural Diagram](ArchitecturalDiagram.png "Architectural Diagram")
+![Architectural Diagram](./ArchitecturalDiagram.png "Architectural Diagram")

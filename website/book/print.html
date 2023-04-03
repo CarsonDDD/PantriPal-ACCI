@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>PantriPal Android Application</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="VISION.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">2.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="demonstration.html"><strong aria-hidden="true">3.</strong> Demonstration</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">PantriPal Android Application</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="vision-statement"><a class="header" href="#vision-statement">Vision Statement</a></h2>
+<p>Pantri Pal is all about creating a place for anybody to discover and share recipes while improving their cooking skills. Pantri Pal offers a digital cookbook to work alongside and enhance the cooking abilities of the user. A sense of community is created through the ability to share user recipes, and discover new recipes. Being digital, Pantri Pal will keep track of an up to date pantry, allowing users to store and update their ingredients. The user will be able to see recipes that contain ingredients in their pantry, as well as add missing ingredients to their grocery list for easier shopping.</p>
+<p>Pantri Pal allows for in depth recipe customization, creation, and storage. By creating a virtual pantry, the app will be able to find recipes that the user can currently make. Pantri Pal also allows for recipe discovery, allowing users to find new and exciting recipes created by the community. By allowing the community to add new recipes, the database is always growing and changing. A difficulty rating will allow users to know at a glance how difficult a recipe is. Users will also be able to edit their existing recipes to change their own flavours.</p>
+<p>From aspiring chefs to proficient cooks, anyone wanting to improve is encouraged to share their recipes and learn with Pantri Pal. Pantri Pal will be designed with an easy to learn interface, keeping users attention on discovering recipes and cooking. Pantri Pal is intended to help a wide array of users, from adolescents to young adults, those with an interest in cooking are welcome.</p>
+<p>Pantri Pal is a unique look at cookbooks, by maintaining a virtual pantry this app becomes an invaluable tool. From something easy to difficult every dish requires ingredients, Pantri Pal’s virtual pantry feature allows users to create and edit their own pantry, keeping track of the ingredients they currently have. In this way, Pantri Pal’s ingredient list will notify the user when ingredients are low, adding them to a grocery list. Pantri Pal will also allow users to create new dishes, by adding their own recipes, encouraging users to experiment in the kitchen.</p>
+<p>This app will be defined as successful provided the majority of users find the app helpful, and a rating off 3 stars or above on the play store is achieved. Furthermore, success will have atleast 35% of users find an increase in their overall cooking skills within 6 months of regular use.</p>
+<h2 id="contributions"><a class="header" href="#contributions">Contributions</a></h2>
+<p>write who specalized in what here</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="project-architecture"><a class="header" href="#project-architecture">Project Architecture</a></h1>
+<p>Our application follows the common three-layer architecture discussed in class. This consists of the presentation, business, and persistence layers, with domain specific objects that are accessed by all layers. This design increases the independence of each layer, to create layers that have low coupling. Further details about each layer is provided below.</p>
+<hr />
+<h2 id="presentation-layer"><a class="header" href="#presentation-layer">Presentation Layer</a></h2>
+<p>The presentation layer controls the user interface and displays data to the user in your recipe manager database app. It acts as a bridge between the user and the app's functionality and interacts with the business logic and data layers to ensure the user is presented with accurate and relevant data.</p>
+<h3 id="mainactivity"><a class="header" href="#mainactivity">MainActivity</a></h3>
+<ul>
+<li>The only <code>AppCompactActivity</code> in the project.</li>
+<li>Its layout contains a <code>FragmentContainerView</code>, <code>BottomNavigationView</code>, and <code>ToolBar</code>.</li>
+<li>Controls admin/system tasks/functionality and delegates display logic to the <code>Fragment</code> (<code>ACCIFragment</code>) contained inside its <code>FragmentContainerView</code>.</li>
+<li>Uses a <code>FragmentNavigator</code> to manage navigation between different fragments.</li>
+</ul>
+<h3 id="fragmentnavigator"><a class="header" href="#fragmentnavigator">FragmentNavigator</a></h3>
+<ul>
+<li>A helper object that manages navigation between different fragments.</li>
+<li>Implemented as a stack which updates the display every time a fragment is pushed or popped.</li>
+<li>The top of the stack is the fragment to be displayed.</li>
+<li>Keeps a history of previously displayed fragments, allowing users to return to previous pages without creating new instances of the fragment.</li>
+</ul>
+<h3 id="recipeadapter"><a class="header" href="#recipeadapter">RecipeAdapter</a></h3>
+<ul>
+<li>Adapts a given list of <code>Recipe</code> objects to a <code>RecyclerView</code> of <code>RecipeCardViewHolder</code>.</li>
+</ul>
+<h3 id="recipecardviewholder"><a class="header" href="#recipecardviewholder">RecipeCardViewHolder</a></h3>
+<ul>
+<li>The item that populates the <code>RecyclerView</code>.</li>
+<li>Holds the recipe's title, image, and an event listener that opens the recipe page for the selected item.</li>
+</ul>
+<h2 id="fragments"><a class="header" href="#fragments">Fragments</a></h2>
+<h3 id="accifragment"><a class="header" href="#accifragment">ACCIFragment</a></h3>
+<ul>
+<li>A subclass of <code>Fragment</code> that adds new functionality for controlling display, such as showing/hiding action bar and navigation bar.</li>
+</ul>
+<h3 id="accifragmentable"><a class="header" href="#accifragmentable">ACCIFragmentable</a></h3>
+<ul>
+<li>An interface for <code>ACCIFragment</code>.</li>
+</ul>
+<h3 id="recipeinsertfragment"><a class="header" href="#recipeinsertfragment">RecipeInsertFragment</a></h3>
+<ul>
+<li>Implements the GUI and functionality for creating new recipes.</li>
+<li>Linked to the recipe manager to create and modify recipes.</li>
+</ul>
+<h3 id="profileviewfragment"><a class="header" href="#profileviewfragment">ProfileViewFragment</a></h3>
+<ul>
+<li>Populates the layout with data of a given user.</li>
+<li>Allows users to view and modify their profile.</li>
+</ul>
+<h3 id="recipeviewfragment"><a class="header" href="#recipeviewfragment">RecipeViewFragment</a></h3>
+<ul>
+<li>Populates the data on the recipe page with a given recipe.</li>
+</ul>
+<h3 id="discoveryviewfragment"><a class="header" href="#discoveryviewfragment">DiscoveryViewFragment</a></h3>
+<ul>
+<li>Provides a <code>RecyclerView</code> with a feed of recipes from the database.</li>
+<li>Contains functionality to search for specific items in the view.</li>
+</ul>
+<hr />
+<h2 id="business-layer"><a class="header" href="#business-layer">Business Layer</a></h2>
+<p>The business layer handles the application's logic and functionality, and connects the persistence/DSO layer with the presentation layer.</p>
+<h3 id="recipemanager"><a class="header" href="#recipemanager">RecipeManager</a></h3>
+<p>The recipe manager is the interface required for users to create new recipe objects and add them to the database, as well as view, modify and search for existing recipes by recipe ID.</p>
+<h3 id="recipecreator"><a class="header" href="#recipecreator">RecipeCreator</a></h3>
+<p>The recipe creator is the implementatiion of the recipe manager interface. The constructor requires it to be passed the necessary persistences.</p>
+<h3 id="usermanager"><a class="header" href="#usermanager">UserManager</a></h3>
+<p>The user manager is the interface responsible for managing the user accounts and related data such as saved recipes.</p>
+<h3 id="usercreator"><a class="header" href="#usercreator">UserCreator</a></h3>
+<p>The user creator is the implementation of the UserManager. the constructor requires it to be passed the related persistences.</p>
+<hr />
+<h2 id="persistence-layer"><a class="header" href="#persistence-layer">Persistence Layer</a></h2>
+<p>The persistence layer handles all the functionality of saving and retrieving data. It consists of two parts: Interfaces and the classes that implement the interfaces. The interfaces lay out all of the functionality that will be provided to the Business layer, including function names, the arguments they take, and the form of the output that they will provide. This interface acts as a promise to the business layer, so the business layer can call the interface regardless of the class that actually implements the interface.</p>
+<p>In Iteration 1, the classes that implemented the interfaces were stubs. These provided all the needed functionality of the interface when an app is running. but all the modified data is lost once the app is closed. The stubs saved lists of each of their respective DSOs, and have working functions that modify them. Commonly, the function return a given DSO (i.e. for the RecipePersistenceStub, the getRecipe function will return a Recipe object).</p>
+<p>Currently, the classes that the app uses to implement the interfaces use HSQLDB. This is a database implementation made for Java and it uses sql commands to create tables, add entries, update entries, and delete entries. There is an implementation for each respective DSO and Interface, and since they implement the same interface as the Stubs, they have the same arguments and return types for each fuction.</p>
+<hr />
+<h2 id="domain-specific-objects"><a class="header" href="#domain-specific-objects">Domain Specific Objects</a></h2>
+<p>Domain Specific Objects are classes that implement a certain form of data. Each DSO can have many different elements and methods to get or display the object. They are called by all layers of the architecture and are often passed between layers as the arguments to functions or the returned results. We designed the DSOs for this project to mimic the tables in a relational database, having them reference other DSOs when needed. The DSOs used for this project are described below.</p>
+<h3 id="user"><a class="header" href="#user">User</a></h3>
+<p>The User DSO defines a user of the application. They have a Username, a User ID, and a Biography. This class is often referenced by other DSOs as it makes sense to group recipes by the user that made them, or display the recipes that a given user liked.</p>
+<h3 id="recipe"><a class="header" href="#recipe">Recipe</a></h3>
+<p>The Recipe DSO is also a primary object. It has a recipe ID, author, name, instructions, difficulty level, and a boolean to determine whether it is private or not. The author is a User DSO, representing the user that created it.</p>
+<h3 id="ingredient"><a class="header" href="#ingredient">Ingredient</a></h3>
+<p>The Ingredient DSO is the final primary object. It represents an ingredient that may be used in a Recipe or a users Pantry. It only contains a string that represents the ingredient's name.</p>
+<h3 id="pantry"><a class="header" href="#pantry">Pantry</a></h3>
+<p>The Pantry DSO represents the many-to-many relationship between the User and Ingredient table. It represents the ingredients that a user currently has. Each entry has an associated User and Ingredient, but also has a quantity and a unit. For example, a user could have three apples in their pantry, or 6 slices of bread.</p>
+<h3 id="contains"><a class="header" href="#contains">Contains</a></h3>
+<p>The Contains DSO represents the many-to-many relationship between the Recipe and Ingredient table. It is similar to the Pantry DSO, but represents the ingredients that are required for a given recipe. Each entry has a Recipe and Ingredient, as well as a quantity and a unit.</p>
+<h3 id="liked"><a class="header" href="#liked">Liked</a></h3>
+<p>The Liked DSO represents one of the many-to-many relationships between the User and Recipe DSOs. A liked object has a User and Recipe and is created when a user likes a recipe.</p>
+<h3 id="saved"><a class="header" href="#saved">Saved</a></h3>
+<p>The Saved DSO represents the other many-to-many relationship between the User and Recipe DSOs. A Saved object has a User and Recipe and is created when a user Saves a recipe. The difference betwheen the Liked and Saved DSOs is where they will be displayed. We plan to display the number of users that like a recipe on each recipe card, while a user will be able to navigate to a Saved Recipies page to view all of the recipes that they saved.</p>
+<h2 id="architectural-diagram"><a class="header" href="#architectural-diagram">Architectural Diagram</a></h2>
+<p><img src="./ArchitecturalDiagram.png" alt="Architectural Diagram" title="Architectural Diagram" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="demonstration"><a class="header" href="#demonstration">Demonstration</a></h1>
+<p>A gif of the recorded screen will go here</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
