@@ -1,5 +1,5 @@
 
-package comp3350.acci.tests.business;
+package comp3350.acci.tests.business.IntegrationTests;
 
 //java imports
 
@@ -16,13 +16,17 @@ import java.io.File;
 import java.io.IOException;
 
 import comp3350.acci.business.implementation.RecipeCreator;
+import comp3350.acci.business.implementation.UserCreator;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.ContainPersistence;
 import comp3350.acci.persistence.RecipePersistence;
+import comp3350.acci.persistence.UserPersistence;
 import comp3350.acci.persistence.hsqldb.ContainPersistenceHSQLDB;
 import comp3350.acci.persistence.hsqldb.RecipePersistenceHSQLDB;
+import comp3350.acci.persistence.hsqldb.UserPersistenceHSQLDB;
 import comp3350.acci.tests.utils.TestFilesUtil;
 
 
@@ -47,9 +51,13 @@ public class RecipeManagerIntegrationTest extends TestCase {
     public void setUp() throws IOException {
         this.tempDB = TestFilesUtil.copyDB();
         repPer = new RecipePersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
-        contPer =new ContainPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
+        contPer = new ContainPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
+
         manager = new RecipeCreator(repPer, contPer);
-        testAuthor = new User("Caelan", "I'm the coolest");
+        //we need a temporary user persistence to ensure we are inputting a user that exists
+        UserPersistence tempUsePers = new UserPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
+        testAuthor = tempUsePers.getCurrentUser();
+
         testRep = new Recipe(testAuthor, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
     }
     @After
@@ -107,6 +115,7 @@ public class RecipeManagerIntegrationTest extends TestCase {
     public void testRecipeInstructions() {
         System.out.println("\nStarting recipe instruction Tests:");
 
+        testRep = manager.createRecipe(testAuthor, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
         assertNotNull("Instructions field should be non-null",testRep.getInstructions());
         assertNotNull("Getter from manager should produce non-null",manager.getInstructions(testRep));
@@ -151,7 +160,7 @@ public class RecipeManagerIntegrationTest extends TestCase {
         System.out.println("\nStarting null recipe search Tests:");
 
         assertNull("Result of nonexistent recipe id should be NULL", manager.getRecipeByID(100));
-        assertNull("Result of nonexistent recipe search should be NULL",manager.getRecipeFromPersistence(testRep));
+        assertNull("Result of nonexistent recipe search should be NULL", manager.getRecipeFromPersistence(null));
 
         System.out.println("Null recipe search tested Successfully");
     }

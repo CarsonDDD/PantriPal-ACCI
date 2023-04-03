@@ -1,4 +1,4 @@
-package comp3350.acci.tests.business;
+package comp3350.acci.tests.business.IntegrationTests;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;

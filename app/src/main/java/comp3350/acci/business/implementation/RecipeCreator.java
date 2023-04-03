@@ -58,6 +58,9 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
     }
 
     public Recipe getRecipeFromPersistence(Recipe recipe) {
+        if(recipe == null){
+            return null;
+        }
         return recipePersistence.getRecipe(recipe);
     }
     //given an id, returns the associated recipe, returns null if recipe with id could not be found
