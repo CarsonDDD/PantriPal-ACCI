@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         changeFragment(new SearchViewFragment());
                         break;
                     case R.id.nav_pantry:
-                        Toast.makeText(MainActivity.super.getBaseContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
+                        changeFragment(new PantryFragment());
                         break;
                     case R.id.nav_insert_recipe:
                         changeFragment(new RecipeInsertFragment());
