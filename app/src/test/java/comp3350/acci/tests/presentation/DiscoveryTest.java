@@ -31,6 +31,6 @@ public class DiscoveryTest {
 
     @Test
     public void discoverRecipes() {
-//        onView(withId(R.id.button))
+        onView(withId(R.id.nav_discovery)).perform(click());
     }
 }
