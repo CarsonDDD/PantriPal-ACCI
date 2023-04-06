@@ -94,6 +94,7 @@ public class RecipeViewFragment extends Fragment {
         TextView instructionView = view.findViewById(R.id.tv_instructions);
         TextView difficultyView = view.findViewById(R.id.tv_difficulty);
         TextView updatedView = view.findViewById(R.id.tv_date);
+        TextView titleView = view.findViewById(R.id.tv_recipe_name);
         RecyclerView rvImages = view.findViewById(R.id.rv_images);
 
         // ------------- Fill Fields -------------------
@@ -107,7 +108,8 @@ public class RecipeViewFragment extends Fragment {
         rvImages.setAdapter(imageAdapter);
 
         //set the textviews to the values from the recipe:
-        toolbar.setTitle(RECIPE.getName());
+        toolbar.setTitle("");
+        titleView.setText(RECIPE.getName());
         authorView.setText(RECIPE.getAuthor().getUserName());
         difficultyView.setText(RECIPE.getDifficulty());
         instructionView.setText(RECIPE.getInstructions().replace("\\n", "\n"));
