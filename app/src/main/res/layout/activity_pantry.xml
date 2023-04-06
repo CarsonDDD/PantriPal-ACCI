@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:elevation="4dp"
+        app:title="@string/app_name">
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Profile picture and "My Pantry" title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_person"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/my_pantry_title"
+            android:layout_width="193dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="My Pantry"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/add_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add item" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/pantry_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:outlineAmbientShadowColor="@color/light_grey"
+                android:outlineSpotShadowColor="@color/white"
+                app:iconifiedByDefault="false"
+                app:queryHint="search inventory"
+                app:searchIcon="@drawable/ic_search" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerIngredient"
+        android:layout_width="320dp"
+        android:layout_height="match_parent" />
+
+
+    <!-- List of available ingredients -->
+
+
+</LinearLayout>
