@@ -23,7 +23,6 @@ import java.io.InputStreamReader;
 
 import comp3350.acci.R;
 import comp3350.acci.presentation.fragments.PantryFragment;
-import comp3350.acci.presentation.fragments.RecipeEditFragment;
 import comp3350.acci.presentation.fragments.SearchViewFragment;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.listeners.RecipeClickListener;
@@ -59,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                         changeFragment(new SearchViewFragment());
                         break;
                     case R.id.nav_pantry:
-                        Toast.makeText(MainActivity.super.getBaseContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
+                        changeFragment(new PantryFragment());
+                        //Toast.makeText(MainActivity.super.getBaseContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_insert_recipe:
                         changeFragment(new RecipeInsertFragment());

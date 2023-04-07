@@ -28,6 +28,9 @@
     <string name="added_recipes">My Recipes</string>
     <string name="search">Search</string>
     <string name="pantry">Pantry</string>
+    <string name = "quantity">Quantity</string>
+    <string name = "x">X</string>
+    <string name = "ingredient">Ingredient</string>
     
     <string-array name="difficulties">
         <item>Easy</item>
