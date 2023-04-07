@@ -20,6 +20,7 @@ import comp3350.acci.business.interfaces.PantryManager;
 import comp3350.acci.objects.Ingredient;
 import comp3350.acci.objects.Pantry;
 import comp3350.acci.objects.User;
+import comp3350.acci.persistence.IngredientPersistence;
 import comp3350.acci.persistence.PantryPersistence;
 import comp3350.acci.persistence.stubs.PantryPersistenceStub;
 
@@ -30,12 +31,14 @@ public class PantryManagerTest extends TestCase{
     }
 
     private PantryPersistence pantMock;
+    private IngredientPersistence ingMock;
     private Pantry testPantry;
     @Before
     public void setUp() {
 
 
         pantMock = Mockito.mock(PantryPersistence.class);
+        ingMock = Mockito.mock(IngredientPersistence.class);
 
         //common mock behaviour
 
@@ -43,13 +46,14 @@ public class PantryManagerTest extends TestCase{
     @After
     public void tearDown() {
         pantMock = null;
+        ingMock = null;
         testPantry = null;
     }
     @Test
     public void testInsertPantry(){
         System.out.println("\nStarting pantry insertion test:");
 
-        PantryManager manager = new PantryCreator(pantMock);
+        PantryManager manager = new PantryCreator(pantMock, ingMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
         Ingredient bread = new Ingredient("Bread");
@@ -90,7 +94,7 @@ public class PantryManagerTest extends TestCase{
     public void testUpdatePantry(){
         System.out.println("\nStarting pantry update test:");
 
-        PantryManager manager = new PantryCreator(pantMock);
+        PantryManager manager = new PantryCreator(pantMock, ingMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 
@@ -113,7 +117,7 @@ public class PantryManagerTest extends TestCase{
     public void testDeletePantry(){
         System.out.println("\nStarting pantry deletion test:");
 
-        PantryManager manager = new PantryCreator(pantMock);
+        PantryManager manager = new PantryCreator(pantMock, ingMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 
@@ -133,7 +137,7 @@ public class PantryManagerTest extends TestCase{
     public void testGetPantrys(){
         System.out.println("\nStarting pantry search test:");
 
-        PantryManager manager = new PantryCreator(pantMock);
+        PantryManager manager = new PantryCreator(pantMock, ingMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 
@@ -156,7 +160,7 @@ public class PantryManagerTest extends TestCase{
     public void testGetPantrysByUser(){
         System.out.println("\nStarting pantry search by user test:");
 
-        PantryManager manager = new PantryCreator(pantMock);
+        PantryManager manager = new PantryCreator(pantMock, ingMock);
 
         User user = new User("Ivory", "Professional toast chef and expert jam spreader");
 

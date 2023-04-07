@@ -60,7 +60,7 @@ public class PantryFragment extends Fragment {
 
         PantryManager pantryManager = Services.getPantryManager();
         List<Pantry> pantryList = pantryManager.getPantrys();
-        pantryAdapter = new PantryAdapter(pantryList);
+        pantryAdapter = new PantryAdapter(pantryList, ((MainActivity)getActivity()).CLICK_EDIT_PANTRY);
         recyclerView.setAdapter(pantryAdapter);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

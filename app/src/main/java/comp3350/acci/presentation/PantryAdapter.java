@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.acci.R;
+import comp3350.acci.business.listeners.PantryEditClickListener;
 import comp3350.acci.objects.Pantry;
 
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryCardViewHolder> {
     private List<Pantry> pantries;
 
-    public PantryAdapter(List<Pantry> pantries){
+    private PantryEditClickListener listener;
+
+    public PantryAdapter(List<Pantry> pantries, PantryEditClickListener listener){
         this.pantries = pantries;
+        this.listener = listener;
     }
 
     public class PantryCardViewHolder extends RecyclerView.ViewHolder{
@@ -33,6 +37,12 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryCard
             tv_ingredient = itemView.findViewById(R.id.tv_ingredient);
             tv_quantity = itemView.findViewById(R.id.tv_quantity);
             iv_edit = itemView.findViewById(R.id.iv_edit);
+
+            iv_edit.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    listener.onPantryEditClick(pantries.get(getAbsoluteAdapterPosition()));
+                }
+            });
         }
 
         public TextView getTv_ingredient(){
