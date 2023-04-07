@@ -7,14 +7,14 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="324dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="7dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:id="@+id/llrow"
-            android:layout_width="385dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="11dp">
@@ -36,7 +36,7 @@
 
                 <EditText
                     android:id="@+id/txtName"
-                    android:layout_width="176dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/ingredient"
                     android:textSize="22sp"
@@ -51,12 +51,22 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/delete"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/x" />
+                android:layout_gravity="center"
+                >
+
+
+                <Button
+                    android:id="@+id/delete"
+                    android:layout_width="73dp"
+                    android:layout_height="37dp"
+                    android:text="@string/x" />
+            </LinearLayout>
+
+
 
 
         </LinearLayout>

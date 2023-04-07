@@ -1,9 +1,87 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.PantryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:elevation="4dp"
+        app:title="@string/app_name">
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_person"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/my_pantry_title"
+            android:layout_width="193dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="My Pantry"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/add_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add item" />
 
 
-</FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/pantry_search"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="22dp"-->
+<!--            android:elevation="4dp"-->
+<!--            app:contentInsetStart="0dp"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways">-->
+
+<!--                                <androidx.appcompat.widget.SearchView&ndash;&gt;-->
+<!--                                    android:id="@+id/search_view"&ndash;&gt;-->
+<!--                                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        android:layout_height="match_parent"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        android:layout_margin="8dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        android:background="@color/white"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        android:outlineAmbientShadowColor="@color/light_grey"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        android:outlineSpotShadowColor="@color/white"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        app:iconifiedByDefault="false"&ndash;&gt;-->
+<!--            &lt;!&ndash;                        app:queryHint="search inventory"&ndash;&gt;-->
+<!--                                    app:searchIcon="@drawable/ic_search" />&ndash;&gt;-->
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerIngredient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <!--    &lt;!&ndash; List of available ingredients &ndash;&gt;-->
+
+
+</LinearLayout>

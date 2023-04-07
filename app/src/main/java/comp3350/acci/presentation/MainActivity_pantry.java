@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import comp3350.acci.R;
 
-public class MainActivity_Pantry extends AppCompatActivity {
+public class MainActivity_pantry extends AppCompatActivity {
     ArrayList<IngredientModel> arrayIngredients = new ArrayList<>();
     RecyclerIngredientAdapter adapter;
     Button btnOpenDialog;
@@ -23,7 +23,7 @@ public class MainActivity_Pantry extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantry);
+        setContentView(R.layout.fragment_pantry);
 
         recyclerView = findViewById(R.id.recyclerIngredient);
         btnOpenDialog = findViewById(R.id.add_items);
@@ -32,7 +32,7 @@ public class MainActivity_Pantry extends AppCompatActivity {
         btnOpenDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = new Dialog(MainActivity_Pantry.this);
+                Dialog dialog = new Dialog(MainActivity_pantry.this);
                 dialog.setContentView(R.layout.dialog_add_item);
                 EditText editName = dialog.findViewById(R.id.edtIngredient);
                 EditText editquantity = dialog.findViewById(R.id.edtQuantity);
@@ -45,12 +45,12 @@ public class MainActivity_Pantry extends AppCompatActivity {
                         if (!editName.getText().toString().equals("")) {
                             name = editName.getText().toString();
                         } else {
-                            Toast.makeText(MainActivity_Pantry.this, "Please enter Ingredient Name", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity_pantry.this, "Please enter Ingredient Name", Toast.LENGTH_SHORT).show();
                         }
                         if (!editquantity.getText().toString().equals("")) {
                             quantity = editquantity.getText().toString();
                         } else {
-                            Toast.makeText(MainActivity_Pantry.this, "Please enter Ingredient quantity", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity_pantry.this, "Please enter Ingredient quantity", Toast.LENGTH_SHORT).show();
                         }
                         arrayIngredients.add(new IngredientModel(name, quantity));
                        // adapter.notifyItemInserted(arrayIngredients.size()-1);
