@@ -7,7 +7,9 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -31,6 +33,14 @@ public class DiscoveryTest {
 
     @Test
     public void discoverRecipes() {
-        onView(withId(R.id.nav_discovery)).perform(click());
+        //Insert a Recipe
+        onView(withId(R.id.nav_insert_recipe)).perform(click());
+        onView(withId(R.id.et_title)).perform(typeText("Toast"));
+        onView(withId(R.id.et_instructions)).perform(typeText("Put bread in toaster"));
+        onView(withId(R.id.sr_difficulty)).perform(click());
+        onView(withSpinnerText("Hard")).perform(click());
+
+        //Make sure recipe was added
+        onView(withId((R.id.nav_discovery))).perform(click());
     }
 }
