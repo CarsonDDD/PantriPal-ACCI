@@ -6,8 +6,10 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
@@ -44,15 +46,16 @@ public class SystemTests {
         onView(withId(R.id.et_title)).perform(typeText("Toast"));
         onView(withId(R.id.et_instructions)).perform(typeText("Put bread in toaster"));
         onView(withId(R.id.sr_difficulty)).perform(click());
-        onView(withSpinnerText("Hard")).perform(click());
+        onView(withText("Hard")).perform(click());
+
         closeSoftKeyboard();
 
         //Make sure recipe was added
         onView(withId((R.id.nav_discovery))).perform(click());
         onData(anything()).inAdapterView(withId(R.id.rv_recipelist)).atPosition(0).perform(click());
-//        onView(withId(R.id.rv_recipelist)).check(withText("Toast"), );
 
-        onData(withText("Toast")).perform(click());
+//        onView(withId(R.id.rv_recipelist)).perform(RecyclerViewAction.scrollTo(hasDescendant(withText("Toast"))));
+
 
     }
 }
