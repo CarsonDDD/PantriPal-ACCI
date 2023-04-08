@@ -2,12 +2,15 @@ package SystemTests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -67,6 +70,11 @@ public class SaveRecipeTests {
 
         //unsave the recipe
         onView(withId(R.id.action_save_recipe)).perform(click());
+        //make sure the recipe is no longer present in our saved recipes (is unsaved)
+        onView(withId(R.id.toolbar)).perform(pressBack());
+        onView(withText("SAVED RECIPES")).perform(click());
+        onView(withId(R.id.saved_recipes_recycler)).check(matches(not(hasDescendant(withText("Peanut Butter and Jelly")))));
+
     }
 
 }
