@@ -66,6 +66,7 @@ public class SaveRecipeTests {
         onView(withId((R.id.nav_profile))).perform(click());
 
         onView(withText("SAVED RECIPES")).perform(click());
+        //sometimes this crashes the test, presumably the reason is the app is lagging on the emulated device and is struggling to keep up with espresso's inputs (atleast in my experience) it DOES work most of the time (when espresso works)
         onView(withId(R.id.saved_recipes_recycler)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("Peanut Butter and Jelly")), click()));
 
         //unsave the recipe
