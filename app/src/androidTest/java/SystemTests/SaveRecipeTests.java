@@ -60,7 +60,7 @@ public class SaveRecipeTests {
 
         //save recipe
         onView(withId(R.id.action_save_recipe)).perform(click());
-        Thread.sleep(25); //the logic after you save takes a second and espresso is too impatient to handle the lag so it needs to wait a second before continuing
+        Thread.sleep(200); //the logic after you save takes a second and espresso is too impatient to handle the lag so it needs to wait a second before continuing
 
         //check that it got saved
         onView(withId((R.id.nav_profile))).perform(click());
