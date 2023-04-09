@@ -57,6 +57,16 @@ public class RecipeCreator implements comp3350.acci.business.interfaces.RecipeMa
         return recipePersistence.getRecipes();
     }
 
+    @Override
+    public List<Recipe> getUserAndPublicRecipes(User user) {
+        return recipePersistence.getUserAndPublicRecipes(user);
+    }
+
+    @Override
+    public List<Recipe> getPublicUserRecipes(User user) {
+        return recipePersistence.getPublicUserRecipes(user);
+    }
+
     public Recipe getRecipeFromPersistence(Recipe recipe) {
         if(recipe == null){
             return null;
