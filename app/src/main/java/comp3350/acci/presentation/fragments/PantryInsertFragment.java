@@ -31,6 +31,8 @@ public class PantryInsertFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         PantryManager pantryManager = Services.getPantryManager();
         UserManager userManager = Services.getUserManager();
 
