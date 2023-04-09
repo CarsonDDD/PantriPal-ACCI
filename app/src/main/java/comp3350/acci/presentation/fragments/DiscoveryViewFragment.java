@@ -74,7 +74,7 @@ public class DiscoveryViewFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
+                newText = newText.toLowerCase();
                 List<Recipe> filtered = new ArrayList<Recipe>();
 
                 for(Recipe recipe : recipeAdapter.getRecipes()){
