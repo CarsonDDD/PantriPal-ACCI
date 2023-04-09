@@ -69,7 +69,7 @@ public class PantryEditFragment extends Fragment {
                 Pantry editedPantry = pantryManager.updatePantry(userManager.getCurrUser(), new Ingredient(ingredient), quantity, unit);
                 if(editedPantry != null) {
                     Toast.makeText(getContext(), "Ingredient edit submitted!", Toast.LENGTH_SHORT).show();
-                    ((MainActivity)getActivity()).changeFragment(new PantryFragment());
+                    ((MainActivity)getActivity()).undoFragment();
                 }
                 else {
                     Toast.makeText(getContext(), "Some fields were invalid\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class PantryEditFragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 pantryManager.deletePantry(pantry);
-                ((MainActivity)getActivity()).changeFragment(new PantryFragment());
+                ((MainActivity)getActivity()).undoFragment();
             }
         });
     }

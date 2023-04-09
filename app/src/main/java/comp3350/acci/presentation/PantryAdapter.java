@@ -28,6 +28,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryCard
         CardView pantry_card;
         TextView tv_ingredient;
         TextView tv_quantity;
+
+        TextView tv_unit;
         ImageView iv_edit;
 
         public PantryCardViewHolder(View itemView){
@@ -36,6 +38,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryCard
             pantry_card = itemView.findViewById(R.id.pantry_card);
             tv_ingredient = itemView.findViewById(R.id.tv_ingredient);
             tv_quantity = itemView.findViewById(R.id.tv_quantity);
+            tv_unit = itemView.findViewById(R.id.tv_unit);
             iv_edit = itemView.findViewById(R.id.iv_edit);
 
             iv_edit.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +55,10 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryCard
         public TextView getTv_quantity(){
             return tv_quantity;
         }
+
+        public TextView getTv_Unit(){
+            return tv_unit;
+        }
     }
     @Override
     public PantryCardViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
@@ -61,6 +68,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryCard
     public void onBindViewHolder(PantryCardViewHolder viewHolder, final int position){
         viewHolder.getTv_ingredient().setText(pantries.get(position).getIngredient().getName());
         viewHolder.getTv_quantity().setText(Double.toString(pantries.get(position).getQuantity()));
+        viewHolder.getTv_Unit().setText(pantries.get(position).getUnit());
     }
 
     @Override

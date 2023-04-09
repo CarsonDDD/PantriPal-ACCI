@@ -19,6 +19,7 @@ import java.util.List;
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.PantryManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Pantry;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.PantryAdapter;
@@ -59,7 +60,8 @@ public class PantryFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         PantryManager pantryManager = Services.getPantryManager();
-        List<Pantry> pantryList = pantryManager.getPantrys();
+        UserManager userManager = Services.getUserManager();
+        List<Pantry> pantryList = pantryManager.getPantrysByUser(userManager.getCurrUser());
         pantryAdapter = new PantryAdapter(pantryList, ((MainActivity)getActivity()).CLICK_EDIT_PANTRY);
         recyclerView.setAdapter(pantryAdapter);
 

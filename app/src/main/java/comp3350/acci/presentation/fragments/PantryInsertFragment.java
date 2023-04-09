@@ -31,8 +31,10 @@ public class PantryInsertFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        Button submit = view.findViewById(R.id.iv_submit);
+        PantryManager pantryManager = Services.getPantryManager();
+        UserManager userManager = Services.getUserManager();
 
+        Button submit = view.findViewById(R.id.iv_submit);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -50,16 +52,13 @@ public class PantryInsertFragment extends Fragment {
 
                 }
 
-                PantryManager pantryManager = Services.getPantryManager();
-                UserManager userManager = Services.getUserManager();
-
                 Pantry addedPantry = pantryManager.insertPantry(userManager.getCurrUser(), new Ingredient(ingredient), quantity, unit);
                 if(addedPantry != null) {
                     Toast.makeText(getContext(), "Ingredient added to pantry!", Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).changeFragment(new PantryFragment());
                 }
                 else {
-                    Toast.makeText(getContext(), "Some fields were empty\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Some fields were invalid\nPlease fix them and try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
