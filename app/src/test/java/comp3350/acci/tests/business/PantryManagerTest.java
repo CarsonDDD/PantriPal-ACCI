@@ -22,7 +22,6 @@ import comp3350.acci.objects.Pantry;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.IngredientPersistence;
 import comp3350.acci.persistence.PantryPersistence;
-import comp3350.acci.persistence.stubs.PantryPersistenceStub;
 
 public class PantryManagerTest extends TestCase{
 

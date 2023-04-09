@@ -25,8 +25,6 @@ import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
 import comp3350.acci.persistence.SavedPersistence;
 import comp3350.acci.persistence.UserPersistence;
-import comp3350.acci.persistence.stubs.SavedPersistenceStub;
-import comp3350.acci.persistence.stubs.UserPersistenceStub;
 
 public class UserManagerTest extends TestCase {
     public UserManagerTest(String arg0 ) {
