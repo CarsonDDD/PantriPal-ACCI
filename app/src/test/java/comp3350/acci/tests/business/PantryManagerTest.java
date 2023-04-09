@@ -66,7 +66,7 @@ public class PantryManagerTest extends TestCase{
         pantryList.add(testPantry);
         Mockito.when(pantMock.getPantrys()).thenReturn(pantryList);
         Mockito.when(pantMock.getPantrysByUser(any())).thenReturn(pantryList);
-
+        Mockito.when(pantMock.updatePantry(any())).thenReturn(testPantry);
         Pantry pantry1 = manager.insertPantry(user, bread, 1, "loaf" );
 
         assertNotNull("Pantry1 should not be null", pantry1);
