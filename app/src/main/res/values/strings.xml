@@ -37,4 +37,14 @@
         <item>Medium</item>
         <item>Hard</item>
     </string-array>
+
+    <string-array name="units">
+        <item>g</item>
+        <item>ml</item>
+        <item>L</item>
+        <item>pieces</item>
+        <item>servings</item>
+        <item>oz</item>
+    </string-array>
+
 </resources>

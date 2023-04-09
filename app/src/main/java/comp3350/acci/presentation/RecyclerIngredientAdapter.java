@@ -47,7 +47,7 @@ public class RecyclerIngredientAdapter extends RecyclerView.Adapter<RecyclerIngr
                 Dialog dialog= new Dialog(context);
                 dialog.setContentView(R.layout.dialog_add_item);
                 EditText editName = dialog.findViewById(R.id.edtIngredient);
-                EditText editquantity = dialog.findViewById(R.id.edtQuantity);
+                EditText editquantity = dialog.findViewById(R.id.et_quantity);
                 Button btnAction = dialog.findViewById(R.id.btnAction);
                 TextView txtTitle = dialog.findViewById(R.id.txtName);
                 txtTitle.setText("Update Ingredient");
