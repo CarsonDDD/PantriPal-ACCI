@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import comp3350.acci.R;
@@ -31,6 +32,8 @@ public class PantryInsertFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
         ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         PantryManager pantryManager = Services.getPantryManager();
