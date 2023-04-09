@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
@@ -58,5 +60,31 @@ public class DiscoveryViewFragment extends Fragment {
         List<Recipe> recipeList = rm.getUserAndPublicRecipes(um.getCurrUser());
         recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList, ((MainActivity)getActivity()).CLICK_RECIPE);
         recyclerView.setAdapter(recipeAdapter);
+
+        // Set up searchbar
+        SearchView searchView = view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                List<Recipe> filtered = new ArrayList<Recipe>();
+
+                for(Recipe recipe : recipeAdapter.getRecipes()){
+                    if (recipe.getName().toLowerCase().contains(newText)) {
+                        filtered.add(recipe);
+                    }
+                }
+
+                RecipeAdapter filteredAdapter = new RecipeAdapter(R.layout.recipe_card, filtered, ((MainActivity)getActivity()).CLICK_RECIPE);
+                recyclerView.setAdapter(filteredAdapter);
+                return true;
+            }
+        });
+
     }
 }
