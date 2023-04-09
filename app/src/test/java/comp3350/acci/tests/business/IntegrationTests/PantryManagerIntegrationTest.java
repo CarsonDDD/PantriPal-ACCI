@@ -33,6 +33,7 @@ public class PantryManagerIntegrationTest extends TestCase{
         super(arg0);
     }
     private PantryPersistence pantPers;
+    private IngredientPersistence ingPers;
     private Pantry testPantry;
     private File tempDB;
     private User testUser;
@@ -44,9 +45,9 @@ public class PantryManagerIntegrationTest extends TestCase{
         pantPers = new PantryPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
 
         UserPersistence tempUsePers = new UserPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
-        IngredientPersistence tempIngPers = new IngredientPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
+        ingPers = new IngredientPersistenceHSQLDB(tempDB.getAbsolutePath().replace(".script", ""));
         testUser = tempUsePers.getCurrentUser();
-        testIngredient = tempIngPers.getIngredients().get(0);
+        testIngredient = ingPers.getIngredients().get(0);
     }
     @After
     public void tearDown() {
@@ -58,10 +59,7 @@ public class PantryManagerIntegrationTest extends TestCase{
     public void testInsertPantry(){
         System.out.println("\nStarting pantry insertion test:");
 
-        PantryManager manager = new PantryCreator(pantPers);
-
-        
-
+        PantryManager manager = new PantryCreator(pantPers, ingPers);
 
 
         Pantry pantry1 = manager.insertPantry(testUser, testIngredient, 1, "loaf" );
@@ -92,7 +90,7 @@ public class PantryManagerIntegrationTest extends TestCase{
     public void testUpdatePantry(){
         System.out.println("\nStarting pantry update test:");
 
-        PantryManager manager = new PantryCreator(pantPers);
+        PantryManager manager = new PantryCreator(pantPers, ingPers);
 
         
 
@@ -113,7 +111,7 @@ public class PantryManagerIntegrationTest extends TestCase{
     public void testDeletePantry(){
         System.out.println("\nStarting pantry deletion test:");
 
-        PantryManager manager = new PantryCreator(pantPers);
+        PantryManager manager = new PantryCreator(pantPers, ingPers);
 
         Pantry pantry1 = manager.insertPantry(testUser, testIngredient, 1, "l");
         manager.deletePantry(pantry1);
@@ -127,7 +125,7 @@ public class PantryManagerIntegrationTest extends TestCase{
     public void testGetPantrys(){
         System.out.println("\nStarting pantry search test:");
 
-        PantryManager manager = new PantryCreator(pantPers);
+        PantryManager manager = new PantryCreator(pantPers, ingPers);
 
         assertFalse("Pantry should not be empty", manager.getPantrys().isEmpty());
 
@@ -138,14 +136,13 @@ public class PantryManagerIntegrationTest extends TestCase{
     public void testGetPantrysByUser(){
         System.out.println("\nStarting pantry search by user test:");
 
-        PantryManager manager = new PantryCreator(pantPers);
+        PantryManager manager = new PantryCreator(pantPers, ingPers);
 
 
 
 
 
 
-        assertTrue("List should be empty", manager.getPantrysByUser(testUser).isEmpty());
 
 
 

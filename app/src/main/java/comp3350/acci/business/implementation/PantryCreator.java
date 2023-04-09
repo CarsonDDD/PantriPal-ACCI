@@ -22,19 +22,31 @@ public class PantryCreator implements PantryManager {
 
     public Pantry insertPantry(User user, Ingredient ingredient, double amount, String unit){
         Pantry result = null;
+        if(user == null || ingredient == null || amount == 0 || unit == null) {
+            return null;
+        }
         if(!ingredientPersistence.getIngredients().contains(ingredient)){
             ingredientPersistence.insertIngredient(ingredient);
         }
         if(user != null && ingredient != null && amount > 0){
             boolean contains = false;
+            Pantry currentPantry = null;
             for(Pantry pantry : pantryPersistence.getPantrysByUser(user)) {
                 if (pantry.getIngredient().getName().equals(ingredient.getName())) {
                     contains = true;
+                    currentPantry = pantry;
                     break;
                 }
             }
             if(!contains){
                 result = pantryPersistence.insertPantry(new Pantry(user, ingredient, amount, unit));
+            }else {
+                if(currentPantry != null){
+                    double currAmount = currentPantry.getQuantity();
+                    currAmount += amount;
+                    currentPantry.setQuantity(currAmount);
+                    result = updatePantry(user, ingredient, currAmount, currentPantry.getUnit());
+                }
             }
         }
         return result;
