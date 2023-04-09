@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_discovery:
                         changeFragment(new DiscoveryViewFragment());
                         break;
-                    case R.id.nav_search:
+                    /*case R.id.nav_search:
                         changeFragment(new SearchViewFragment());
-                        break;
+                        break;*/
                     case R.id.nav_pantry:
                         changeFragment(new PantryFragment());
                         break;
@@ -177,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
         if(currentFragment instanceof DiscoveryViewFragment){
             navbar.setSelectedItemId(R.id.nav_discovery);
         }
-        else if(currentFragment instanceof SearchViewFragment){
+        /*else if(currentFragment instanceof SearchViewFragment){
             navbar.setSelectedItemId(R.id.nav_search);
-        }
+        }*/
         else if(currentFragment instanceof PantryFragment){
             navbar.setSelectedItemId(R.id.nav_pantry);
         }
