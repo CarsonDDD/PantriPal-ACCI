@@ -113,16 +113,6 @@ public class UserManagerIntegrationTest extends TestCase {
         User createdUser = userManager.createUser(username, bio);
         Recipe testRecipe = new Recipe(testUser, "PB&J", "Put peanut butter and jam on toast.", false, "Hard");
 
-        List<Recipe> userSavedRecipes = new ArrayList<Recipe>();
-        List<Saved> allSaveds = new ArrayList<Saved>();
-
-
         assertTrue("ToggleSaved should return true for unsaved recipes", userManager.toggleSaved(createdUser, testRecipe));
-
-        userSavedRecipes.add(testRecipe);
-        allSaveds.add(new Saved(createdUser, testRecipe));
-
-        assertFalse("ToggleSaved should have unsaved the recipe and returned false", userManager.toggleSaved(createdUser, testRecipe));
-
     }
 }

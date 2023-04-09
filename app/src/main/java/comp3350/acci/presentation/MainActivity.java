@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -39,6 +40,8 @@ import comp3350.acci.presentation.fragments.RecipeViewFragment;
 // This class acts as the engine which runs/controls the fragment interactions
 public class MainActivity extends AppCompatActivity {
 
+    NavigationBarView.OnItemSelectedListener navigationSwitcher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +54,17 @@ public class MainActivity extends AppCompatActivity {
         changeFragment(new DiscoveryViewFragment());
 
         BottomNavigationView navigation = findViewById(R.id.navigation_bar);
-        navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+
+        navigationSwitcher = new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_discovery:
                         changeFragment(new DiscoveryViewFragment());
                         break;
-                    case R.id.nav_search:
+                    /*case R.id.nav_search:
                         changeFragment(new SearchViewFragment());
-                        break;
+                        break;*/
                     case R.id.nav_pantry:
                         changeFragment(new PantryFragment());
                         break;
@@ -73,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
-        });
-
+        };
+        navigation.setOnItemSelectedListener(navigationSwitcher);
     }
 
     private void copyDatabaseToDevice() {
@@ -149,15 +153,20 @@ public class MainActivity extends AppCompatActivity {
     // Public function to be used outside this class without needing to touch its caller
     public void changeFragment(Fragment fragment){
         this.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.current_fragment,fragment)
-                .addToBackStack(null)
+                .replace(R.id.current_fragment, fragment, fragment.getClass().getSimpleName())
+                .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
+        updateNavigationBar(fragment);
     }
 
     public void undoFragment(){
-        if(getSupportFragmentManager().getBackStackEntryCount() > 1){
-            getSupportFragmentManager().popBackStack();
-            updateNavigationBar();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
+
+        if (backStackEntryCount > 1) {
+            fragmentManager.popBackStack();
+            Fragment previousFragment = fragmentManager.findFragmentByTag(fragmentManager.getBackStackEntryAt(backStackEntryCount - 2).getName());
+            updateNavigationBar(previousFragment);
         }
     }
 
@@ -168,18 +177,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Make sure the navigation bar has the correct fragment checked
-    private void updateNavigationBar(){
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.current_fragment);
+    private void updateNavigationBar(Fragment fragment){
+        Fragment currentFragment = fragment;//getSupportFragmentManager().findFragmentById(R.id.current_fragment);
         BottomNavigationView navbar = findViewById(R.id.navigation_bar);
+
+        // Temp remove listener
+        navbar.setOnItemSelectedListener(null);
 
         // hmmmmmm. I believe .setSelectedItemId calls the above fragment switching code. This effectively modifies the stack in a way where nav buttons cannot be back swiped.
         // This was the old behaviour before using the manager stack. Writing this code, I did not intent for this to work like this, nonetheless I am pleasantly pleased.
         if(currentFragment instanceof DiscoveryViewFragment){
             navbar.setSelectedItemId(R.id.nav_discovery);
         }
-        else if(currentFragment instanceof SearchViewFragment){
+        /*else if(currentFragment instanceof SearchViewFragment){
             navbar.setSelectedItemId(R.id.nav_search);
-        }
+        }*/
         else if(currentFragment instanceof PantryFragment){
             navbar.setSelectedItemId(R.id.nav_pantry);
         }
@@ -189,6 +201,9 @@ public class MainActivity extends AppCompatActivity {
         else if(currentFragment instanceof ProfileViewFragment && ((ProfileViewFragment)currentFragment).isCurrentUser()){
             navbar.setSelectedItemId(R.id.nav_profile);
         }
+
+        // Re add listener
+        navbar.setOnItemSelectedListener(navigationSwitcher);
 
         // else.... nothing.
     }

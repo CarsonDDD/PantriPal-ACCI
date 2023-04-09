@@ -218,7 +218,7 @@ public class ProfileViewFragment extends Fragment {
                         break;
                     case R.id.action_login:
                         showSwitchUserDialog();
-                        Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Login as!", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;

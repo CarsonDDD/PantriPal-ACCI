@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/action_add_pantry"
-        android:icon="@drawable/ic_recipe_add"
+        android:icon="@drawable/ic_plus"
         app:showAsAction="always"
-        android:title="Add Pantry"/>
+        android:title="Add Ingredient"/>
 
 </menu>

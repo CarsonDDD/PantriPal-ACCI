@@ -7,11 +7,11 @@
         android:title="@string/home"
         android:state_checked="true"/>
 
-    <item
+    <!-- <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_search"
         android:title="@string/search"
-        android:state_checked="true"/>
+        android:state_checked="true"/> -->
 
     <item
         android:id="@+id/nav_pantry"

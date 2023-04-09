@@ -23,7 +23,7 @@
             app:iconifiedByDefault="false"
             app:queryHint="Recipes, Users, Ingredients, etc."
             android:layout_margin="8dp"
-            android:background="@drawable/lighorange_rounded"
+            android:background="@drawable/lightorange_rounded"
             android:outlineSpotShadowColor="@color/orange_light"
             android:outlineAmbientShadowColor="@color/orange_light" />
 
