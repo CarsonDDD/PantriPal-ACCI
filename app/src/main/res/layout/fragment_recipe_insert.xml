@@ -31,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@id/toolbar"
             android:id="@+id/ll_singleLine">
 
             <!--==title input==-->
@@ -43,7 +42,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="More Fonts..."
                     android:text="Title:"
                     android:textSize="@dimen/input_size" />
 
@@ -57,50 +55,40 @@
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
-            <!--==difficulty input==-->
+            <!--=== Difficulty-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Difficulty:"
+                android:textSize="@dimen/input_size"/>
 
-                <TextView
+                <Spinner
+                    android:id="@+id/sr_difficulty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Difficulty:"
-                    android:textSize="@dimen/input_size"/>
-
-                <EditText
-                    android:id="@+id/et_difficulty"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="How hard is this dish to make?"
-                    android:inputType="textAutoComplete"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:entries="@array/difficulties"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
-            <!--==Privacy input==-->
+            <!--=== Private-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Privacy:"
+                    android:text="Private:"
                     android:layout_gravity="center"
                     android:textSize="@dimen/input_size"/>
-
-                <ToggleButton
-                    android:id="@+id/tb_public"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:text="ToggleButton"
-                    android:textOff="Private"
-                    android:textOn="Public" />
+                <CheckBox
+                    android:id="@+id/cb_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <!--== Images ==-->
@@ -194,7 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_desciption"
-                android:text="Publish Recipe" />
+                android:text="Publish Recipe"
+                android:backgroundTint="@color/sky_blue"/>
         </LinearLayout>
 
     </RelativeLayout>

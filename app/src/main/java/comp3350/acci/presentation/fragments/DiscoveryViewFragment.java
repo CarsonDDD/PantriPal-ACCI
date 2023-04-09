@@ -7,18 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.acci.R;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.RecipeManager;
+import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
 import comp3350.acci.presentation.RecipeAdapter;
@@ -55,7 +54,8 @@ public class DiscoveryViewFragment extends Fragment {
 
         // Populate RecyclerView from database
         RecipeManager rm = Services.getRecipeManager();
-        List<Recipe> recipeList = rm.getRecipes();
+        UserManager um = Services.getUserManager();
+        List<Recipe> recipeList = rm.getUserAndPublicRecipes(um.getCurrUser());
         recipeAdapter = new RecipeAdapter(R.layout.recipe_card, recipeList, ((MainActivity)getActivity()).CLICK_RECIPE);
         recyclerView.setAdapter(recipeAdapter);
     }

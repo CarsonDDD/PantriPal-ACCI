@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="7dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:id="@+id/llrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="11dp">
+
+            <ImageView
+                android:id="@+id/imgIngredient"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="#C6F492"
+                tools:srcCompat="@drawable/ic_star"
+                android:contentDescription="star"/>
+
+            <LinearLayout
+                android:layout_width="176dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginLeft="11dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ingredient"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txtquantity"
+                    android:layout_width="179dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@string/quantity"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                >
+
+
+                <Button
+                    android:id="@+id/delete"
+                    android:layout_width="73dp"
+                    android:layout_height="37dp"
+                    android:text="@string/x" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

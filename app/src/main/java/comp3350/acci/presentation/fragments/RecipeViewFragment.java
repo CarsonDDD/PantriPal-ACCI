@@ -2,8 +2,6 @@ package comp3350.acci.presentation.fragments;
 
 import android.media.Image;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -94,6 +91,7 @@ public class RecipeViewFragment extends Fragment {
         TextView instructionView = view.findViewById(R.id.tv_instructions);
         TextView difficultyView = view.findViewById(R.id.tv_difficulty);
         TextView updatedView = view.findViewById(R.id.tv_date);
+        TextView titleView = view.findViewById(R.id.tv_recipe_name);
         RecyclerView rvImages = view.findViewById(R.id.rv_images);
 
         // ------------- Fill Fields -------------------
@@ -107,7 +105,8 @@ public class RecipeViewFragment extends Fragment {
         rvImages.setAdapter(imageAdapter);
 
         //set the textviews to the values from the recipe:
-        toolbar.setTitle(RECIPE.getName());
+        toolbar.setTitle("");
+        titleView.setText(RECIPE.getName());
         authorView.setText(RECIPE.getAuthor().getUserName());
         difficultyView.setText(RECIPE.getDifficulty());
         instructionView.setText(RECIPE.getInstructions().replace("\\n", "\n"));

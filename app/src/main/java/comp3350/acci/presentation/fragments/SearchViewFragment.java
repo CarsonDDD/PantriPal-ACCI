@@ -9,13 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import comp3350.acci.R;
-import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.MainActivity;
-import comp3350.acci.presentation.RecipeAdapter;
 
 
 public class SearchViewFragment extends Fragment {
