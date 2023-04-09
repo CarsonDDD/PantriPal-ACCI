@@ -46,6 +46,10 @@ public class Pantry {
         this.quantity = quantity;
     }
 
+    public void setUnit(String unit){
+        this.unit = unit;
+    }
+
     public boolean equals(Object other) {
         boolean equals = false;
 

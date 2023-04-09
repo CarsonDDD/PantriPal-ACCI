@@ -50,6 +50,7 @@ public class PantryPersistenceStub implements PantryPersistence {
 
     @Override
     public Pantry updatePantry(Pantry pantry) {
+        /*
         int index;
 
         index = pantryList.indexOf(pantry);
@@ -58,6 +59,19 @@ public class PantryPersistenceStub implements PantryPersistence {
             pantryList.set(index, pantry);
         }
         return pantry;
+        */
+
+        Pantry result = null;
+
+        for(Pantry  p : pantryList){
+            if(pantry.getUser().getUserName().equals(p.getUser().getUserName()) && pantry.getIngredient().getName().equals(p.getIngredient().getName())){
+                p.setQuantity(pantry.getQuantity());
+                p.setUnit(pantry.getUnit());
+                result = p;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
