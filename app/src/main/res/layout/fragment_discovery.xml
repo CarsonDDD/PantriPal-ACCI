@@ -24,7 +24,6 @@
             app:iconifiedByDefault="true"
             app:queryHint="Apple pie. . ."
             android:layout_margin="8dp"
-            android:background="@drawable/lighorange_rounded"
             android:outlineSpotShadowColor="@color/orange_light"
             android:outlineAmbientShadowColor="@color/orange_light" />
     </androidx.appcompat.widget.Toolbar>

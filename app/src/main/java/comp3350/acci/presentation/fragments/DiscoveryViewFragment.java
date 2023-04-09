@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +64,8 @@ public class DiscoveryViewFragment extends Fragment {
 
         // Set up searchbar
         SearchView searchView = view.findViewById(R.id.search_view);
+
+        // Searching it self
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -83,6 +86,24 @@ public class DiscoveryViewFragment extends Fragment {
                 RecipeAdapter filteredAdapter = new RecipeAdapter(R.layout.recipe_card, filtered, ((MainActivity)getActivity()).CLICK_RECIPE);
                 recyclerView.setAdapter(filteredAdapter);
                 return true;
+            }
+        });
+
+        // Display background
+        // Set background on open
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.lightorange_rounded));
+            }
+        });
+
+        // remove background on close
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchView.setBackground(null);// Yes this is valid @~@
+                return false;
             }
         });
 
