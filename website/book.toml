@@ -1,0 +1,6 @@
+[book]
+authors = ["offenloa"]
+language = "en"
+multilingual = false
+src = "src"
+title = "PantriPal Android Application"
