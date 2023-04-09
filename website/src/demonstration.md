@@ -1,6 +1,6 @@
 # Demonstration
 
-A gif of the recorded screen will go here
+A demonstration of the application usage is shown below:
 
 ![demonstration](./FeatureRecording.gif)
 

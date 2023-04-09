@@ -66,6 +66,13 @@ The user manager is the interface responsible for managing the user accounts and
 ### UserCreator
 The user creator is the implementation of the UserManager. the constructor requires it to be passed the related persistences.
 
+### PantryManager
+The pantry manager is the interface responsible for managing the user pantries, including adding and deleting items, and updating existing ones.
+
+### PantryCreator
+The Pantry creator is the implementation of the PantryManager. It implements all the required pantry functions needed for its implementation. The constructor requires it to be passed the related persistences.
+
+
 ---
 
 ## Persistence Layer
