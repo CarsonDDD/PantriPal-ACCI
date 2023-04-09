@@ -7,7 +7,8 @@
     android:paddingLeft="21dp"
     android:paddingRight="21dp"
     android:paddingBottom="11dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/AppTheme">
 
     <TextView
         android:layout_width="match_parent"
@@ -15,38 +16,76 @@
         android:gravity="center"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:text="Ingredient"
+        android:layout_margin="18dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:padding="11dp"
+        android:background="@drawable/lightorange_rounded"
+        android:padding="4dp"
         android:id="@+id/edtIngredient"
         android:layout_marginBottom="11dp"
         android:inputType="text"
+        android:textSize="@dimen/input_size"
         android:hint="Enter Ingredient"/>
 
-
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:padding="11dp"
-        android:id="@+id/edtQuantity"
-        android:hint="Enter Quantity"
-        android:inputType="text"/>
+        android:orientation="vertical"
+        android:background="@drawable/lightorange_rounded">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/input_size"
+            android:text="Quantity:"
+            android:textColor="?attr/editTextColor"
+            android:padding="4dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="11dp"
+            android:layout_gravity="center_horizontal">
+
+            <NumberPicker
+                android:id="@+id/sr_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                android:layout_marginTop="16dp"/>
+
+            <Spinner
+                android:id="@+id/sr_quantity"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/units"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:background="@drawable/lightorange_rounded"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text= "Add"
         android:id="@+id/btnAction"
-        android:backgroundTint="#fff"
+        android:backgroundTint="@color/sky_blue"
         android:layout_marginTop="11dp"
         android:textColor="@color/white"
-        android:background="@color/sky_blue"
-        android:layout_gravity="end"/>
+        android:layout_gravity="center"/>
 
 
 </LinearLayout>
