@@ -119,7 +119,12 @@ public class ProfileViewFragment extends Fragment {
 
 
         // set up RecyclerViews
-        List<Recipe> userRecipes =  Services.getRecipeManager().getUsersRecipes(user);
+        List<Recipe> userRecipes = null;
+        if(isCurrentUser()){
+            userRecipes = Services.getRecipeManager().getUsersRecipes(user);
+        } else {
+            userRecipes = Services.getRecipeManager().getPublicUserRecipes(user);
+        }
         List<Recipe> savedRecipes = Services.getUserManager().getUsersSavedRecipes(user);
 
         savedRecipesView.setAdapter(new RecipeAdapter(R.layout.recipe_card_small, savedRecipes, ((MainActivity)getActivity()).CLICK_RECIPE));
