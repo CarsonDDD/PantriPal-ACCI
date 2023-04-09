@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,9 +73,84 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         }
     }
 
+    public Recipe updateRecipeFromDB(Recipe rcp) {
+        Recipe recipe = null;
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID = ? AND instructions = ? AND name = ? AND isPrivate = ? AND difficulty = ?");
+            st.setInt(1, rcp.getAuthor().getUserID());
+            st.setString(2, rcp.getInstructions());
+            st.setString(3, rcp.getName());
+            st.setBoolean(4, rcp.getIsPrivate());
+            st.setString(5, rcp.getDifficulty());
+
+            final ResultSet rs = st.executeQuery();
+            if (rs.next())
+            {
+                recipe = fromResultSet(rs);
+            }
+            rs.close();
+            st.close();
+
+            return recipe;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
     @Override
     public Recipe getRecipe(Recipe recipe) {
         return getRecipeByID(recipe.getRecipeID());
+    }
+
+    @Override
+    public List<Recipe> getUserAndPublicRecipes(User user) {
+        final List<Recipe> recipes = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID=? OR isPrivate = false");
+            st.setInt(1, user.getUserID());
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final Recipe recipe = fromResultSet(rs);
+                recipes.add(recipe);
+            }
+            rs.close();
+            st.close();
+
+            return recipes;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public List<Recipe> getPublicUserRecipes(User user) {
+        final List<Recipe> recipes = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM recipe WHERE authorID=? AND isPrivate = false");
+            st.setInt(1, user.getUserID());
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final Recipe recipe = fromResultSet(rs);
+                recipes.add(recipe);
+            }
+            rs.close();
+            st.close();
+
+            return recipes;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
@@ -117,6 +193,8 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
             st.setBoolean(4, recipe.getIsPrivate());
             st.setString(5, recipe.getDifficulty());
             st.executeUpdate();
+
+            recipe = updateRecipeFromDB(recipe);
             return recipe;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
@@ -162,6 +240,7 @@ public class RecipePersistenceHSQLDB implements RecipePersistence {
         final String instructions = rs.getString("instructions");
         final String difficulty = rs.getString("difficulty");
         final boolean isPrivate = rs.getBoolean("isPrivate");
-        return new Recipe(author, recipeID, name, instructions, isPrivate, difficulty);
+        final Timestamp updated = rs.getTimestamp("updated");
+        return new Recipe(author, recipeID, name, instructions, isPrivate, difficulty, updated);
     }
 }

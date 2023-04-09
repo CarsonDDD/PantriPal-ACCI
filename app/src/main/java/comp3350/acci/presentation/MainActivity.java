@@ -1,21 +1,21 @@
 package comp3350.acci.presentation;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.View;
+import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,67 +23,62 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.acci.R;
+import comp3350.acci.business.listeners.PantryEditClickListener;
+import comp3350.acci.objects.Pantry;
+import comp3350.acci.presentation.fragments.PantryEditFragment;
+import comp3350.acci.presentation.fragments.PantryFragment;
+import comp3350.acci.presentation.fragments.RecipeEditFragment;
+import comp3350.acci.presentation.fragments.SearchViewFragment;
 import comp3350.acci.application.Services;
-import comp3350.acci.databinding.ActivityMainBinding;
+import comp3350.acci.business.listeners.RecipeClickListener;
+import comp3350.acci.objects.Recipe;
 import comp3350.acci.presentation.fragments.ProfileViewFragment;
 import comp3350.acci.presentation.fragments.DiscoveryViewFragment;
-import comp3350.acci.presentation.fragments.ACCIFragment;
 import comp3350.acci.presentation.fragments.RecipeInsertFragment;
+import comp3350.acci.presentation.fragments.RecipeViewFragment;
 
 // This class acts as the engine which runs/controls the fragment interactions
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-    private FragmentNavigator fragmentNavigator;
-
-    private boolean isShowingNavigationBar;
-    private boolean isShowingBackButton;
-    private boolean isShowingActionBar;
+    NavigationBarView.OnItemSelectedListener navigationSwitcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());// Set app display to this file
+        setContentView(R.layout.activity_main);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Lock screen orientation
 
         copyDatabaseToDevice();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        changeFragment(new DiscoveryViewFragment());
 
-        // Starting conditions for back button and ActionBar.
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        hideActionBar();
+        BottomNavigationView navigation = findViewById(R.id.navigation_bar);
 
-        // Set starting fragment
-        fragmentNavigator = new FragmentNavigator(this.getSupportFragmentManager());
-        fragmentNavigator.setFragment(new DiscoveryViewFragment(this));
-
-        // init layout variables to the starting fragment.
-        isShowingBackButton = fragmentNavigator.currentFragment().hasBackButton();
-        isShowingNavigationBar = fragmentNavigator.currentFragment().hasNavigationBar();
-        isShowingActionBar = fragmentNavigator.currentFragment().hasActionBar();
-
-        //adjustCurrentFragment();
-
-        // Event Handler for bottom nav menu
-        binding.navigationBar.setOnItemSelectedListener(item -> {
-            fragmentNavigator.clear();// Clear navigation history. This is a design choice to not have a back button on a "main" menu
-            switch (item.getItemId()){
-                case R.id.menu_discovery:
-                    changeFragment(new DiscoveryViewFragment(this));
-                    break;
-                case R.id.menu_insert_recipe:
-                    changeFragment(new RecipeInsertFragment(this));
-                    break;
-                case R.id.menu_profile:
-                    changeFragment(new ProfileViewFragment(this,Services.getUserManager().getCurrUser()));
-                    break;
+        navigationSwitcher = new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_discovery:
+                        changeFragment(new DiscoveryViewFragment());
+                        break;
+                    /*case R.id.nav_search:
+                        changeFragment(new SearchViewFragment());
+                        break;*/
+                    case R.id.nav_pantry:
+                        changeFragment(new PantryFragment());
+                        break;
+                    case R.id.nav_insert_recipe:
+                        changeFragment(new RecipeInsertFragment());
+                        break;
+                    case R.id.nav_profile:
+                        changeFragment(new ProfileViewFragment(Services.getUserManager().getCurrUser()));
+                        break;
+                }
+                return true;
             }
-            //adjustCurrentFragment();
-            return true;
-        });
-
+        };
+        navigation.setOnItemSelectedListener(navigationSwitcher);
     }
 
     private void copyDatabaseToDevice() {
@@ -139,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     // Gets called when the back button is pressed.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -149,119 +143,92 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 //Toast.makeText(this, "Back Button!", Toast.LENGTH_SHORT).show();
-                fragmentNavigator.undoFragment();// Possible to edit this function to not update the display, then set it using the local function here to isolate code
-                adjustLayoutToCurrentFragment();
+                undoFragment();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+
     // Public function to be used outside this class without needing to touch its caller
-    public boolean changeFragment(ACCIFragment f){
-        boolean hasChanged = fragmentNavigator.setFragment(f);
-        adjustLayoutToCurrentFragment();
-        return hasChanged;
+    public void changeFragment(Fragment fragment){
+        this.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.current_fragment, fragment, fragment.getClass().getSimpleName())
+                .addToBackStack(fragment.getClass().getSimpleName())
+                .commit();
+        updateNavigationBar(fragment);
     }
 
-    // Update layout variables, only if they are different.
-    // This function needs to be called everytime a fragment is changed (so the main components update)
-    // Probably a better way around this, but that's for later.
-    private void adjustLayoutToCurrentFragment(){
-        ACCIFragment currentFragment = fragmentNavigator.currentFragment();
+    public void undoFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int backStackEntryCount = fragmentManager.getBackStackEntryCount();
 
-        // Only change if a change is required
-        boolean curBack = currentFragment.hasBackButton();
-        boolean curNavbar = currentFragment.hasNavigationBar();
-        boolean curAction = currentFragment.hasActionBar();
-
-        if(curBack != isShowingBackButton){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(curBack);
-            isShowingBackButton = curBack;
-        }
-        if(curNavbar != isShowingNavigationBar) {
-            setNavigationBar(curNavbar);
-            isShowingNavigationBar = curNavbar;
-        }
-        if(curAction != isShowingActionBar){
-            if(curAction){
-                //getSupportActionBar().show();
-                showActionBar();
-            }
-            else{
-                //getSupportActionBar().hide();
-                hideActionBar();
-            }
-
-            isShowingActionBar = curAction;
+        if (backStackEntryCount > 1) {
+            fragmentManager.popBackStack();
+            Fragment previousFragment = fragmentManager.findFragmentByTag(fragmentManager.getBackStackEntryAt(backStackEntryCount - 2).getName());
+            updateNavigationBar(previousFragment);
         }
     }
 
-    public float convertDpToPixel(float dp){
-        return dp * ((float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        undoFragment();
     }
 
-    public void setNavigationBar(boolean showBar){
+    // Make sure the navigation bar has the correct fragment checked
+    private void updateNavigationBar(Fragment fragment){
+        Fragment currentFragment = fragment;//getSupportFragmentManager().findFragmentById(R.id.current_fragment);
+        BottomNavigationView navbar = findViewById(R.id.navigation_bar);
+
+        // Temp remove listener
+        navbar.setOnItemSelectedListener(null);
+
+        // hmmmmmm. I believe .setSelectedItemId calls the above fragment switching code. This effectively modifies the stack in a way where nav buttons cannot be back swiped.
+        // This was the old behaviour before using the manager stack. Writing this code, I did not intent for this to work like this, nonetheless I am pleasantly pleased.
+        if(currentFragment instanceof DiscoveryViewFragment){
+            navbar.setSelectedItemId(R.id.nav_discovery);
+        }
+        /*else if(currentFragment instanceof SearchViewFragment){
+            navbar.setSelectedItemId(R.id.nav_search);
+        }*/
+        else if(currentFragment instanceof PantryFragment){
+            navbar.setSelectedItemId(R.id.nav_pantry);
+        }
+        else if(currentFragment instanceof RecipeInsertFragment){
+            navbar.setSelectedItemId(R.id.nav_insert_recipe);
+        }
+        else if(currentFragment instanceof ProfileViewFragment && ((ProfileViewFragment)currentFragment).isCurrentUser()){
+            navbar.setSelectedItemId(R.id.nav_profile);
+        }
+
+        // Re add listener
+        navbar.setOnItemSelectedListener(navigationSwitcher);
+
+        // else.... nothing.
+    }
+
+    public void showNavigationBar(boolean showBar){
+        BottomNavigationView nav = findViewById(R.id.navigation_bar);
         if(showBar)
-            showNavigationBar();
+            nav.setVisibility(View.VISIBLE);
         else
-            hideNavigationBar();
+            nav.setVisibility(View.GONE);
     }
 
-    // To hide the nav bar in a constraint layout, we need to do 2 things
-    // Yes there is a better way to do this since all the code is similar, but I was getting strange issues so we are keeping this for now.
-    // 1. Make the navigation bar invisible: set the height to 0.
-    // 2. Make the fragment fullscreen/take its place: re-wire the constraint; tie the fragment to the bottom of the screen (instead of the top of the nav bar.)
-    private void hideNavigationBar(){
-        FragmentContainerView fragment = binding.currentFragment;
-        BottomNavigationView bar = binding.navigationBar;
-        ConstraintLayout layout = binding.container;
+    public final RecipeClickListener CLICK_RECIPE = new RecipeClickListener() {
+        @Override
+        public void onRecipeClick(Recipe recipe) {
+            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            changeFragment(new RecipeViewFragment(recipe));
+        }
+    };
 
-        bar.getLayoutParams().height = 0;
-
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(layout);
-        constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM,layout.getId(),ConstraintSet.BOTTOM,0);
-        constraintSet.applyTo(layout);
-    }
-
-    // Reset the height and constraints.
-    private void showNavigationBar(){
-        FragmentContainerView fragment = binding.currentFragment;
-        BottomNavigationView bar = binding.navigationBar;
-        ConstraintLayout layout = binding.container;
-
-        bar.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(layout);
-        constraintSet.connect(fragment.getId(),ConstraintSet.BOTTOM, bar.getId(),ConstraintSet.TOP,(int)convertDpToPixel(55));
-        constraintSet.applyTo(layout);
-    }
-
-    private void hideActionBar(){
-        getSupportActionBar().hide();
-
-        FragmentContainerView fragment = binding.currentFragment;
-        ConstraintLayout layout = binding.container;
-
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(layout);
-        constraintSet.connect(fragment.getId(),ConstraintSet.TOP,layout.getId(),ConstraintSet.TOP,0);
-        constraintSet.applyTo(layout);
-    }
-
-    // Reset the height and constraints.
-    private void showActionBar(){
-        getSupportActionBar().show();
-
-        FragmentContainerView fragment = binding.currentFragment;
-        ConstraintLayout layout = binding.container;
-
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(layout);
-        constraintSet.connect(fragment.getId(),ConstraintSet.TOP,layout.getId(),ConstraintSet.TOP,(int)convertDpToPixel(55));
-        constraintSet.applyTo(layout);
-    }
-
-
+    public final PantryEditClickListener CLICK_EDIT_PANTRY = new PantryEditClickListener() {
+        @Override
+        public void onPantryEditClick(Pantry pantry) {
+            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            changeFragment(new PantryEditFragment(pantry));
+        }
+    };
 }

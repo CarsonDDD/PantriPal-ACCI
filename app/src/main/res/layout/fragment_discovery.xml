@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme">
 
-    <!-- appbarlayout allows for it to scroll away when scrolling-->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:elevation="4dp"
+        app:title="@string/app_name">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            android:background="@color/colorPrimary"
-            android:elevation="4dp">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@color/white"
-                app:queryHint="Apple pie . . ."/>
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:searchIcon="@drawable/ic_search"
+            android:layout_gravity="end"
+            app:iconifiedByDefault="true"
+            app:queryHint="Apple pie. . ."
+            android:layout_margin="8dp"
+            android:outlineSpotShadowColor="@color/orange_light"
+            android:outlineAmbientShadowColor="@color/orange_light" />
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_recipe"
-        android:layout_margin="4dp"
+        android:id="@+id/rv_recipelist"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         tools:listitem="@layout/recipe_card">
     </androidx.recyclerview.widget.RecyclerView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

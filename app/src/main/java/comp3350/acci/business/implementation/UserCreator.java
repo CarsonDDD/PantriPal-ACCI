@@ -5,6 +5,7 @@ import java.util.List;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.interfaces.UserManager;
 import comp3350.acci.objects.Recipe;
+import comp3350.acci.objects.Saved;
 import comp3350.acci.objects.User;
 import comp3350.acci.persistence.RecipePersistence;
 import comp3350.acci.persistence.SavedPersistence;
@@ -44,6 +45,38 @@ public class UserCreator implements UserManager {
     public List<Recipe> getUsersSavedRecipes(User user) {
         return savedPersistence.getSavedRecipesByUser(user);
     }
+    public boolean isSaved(User user, Recipe recipe) {
+        List<Recipe> userSaved = savedPersistence.getSavedRecipesByUser(user);
+        return userSaved.contains(recipe);
+    }
+
+    public boolean toggleSaved(User user, Recipe recipe) {
+        boolean result = false;
+        List<Recipe> userSaved =  savedPersistence.getSavedRecipesByUser(user);
+
+        if(userSaved.contains(recipe)) {
+            List<Saved> saves = savedPersistence.getSaveds();
+            Saved toRemove = null;
+            for (Saved item : saves) {
+                if(item.getUser().equals(user) && item.getRecipe().equals(recipe)) {
+                    toRemove = item;
+                    break;
+                }
+            }
+            if(toRemove != null) {
+                savedPersistence.deleteSaved(toRemove);
+                result = false;
+            }
+
+        }else {
+            Saved newSaved = new Saved(user, recipe);
+            savedPersistence.insertSaved(newSaved);
+            result = true;
+        }
+        return result;
+    }
+
+
     public User getUser(int userID) {
         return userPersistence.getUser(userID);
     }

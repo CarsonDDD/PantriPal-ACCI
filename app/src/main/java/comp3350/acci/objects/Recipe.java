@@ -1,6 +1,8 @@
 package comp3350.acci.objects;
 
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Recipe
@@ -20,6 +22,8 @@ public class Recipe
 
 	private String difficulty;
 
+	private Timestamp updated;
+
 	public Recipe(){
 		recipeID = count;
 		name = null;
@@ -27,6 +31,7 @@ public class Recipe
 		instructions = null;
 		isPrivate = true;
 		difficulty= null;
+		updated= null;
 		count++;
 	}
 
@@ -37,6 +42,7 @@ public class Recipe
 		this.instructions = instructions;
 		this.isPrivate = isPrivate;
 		this.difficulty= difficulty;
+		this.updated = null;
 		count++;
 	}
 
@@ -47,6 +53,17 @@ public class Recipe
 		this.instructions = instructions;
 		this.isPrivate = isPrivate;
 		this.difficulty= difficulty;
+		count++;
+	}
+
+	public Recipe(User author, int recipeID, String name, String instructions, boolean isPrivate, String difficulty, Timestamp updated){
+		this.recipeID = recipeID;
+		this.name = name;
+		this.author = author;
+		this.instructions = instructions;
+		this.isPrivate = isPrivate;
+		this.difficulty= difficulty;
+		this.updated = updated;
 		count++;
 	}
 
@@ -76,6 +93,10 @@ public class Recipe
 
 	public boolean getIsPrivate() {
 		return isPrivate;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
 	}
 
 	public void setName(String name) {

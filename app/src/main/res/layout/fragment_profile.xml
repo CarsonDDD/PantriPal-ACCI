@@ -1,34 +1,39 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/AppTheme">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/profile_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
-        <!--app:menu="@menu/menu_profile"-->
-
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/action_font_size"
-            android:textStyle="bold"
-            android:text="User Name"/>
+            app:menu="@menu/menu_profile"
+            app:title="">
 
-    </androidx.appcompat.widget.Toolbar>
+            <EditText
+                android:id="@+id/et_edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="@dimen/toolbar_text"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/white"/>
+        </androidx.appcompat.widget.Toolbar>
 
     <!-- pfp and edit page -->
     <LinearLayout
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="horizontal"
-        android:layout_below="@id/profile_menu"
-        android:padding="16dp">
+        android:background="@color/orange"
+        android:layout_below="@id/toolbar"
+        android:paddingTop="0dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
 
         <ImageView
             android:id="@+id/profile_picture"
@@ -36,43 +41,79 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_person"
             android:scaleType="centerCrop"
-            android:background="@color/dark_gray"/>
-
-        <View
-            android:layout_width="16dp"
-            android:layout_height="match_parent"/>
+            android:background="@drawable/darkgrey_rounded"/>
 
         <TextView
             android:id="@+id/bio"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Bio"
-            android:textColor="@color/dark_gray"
-            android:textSize="16sp" />
+            android:layout_marginStart="16dp"
+            android:textColor="@color/white"
+            android:text="Bio\nBio\nBio\nBio\nBio\nBio\nBio\nBio\n"
+            android:textSize="16sp"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:visibility="visible"/>
+
+        <EditText
+            android:id="@+id/et_edit_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:text="bio"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:hint="I am a human!"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:visibility="gone"/>
+
 
     </LinearLayout>
 
-    <!-- old bio bar, reuse later -->
     <LinearLayout
-        android:id="@+id/user_info_layout"
+        android:id="@+id/ll_edit"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/profile_header"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:background="@color/orange">
+
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel Edit"
+            android:backgroundTint="@color/orange_dark"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"/>
+
+        <Button
+            android:id="@+id/btn_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Edit"
+            android:backgroundTint="@color/sky_blue"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"/>
 
     </LinearLayout>
 
     <!-- Tabs for saved and user Recipes -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/user_info_layout"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_edit"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:gravity="center_horizontal"
+        android:foregroundGravity="center_horizontal">
 
         <!-- Tabs for saved and user Recipes -->
         <!-- TabLayouts contain tabs. Think radio button where only one is selected, and nothing else-->
@@ -80,28 +121,41 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:elevation="4dp"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
-            app:tabIndicatorColor="@color/black"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/dark_gray"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            android:background="@color/orange_dark"
+            app:tabIndicatorColor="@color/light_grey"
+            app:tabTextColor="@color/dark_grey"
+            app:tabSelectedTextColor="@color/light_grey"/>
+        <!--app:tabIndicatorColor="@color/black"
+app:tabSelectedTextColor="@color/black"
+app:tabTextColor="@color/dark_gray" -->
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saved_recipes_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:foregroundGravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_recipes_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:visibility="visible"
+            android:foregroundGravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            tools:listitem="@layout/recipe_card_small"/>
 
     </LinearLayout>
 

@@ -1,53 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.RecipeViewFragment">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.fragments.RecipeViewFragment"
+    android:theme="@style/AppTheme">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_recipe_current">
+
+        <TextView
+            android:id="@+id/tv_recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/toolbar_text"
+            android:textStyle="bold"
+            android:text="RECIPE TITLE"
+            android:textAlignment="center" />
+    </androidx.appcompat.widget.Toolbar>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_images"/>
+
+    <!-- == Author Info == -->
+    <LinearLayout
+        android:id="@+id/ll_author"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="@drawable/skyblue_rounded"
+        android:layout_below="@id/rv_images"
+        android:layout_marginTop="8dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:foregroundGravity="center"
+            android:src="@drawable/ic_person"
+            android:scaleType="centerCrop"
+            android:background="@drawable/darkgrey_rounded"
+            android:layout_marginStart="4dp"/>
+
+        <!--== info text ==-->
         <LinearLayout
-            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp">
+
+        <!--==Author name==-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/recipe_title"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="1"
-                android:text="RecipeTitle"
-                android:textSize="24dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Created by: "
+                android:textSize="20sp"/>
 
             <TextView
-                android:id="@+id/recipe_author"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/text_margin"
-                android:layout_weight="1"
-                android:text="RecipeAuthor"
-                android:textSize="24dp" />
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
         </LinearLayout>
+            <!--==Difficulty==-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Difficulty: "
+                    android:textStyle="italic"
+                    android:textSize="@dimen/small_text"/>
+
+                <TextView
+                    android:id="@+id/tv_difficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hard"
+                    android:textStyle="bold|italic"
+                    android:textSize="@dimen/small_text"/>
+            </LinearLayout>
+            <!--==Date edited==-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="last edited: "
+                    android:textStyle="italic"
+                    android:textSize="@dimen/small_text"/>
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="edit date"
+                    android:textStyle="bold|italic"
+                    android:textSize="@dimen/small_text"/>
+            </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_author"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp">
+
         <TextView
-            android:id="@+id/recipe_difficulty"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/text_margin"
-            android:text="RecipeDifficulty"
-            android:textSize="24dp" />
-        <TextView
-            android:id="@+id/recipe_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title_layout"
-            android:layout_margin="@dimen/text_margin"
-            android:text="RecipeInstructions"
-            android:textSize="24dp" />
+            android:scrollbars="vertical"
+            android:textSize="@dimen/input_size"
+            android:text="Instructions:"
+            android:gravity="center"/>
+
+
+        <TextView
+            android:id="@+id/tv_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+
+
     </LinearLayout>
+
+</RelativeLayout>
+</LinearLayout>
+
 </androidx.core.widget.NestedScrollView>

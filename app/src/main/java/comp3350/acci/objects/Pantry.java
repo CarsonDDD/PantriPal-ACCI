@@ -1,5 +1,7 @@
 package comp3350.acci.objects;
 
+import java.util.Objects;
+
 public class Pantry {
 
     private User user;
@@ -42,6 +44,22 @@ public class Pantry {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public void setUnit(String unit){
+        this.unit = unit;
+    }
+
+    public boolean equals(Object other) {
+        boolean equals = false;
+
+        if (other instanceof Pantry)
+        {
+            final Pantry otherPantry = (Pantry) other;
+            equals = Objects.equals(this.user, otherPantry.getUser()) && Objects.equals(this.ingredient, otherPantry.getIngredient());
+        }
+
+        return equals;
     }
 
     public String toString(){

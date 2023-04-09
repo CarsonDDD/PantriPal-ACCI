@@ -1,5 +1,7 @@
 package comp3350.acci.objects;
 
+import java.util.Objects;
+
 public class Contain {
 
     private Recipe recipe;
@@ -42,6 +44,18 @@ public class Contain {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean equals(Object other) {
+        boolean equals = false;
+
+        if (other instanceof Contain)
+        {
+            final Contain otherContain = (Contain) other;
+            equals = Objects.equals(this.recipe, otherContain.getRecipe()) && Objects.equals(this.ingredient, otherContain.getIngredient());
+        }
+
+        return equals;
     }
 
     public String toString(){

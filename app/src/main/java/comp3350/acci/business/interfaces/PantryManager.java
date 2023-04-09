@@ -18,4 +18,6 @@ public interface PantryManager {
     List<Pantry> getPantrys();
 
     List<Pantry> getPantrysByUser(User user);
+
+    List<Ingredient> getIngredients();
 }
