@@ -40,6 +40,8 @@ import comp3350.acci.presentation.MainActivity;
         This means that you should clear the storage of the app before you run the system tests.
         This is because espresso can be buggy with duplicate Id's and things that are not exactly how it expects.
 
+        IMPORTANT! This test frequently fails on the first run, it succeeds on the second run, presumably it is a caching/speed issue with espresso
+        I was not able to fix this -Caelan
  */
 
 @RunWith(AndroidJUnit4.class)
