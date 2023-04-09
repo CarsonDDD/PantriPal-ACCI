@@ -209,7 +209,7 @@ public class ProfileViewFragment extends Fragment {
                         ((MainActivity)getActivity()).changeFragment(new RecipeInsertFragment());
                         break;
                     case R.id.action_pantry:
-                        Toast.makeText(getContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).changeFragment(new PantryFragment());
                         break;
                     case R.id.action_edit_profile:
                         // Hide/show visability to edit fields

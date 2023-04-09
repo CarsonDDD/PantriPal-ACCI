@@ -73,7 +73,7 @@ public class Services
 
     public static synchronized PantryManager getPantryManager() {
         if(pantryManager == null) {
-            pantryManager = new PantryCreator(getPantryPersistence());
+            pantryManager = new PantryCreator(getPantryPersistence(), getIngredientPersistence());
         }
         return pantryManager;
     }

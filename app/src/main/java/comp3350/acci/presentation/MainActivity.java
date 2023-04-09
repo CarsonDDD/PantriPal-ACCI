@@ -22,7 +22,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.acci.R;
+import comp3350.acci.business.listeners.PantryEditClickListener;
+import comp3350.acci.objects.Pantry;
+import comp3350.acci.presentation.fragments.PantryEditFragment;
 import comp3350.acci.presentation.fragments.PantryFragment;
+import comp3350.acci.presentation.fragments.RecipeEditFragment;
 import comp3350.acci.presentation.fragments.SearchViewFragment;
 import comp3350.acci.application.Services;
 import comp3350.acci.business.listeners.RecipeClickListener;
@@ -59,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_pantry:
                         changeFragment(new PantryFragment());
-                        //Toast.makeText(MainActivity.super.getBaseContext(), "View Pantry!", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_insert_recipe:
                         changeFragment(new RecipeInsertFragment());
@@ -203,6 +206,14 @@ public class MainActivity extends AppCompatActivity {
         public void onRecipeClick(Recipe recipe) {
             //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
             changeFragment(new RecipeViewFragment(recipe));
+        }
+    };
+
+    public final PantryEditClickListener CLICK_EDIT_PANTRY = new PantryEditClickListener() {
+        @Override
+        public void onPantryEditClick(Pantry pantry) {
+            //getAppCompact().changeFragment(new RecipeViewFragment(getAppCompact(), recipe));
+            changeFragment(new PantryEditFragment(pantry));
         }
     };
 }
