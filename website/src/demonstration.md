@@ -2,6 +2,8 @@
 
 A gif of the recorded screen will go here
 
+![demonstration](./FeatureRecording.gif)
+
 * browse/search ingredients and click on an recipe
 * edit a recipe and see that it updated
 * View a profile page and see the recipes

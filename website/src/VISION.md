@@ -9,6 +9,14 @@ Pantri Pal is a unique look at cookbooks, by maintaining a virtual pantry this a
 
 This app will be defined as successful provided the majority of users find the app helpful, and a rating off 3 stars or above on the play store is achieved. Furthermore, success will have atleast 35% of users find an increase in their overall cooking skills within 6 months of regular use.
 
+## Intended Users
+
+The intended users for the Pantri Pal application is all people over 10 who are interested in cooking. Any skill level of chef is able to use the application.
+
+## Major Functionality
+
+Users are able to add, edit, save, and discover recipes. They are also able to edit their user profile, and can make private or public recipes. Users can also manage their pantry, where they keep track of the ingredients they have on hand.
+
 ## Contributions
 
 ### Carson Dickinson
