@@ -1,4 +1,4 @@
-# Pantripal
+# PantriPal
 
 PantriPal is an android application that helps people keep track of their ingredients and recipes. Information on how to run the application and useful links are shown below.
 
